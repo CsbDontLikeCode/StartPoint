@@ -114,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)StartPoint\vender\spdlog\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
