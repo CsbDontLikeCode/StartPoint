@@ -113,7 +113,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)StartPoint\vender\spdlog\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +130,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)StartPoint\vender\spdlog\include\spdlog</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +142,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\StartPoint\Events\Event.h" />
+    <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
+    <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
     <ClInclude Include="src\StartPoint\Log.h" />
     <ClInclude Include="src\StartPoint.h" />
     <ClInclude Include="src\StartPoint\Application.h" />

@@ -9,3 +9,5 @@
 #else
 	#error StartPoint Only Suppert Windows
 #endif
+
+#define BIT(x) (1 << x)

@@ -1,4 +1,7 @@
 #include "Application.h"
+#include "Events/ApplicationEvent.h"
+#include "Log.h"
+
 
 namespace StartPoint {
 	Application::Application() {
@@ -10,6 +13,6 @@ namespace StartPoint {
 	}
 
 	void Application::Run() {
-		while (true);
+
 	}
 }

@@ -15,5 +15,3 @@ namespace StartPoint {
 	// 将由用户设置
 	Application* createApplication();
 }
-
-

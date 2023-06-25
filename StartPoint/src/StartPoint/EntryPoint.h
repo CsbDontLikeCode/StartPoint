@@ -9,8 +9,7 @@ int main(int argc, char** argv) {
 	//StartPoint::Log::GetCoreLogger()->warn("初始化日志");
 	SP_CORE_WARN("CORE WARN!");
 	//StartPoint::Log::GetClientLogger()->info("初始化日志");
-	int a = 666;
-	SP_INFO("CLIENT INFO! Var = {0}", a);
+	SP_INFO("CLIENT INFO!");
 
 	auto app = StartPoint::createApplication();
 	app->Run();
