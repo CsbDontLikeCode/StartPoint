@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-#include <sstream>
+#include "sppch.h"
 
 namespace StartPoint {
 	class SP_API MouseMovedEvent : public Event
@@ -24,22 +24,36 @@ namespace StartPoint {
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseMovedEvent:" << m_MouseX << "," << m_MouseY << "\n";
+			ss << "MouseMovedEvent:" << m_MouseX << "," << m_MouseY;
 			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)
-
-		//EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
-		int x = (EventCategoryKeyboard | EventCategoryInput);
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse)
 
 		float m_MouseX, m_MouseY;
 	};
 	
 	class SP_API MouseScrolledEvent : public Event
 	{
+	public:
+		MouseScrolledEvent(const float xOffset, const float yOffset)
+			: m_XOffset(xOffset), m_YOffset(yOffset) {}
 
+		float GetXOffset() const { return m_XOffset; }
+		float GetYOffset() const { return m_YOffset; }
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
+			return ss.str();
+		}
+
+		EVENT_CLASS_TYPE(MouseScrolled)
+		EVENT_CLASS_CATEGORY(EventCategoryMouse)
+	private:
+		float m_XOffset, m_YOffset;
 	};
 
 	class SP_API MouseButtonEvent : public Event
@@ -49,9 +63,7 @@ namespace StartPoint {
 		{
 			return m_Button;
 		}
-
-		//EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard)
+		EVENT_CLASS_CATEGORY(EventCategoryMouseButton)
 	protected:
 		MouseButtonEvent(int button)
 			: m_Button(button){}
@@ -71,6 +83,8 @@ namespace StartPoint {
 			ss << "MouseButtonPressedEvent:" << m_Button << "\n";
 			return ss.str();
 		}
+
+		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
 	class SP_API MouseButtonReleasedEvent : public MouseButtonEvent
@@ -88,5 +102,4 @@ namespace StartPoint {
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
-
 }

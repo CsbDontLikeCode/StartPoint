@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace StartPoint {
 
 	class SP_API WindowResizeEvent : public Event

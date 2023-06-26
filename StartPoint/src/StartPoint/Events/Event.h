@@ -2,8 +2,8 @@
 
 #include "../Core.h"
 
-#include <string>
-#include <functional>
+//#include <string>
+//#include <functional>
 
 namespace StartPoint {
 
@@ -15,7 +15,7 @@ namespace StartPoint {
 		// 应用事件
 		AppTick,AppUpdate,AppRender,
 		// 按键事件
-		KeyPressed,KeyReleased,
+		KeyPressed,KeyReleased,KeyTyped,
 		// 鼠标事件
 		MouseButtonPressed,MouseButtonReleased,MouseMoved,MouseScrolled
 	};
@@ -39,6 +39,9 @@ namespace StartPoint {
 	class SP_API Event {
 		friend class EventDispatcher;
 	public:
+		// 表示事件是否已经被处理
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual EventCategory GetCategoryFlags() const = 0;
@@ -52,9 +55,6 @@ namespace StartPoint {
 		{
 			return category & GetCategoryFlags();
 		}
-	protected:
-		// 表示事件是否已经被处理
-		bool m_Handled = false;
 	};
 
 	class EventDispatcher {
@@ -69,7 +69,7 @@ namespace StartPoint {
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;

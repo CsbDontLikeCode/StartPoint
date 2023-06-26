@@ -73,11 +73,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,13 +117,17 @@
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(TargetDir)StartPoint.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -131,7 +138,7 @@
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -139,20 +146,36 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(TargetDir)StartPoint.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\sppch.h" />
     <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h" />
     <ClInclude Include="src\StartPoint\Events\Event.h" />
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
+    <ClInclude Include="src\StartPoint\Layer.h" />
+    <ClInclude Include="src\StartPoint\LayerStack.h" />
     <ClInclude Include="src\StartPoint\Log.h" />
     <ClInclude Include="src\StartPoint.h" />
     <ClInclude Include="src\StartPoint\Application.h" />
     <ClInclude Include="src\StartPoint\Core.h" />
     <ClInclude Include="src\StartPoint\EntryPoint.h" />
+    <ClInclude Include="src\StartPoint\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\sppch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Layer.cpp" />
+    <ClCompile Include="src\StartPoint\LayerStack.cpp" />
     <ClCompile Include="src\StartPoint\Log.cpp" />
     <ClCompile Include="src\StartPoint\Application.cpp" />
   </ItemGroup>

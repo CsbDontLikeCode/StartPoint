@@ -1,3 +1,5 @@
+#include "sppch.h"
+
 #include "Log.h"
 
 namespace StartPoint {
