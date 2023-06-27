@@ -1,8 +1,8 @@
 #pragma once
-#include "sppch.h"
 #include "StartPoint/Window.h"
 #include "StartPoint/Log.h"
 
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 namespace StartPoint {

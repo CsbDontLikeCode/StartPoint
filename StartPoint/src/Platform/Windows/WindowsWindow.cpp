@@ -5,6 +5,9 @@
 #include "StartPoint/Events/MouseEvent.h"
 #include "StartPoint/Events/ApplicationEvent.h"
 
+#include <glad/glad.h>
+
+
 namespace StartPoint {
 	static bool s_GLFWInitialized = false;
 
@@ -47,6 +50,8 @@ namespace StartPoint {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		SP_CORE_ASSERT(status, "Failed to initialize GLAD!");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

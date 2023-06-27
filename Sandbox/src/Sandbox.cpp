@@ -22,6 +22,7 @@ class Sandbox : public StartPoint::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new StartPoint::ImGuiLayer());
 	}
 
 	~Sandbox() {

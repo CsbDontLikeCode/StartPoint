@@ -73,13 +73,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(IncludePath)</IncludePath>
+    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(IncludePath);E:\Diego\GameEngine\StartPoint\StartPoint\src</IncludePath>
     <LibraryPath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Include;$(VC_IncludePath);$(WindowsSDK_IncludePath);;E:\Diego\GameEngine\StartPoint\StartPoint\src</IncludePath>
     <LibraryPath>E:\Diego\GameEngine\StartPoint\StartPoint\vender\Libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -116,14 +116,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glad.lib;spdlogd.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(TargetDir)StartPoint.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\Diego\GameEngine\StartPoint\StartPoint\vender\spdlog\include;E:\Diego\GameEngine\StartPoint\StartPoint\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -146,19 +146,22 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glad.lib;spdlogd.lib;ImGui.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /y "$(TargetDir)StartPoint.dll" "$(SolutionDir)bin\Debug-x64\Sandbox"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\sppch.h" />
     <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h" />
     <ClInclude Include="src\StartPoint\Events\Event.h" />
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
+    <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\StartPoint\Layer.h" />
     <ClInclude Include="src\StartPoint\LayerStack.h" />
     <ClInclude Include="src\StartPoint\Log.h" />
@@ -169,11 +172,13 @@
     <ClInclude Include="src\StartPoint\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\sppch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\StartPoint\Layer.cpp" />
     <ClCompile Include="src\StartPoint\LayerStack.cpp" />
     <ClCompile Include="src\StartPoint\Log.cpp" />
