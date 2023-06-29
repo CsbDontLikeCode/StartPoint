@@ -5,6 +5,8 @@
 #include "Log.h"
 #include <glad/glad.h>
 
+#include "Input.h"
+
 
 namespace StartPoint {
 
@@ -51,6 +53,11 @@ namespace StartPoint {
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate();
 			}
+
+			//auto result = Input::GetMousePosition();
+			//auto x = result.first;
+			//auto y = result.second;
+			//SP_CORE_TRACE("{0},{1}", x, y);
 
 			m_Window->OnUpdate();
 		}

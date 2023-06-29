@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\sppch.h" />
     <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\StartPoint\Input.h" />
     <ClInclude Include="src\StartPoint\Layer.h" />
     <ClInclude Include="src\StartPoint\LayerStack.h" />
     <ClInclude Include="src\StartPoint\Log.h" />
@@ -173,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\sppch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -9,12 +9,12 @@ public:
 
 	void OnUpdate() override
 	{
-		SP_INFO("ExampleLayer::Update");
+		//SP_INFO("ExampleLayer::Update");
 	}
 
 	void OnEvent(StartPoint::Event& event) override
 	{
-		SP_TRACE("{0}", event);
+		//SP_TRACE("{0}", event);
 	}
 };
 
