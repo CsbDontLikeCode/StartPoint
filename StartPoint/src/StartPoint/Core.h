@@ -19,3 +19,7 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+#define SP_BIND_ENENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+#define GLFW_INCLUDE_NONE
