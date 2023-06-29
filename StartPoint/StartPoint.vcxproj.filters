@@ -72,6 +72,12 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\KeyCodes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\MouseButtonCodes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Application.cpp">

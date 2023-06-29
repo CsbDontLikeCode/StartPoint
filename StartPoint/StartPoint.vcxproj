@@ -164,6 +164,7 @@
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\StartPoint\Input.h" />
+    <ClInclude Include="src\StartPoint\KeyCodes.h" />
     <ClInclude Include="src\StartPoint\Layer.h" />
     <ClInclude Include="src\StartPoint\LayerStack.h" />
     <ClInclude Include="src\StartPoint\Log.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="src\StartPoint\Application.h" />
     <ClInclude Include="src\StartPoint\Core.h" />
     <ClInclude Include="src\StartPoint\EntryPoint.h" />
+    <ClInclude Include="src\StartPoint\MouseButtonCodes.h" />
     <ClInclude Include="src\StartPoint\Window.h" />
   </ItemGroup>
   <ItemGroup>
