@@ -1,6 +1,7 @@
 #pragma once
 
 #include <StartPoint/Core.h>
+#include <glad/glad.h>
 
 namespace StartPoint {
 

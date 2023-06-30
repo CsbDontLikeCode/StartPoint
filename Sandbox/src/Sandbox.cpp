@@ -1,5 +1,6 @@
 #include <iostream>
 #include <StartPoint.h>
+#include <imgui.h>
 
 class ExampleLayer : public StartPoint::Layer 
 {
@@ -11,6 +12,13 @@ public:
 	{
 		//SP_INFO("ExampleLayer::Update");
 
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello, World!");
+		ImGui::End();
 	}
 
 	void OnEvent(StartPoint::Event& event) override
@@ -26,7 +34,7 @@ class Sandbox : public StartPoint::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new StartPoint::ImGuiLayer());
+		// PushOverlay(new StartPoint::ImGuiLayer());
 	}
 
 	~Sandbox() {

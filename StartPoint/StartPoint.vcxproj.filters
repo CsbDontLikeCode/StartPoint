@@ -57,15 +57,6 @@
     <ClInclude Include="src\StartPoint\LayerStack.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\StartPoint\Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -76,6 +67,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\MouseButtonCodes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,13 +92,13 @@
     <ClCompile Include="src\StartPoint\LayerStack.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+    <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
