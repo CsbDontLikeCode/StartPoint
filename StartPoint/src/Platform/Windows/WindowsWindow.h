@@ -5,6 +5,8 @@
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
+#include <StartPoint/Renderer/GraphicsContext.h>
+
 namespace StartPoint {
 	class WindowsWindow : public Window
 	{
@@ -41,6 +43,7 @@ namespace StartPoint {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData 
 		{

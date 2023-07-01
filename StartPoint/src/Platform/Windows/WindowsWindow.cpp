@@ -5,6 +5,8 @@
 #include "StartPoint/Events/MouseEvent.h"
 #include "StartPoint/Events/ApplicationEvent.h"
 
+#include <Platform/OpenGL/OpenGLContext.h>
+
 #include <glad/glad.h>
 
 
@@ -49,9 +51,13 @@ namespace StartPoint {
 		}
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		SP_CORE_ASSERT(status, "Failed to initialize GLAD!");
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->init();
+		
+
+		
+		
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -148,7 +154,7 @@ namespace StartPoint {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) 
