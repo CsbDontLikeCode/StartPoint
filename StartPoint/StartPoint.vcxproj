@@ -173,6 +173,7 @@
     <ClInclude Include="src\StartPoint\EntryPoint.h" />
     <ClInclude Include="src\StartPoint\MouseButtonCodes.h" />
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\StartPoint\Renderer\Shader.h" />
     <ClInclude Include="src\StartPoint\Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +190,7 @@
     <ClCompile Include="src\StartPoint\LayerStack.cpp" />
     <ClCompile Include="src\StartPoint\Log.cpp" />
     <ClCompile Include="src\StartPoint\Application.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\Shader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

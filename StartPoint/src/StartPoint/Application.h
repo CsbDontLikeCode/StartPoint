@@ -5,6 +5,7 @@
 #include "LayerStack.h"
 #include "Events/ApplicationEvent.h"
 #include "ImGui/ImGuiLayer.h"
+#include "Renderer/Shader.h"
 
 namespace StartPoint {
 	class SP_API Application
@@ -30,6 +31,7 @@ namespace StartPoint {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};

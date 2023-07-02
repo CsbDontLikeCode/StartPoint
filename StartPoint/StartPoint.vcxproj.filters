@@ -78,6 +78,9 @@
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Application.cpp">
@@ -108,6 +111,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
