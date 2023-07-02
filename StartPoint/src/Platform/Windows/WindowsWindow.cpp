@@ -54,10 +54,6 @@ namespace StartPoint {
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->init();
 		
-
-		
-		
-
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
