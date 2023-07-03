@@ -15,6 +15,27 @@ namespace StartPoint {
 
 	Application* Application::s_Instance = nullptr;
 
+	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) 
+	{
+		switch (type) 
+		{
+		case ShaderDataType::Float:				return GL_FLOAT;
+		case ShaderDataType::Float2:			return GL_FLOAT;
+		case ShaderDataType::Float3:			return GL_FLOAT;
+		case ShaderDataType::Float4:			return GL_FLOAT;
+		case ShaderDataType::Mat3:				return GL_FLOAT;
+		case ShaderDataType::Mat4:				return GL_FLOAT;
+		case ShaderDataType::Int:				return GL_INT;
+		case ShaderDataType::Int2:				return GL_INT;
+		case ShaderDataType::Int3:				return GL_INT;
+		case ShaderDataType::Int4:				return GL_INT;
+		case ShaderDataType::Bool:				return GL_BOOL;
+		}
+
+		SP_CORE_ASSERT(false, "Unknown ShaderDataType~");
+		return 0;
+	}
+
 	Application::Application()
 	{
 		SP_CORE_ASSERT(!s_Instance, "Application already exists!");
@@ -26,23 +47,43 @@ namespace StartPoint {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		//顶点数组
+		//Vertex Array
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
-		////顶点缓冲
+		////Vertex Buffer
 		//glGenBuffers(1, &m_VertexBuffer);
 		//glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-		//索引缓冲
-		//着色器
-		float vertices[3 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f, 0.5f, 0.0f,
+		//Index Buffer
+		//Shader
+		float vertices[3 * 7] = {
+			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
+
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
+		{
+			BufferLayout layout = {
+				{ShaderDataType::Float3, "a_Position"},
+				{ShaderDataType::Float4, "a_Color"}
+			};
+
+			m_VertexBuffer->SetLayout(layout);
+		}
+
+		unsigned int index = 0;
+		const auto& layout = m_VertexBuffer->GetLayout();
+		for (const auto& i : layout) {
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(index, 
+				i.GetElementCount(), 
+				ShaderDataTypeToOpenGLBaseType(i.Type), 
+				i.Normalized ? GL_TRUE : GL_FALSE, 
+				layout.GetStride(),
+				(const void*)i.Offset);
+			index++;
+		}
 
 		unsigned int indices[3] = { 0, 1, 2 };
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)));
@@ -51,12 +92,15 @@ namespace StartPoint {
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec4 a_Color;
 
-			out vec3 position;			
+			out vec3 position;
+			out vec4 a_color;	
 			
 			void main(){
 				position = a_Position;
 				gl_Position = vec4(a_Position, 1.0);
+				a_color = a_Color;
 			}
 		)";
 
@@ -65,10 +109,11 @@ namespace StartPoint {
 			
 			layout(location = 0) out vec4 color;
 			
-			in vec3 position;	
+			in vec3 position;
+			in vec4 a_color;
 			
 			void main(){
-				color = vec4(position * 0.5 + 0.5, 1.0);
+				color = a_color;
 			}
 		)";
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));

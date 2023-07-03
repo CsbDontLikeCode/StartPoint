@@ -177,6 +177,7 @@
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\StartPoint\Renderer\Renderer.h" />
     <ClInclude Include="src\StartPoint\Renderer\Shader.h" />
+    <ClInclude Include="src\StartPoint\Renderer\VertexArray.h" />
     <ClInclude Include="src\StartPoint\Window.h" />
   </ItemGroup>
   <ItemGroup>

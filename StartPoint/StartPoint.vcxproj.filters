@@ -90,6 +90,9 @@
     <ClInclude Include="src\StartPoint\Renderer\Renderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\VertexArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Application.cpp">

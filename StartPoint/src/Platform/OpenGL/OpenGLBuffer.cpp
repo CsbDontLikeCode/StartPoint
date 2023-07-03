@@ -29,6 +29,16 @@ namespace StartPoint {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
+	const BufferLayout& OpenGLVertexBuffer::GetLayout() const
+	{
+		return m_Layout;
+	}
+
+	void OpenGLVertexBuffer::SetLayout(const BufferLayout& layout)
+	{
+		m_Layout = layout;
+	}
+
 	// ------------------------------------------------------------------------------------------------
 	// IndexBuffer ------------------------------------------------------------------------------------
 	// ------------------------------------------------------------------------------------------------
