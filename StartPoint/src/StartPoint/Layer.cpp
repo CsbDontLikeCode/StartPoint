@@ -7,4 +7,5 @@ namespace StartPoint {
 		:m_DebugName(name){}
 
 	Layer::~Layer(){}
+
 }

@@ -1,8 +1,6 @@
 #pragma once
-
-#include "Event.h"
-
 #include "sppch.h"
+#include "Event.h"
 
 namespace StartPoint{
 
@@ -13,6 +11,7 @@ namespace StartPoint{
 		{
 			return m_KeyCode;
 		}
+
 		//EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard)
 	protected:

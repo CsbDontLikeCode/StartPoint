@@ -4,7 +4,6 @@
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include <glad/glad.h>
-
 #include "Input.h"
 #include <GLFW/glfw3.h>
 
@@ -47,14 +46,10 @@ namespace StartPoint {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		//Vertex Array
+		// Vertex Array
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
-		////Vertex Buffer
-		//glGenBuffers(1, &m_VertexBuffer);
-		//glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-		//Index Buffer
-		//Shader
+		// Index Buffer
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
@@ -63,6 +58,8 @@ namespace StartPoint {
 
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
+		// Set action scope
+		// "layout" will be deleted automatically out of action scope
 		{
 			BufferLayout layout = {
 				{ShaderDataType::Float3, "a_Position"},
@@ -119,17 +116,12 @@ namespace StartPoint {
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 	}
 
-	Application::~Application() 
-	{
-
-	}
+	Application::~Application() {}
 
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClosed));
-
-		// SP_CORE_TRACE("{0}", e);
 
 		for(auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
@@ -161,10 +153,6 @@ namespace StartPoint {
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
-			//auto result = Input::GetMousePosition();
-			//auto x = result.first;
-			//auto y = result.second;
-			//SP_CORE_TRACE("{0},{1}", x, y);
 
 			m_Window->OnUpdate();
 		}

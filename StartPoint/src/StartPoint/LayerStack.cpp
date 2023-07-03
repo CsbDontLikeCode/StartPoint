@@ -2,9 +2,8 @@
 #include "LayerStack.h"
 
 namespace StartPoint {
-	LayerStack::LayerStack() 
-	{
-	}
+
+	LayerStack::LayerStack() {}
 
 	LayerStack::~LayerStack()
 	{
@@ -39,4 +38,5 @@ namespace StartPoint {
 		if (it != m_Layers.end())
 			m_Layers.erase(it);
 	}
+
 }

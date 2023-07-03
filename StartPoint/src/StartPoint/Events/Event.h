@@ -1,22 +1,18 @@
 #pragma once
-
 #include "../Core.h"
-
-//#include <string>
-//#include <functional>
 
 namespace StartPoint {
 
 	enum class EventType 
 	{
 		None = 0,
-		// 窗体事件
+		// Window Events
 		WindowClose,WindowResize,WindowFocus,WindowLostFocus,WindowMoved,
-		// 应用事件
+		// Application Events
 		AppTick,AppUpdate,AppRender,
-		// 按键事件
+		// Key Events
 		KeyPressed,KeyReleased,KeyTyped,
-		// 鼠标事件
+		// Mouse Events
 		MouseButtonPressed,MouseButtonReleased,MouseMoved,MouseScrolled
 	};
 
@@ -39,11 +35,13 @@ namespace StartPoint {
 	class SP_API Event {
 		friend class EventDispatcher;
 	public:
-		// 表示事件是否已经被处理
+		// Event has been done or not
 		bool Handled = false;
 
 		virtual EventType GetEventType() const = 0;
+
 		virtual const char* GetName() const = 0;
+
 		virtual EventCategory GetCategoryFlags() const = 0;
 
 		virtual std::string ToString() const

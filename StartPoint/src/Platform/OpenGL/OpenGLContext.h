@@ -10,7 +10,9 @@ namespace StartPoint {
 	{
 	public:
 		OpenGLContext(GLFWwindow* windowHandle);
+
 		virtual void init() override;
+
 		virtual void SwapBuffers() override;
 	private:
 		GLFWwindow* m_WindowHandle;

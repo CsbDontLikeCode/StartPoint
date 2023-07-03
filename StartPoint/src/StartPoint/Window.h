@@ -1,7 +1,6 @@
 #pragma once
 
 #include "sppch.h"
-
 #include "Core.h"
 #include "Events/Event.h"
 
@@ -27,10 +26,13 @@ namespace StartPoint{
 		virtual void OnUpdate() = 0;
 
 		virtual unsigned int GetWidth() const = 0;
+
 		virtual unsigned int GetHeight() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
+
 		virtual void SetVSync(bool enabled) = 0;
+
 		virtual bool IsVSync() const = 0;
 
 		virtual void* GetNativeWindow() const = 0;

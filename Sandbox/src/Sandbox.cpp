@@ -24,13 +24,11 @@ public:
 	void OnEvent(StartPoint::Event& event) override
 	{
 		//SP_TRACE("{0}", event);
-		//if (StartPoint::Input::IsKeyPressed(SP_KEY_TAB)) {
-		//	SP_INFO("{0}", "tab pressed");
-		//}
 	}
 };
 
 class Sandbox : public StartPoint::Application {
+
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
@@ -40,7 +38,6 @@ public:
 	~Sandbox() {
 
 	}
-
 
 };
 
