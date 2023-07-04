@@ -3,10 +3,8 @@
 #include "Application.h"
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
-#include <glad/glad.h>
 #include "Input.h"
 #include <GLFW/glfw3.h>
-
 
 namespace StartPoint {
 
@@ -136,19 +134,32 @@ namespace StartPoint {
 
 	void Application::Run() 
 	{
-		while(m_Running)
+		while (m_Running)
 		{
-
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+			RenderCommand::Clear();
+			//glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+			//glClear(GL_COLOR_BUFFER_BIT);
+			
+			Renderer::BeginScene();
 
 			m_Shader2->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVA);
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+
+
+
+			Renderer::EndScene();
+
+			//m_Shader2->Bind();
+			//m_SquareVA->Bind();
+			//glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+			//m_Shader->Bind();
+			//m_VertexArray->Bind();
+			//glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			glViewport(0, 0, m_Window->GetWidth(), m_Window->GetHeight());
 

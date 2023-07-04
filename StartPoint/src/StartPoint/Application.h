@@ -10,6 +10,9 @@
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
 
+#include <StartPoint/Renderer/Renderer.h>
+#include "Renderer/RenderCommand.h"
+
 namespace StartPoint {
 	class SP_API Application
 	{
