@@ -48,6 +48,7 @@ namespace StartPoint {
 		glCreateBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+		m_Count = size/sizeof(unsigned int);
 	}
 
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()
@@ -63,6 +64,11 @@ namespace StartPoint {
 	void OpenGLIndexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	unsigned int OpenGLIndexBuffer::GetCount() const
+	{
+		return m_Count;
 	}
 
 }

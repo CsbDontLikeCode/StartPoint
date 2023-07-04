@@ -14,27 +14,6 @@ namespace StartPoint {
 
 	Application* Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) 
-	{
-		switch (type) 
-		{
-		case ShaderDataType::Float:				return GL_FLOAT;
-		case ShaderDataType::Float2:			return GL_FLOAT;
-		case ShaderDataType::Float3:			return GL_FLOAT;
-		case ShaderDataType::Float4:			return GL_FLOAT;
-		case ShaderDataType::Mat3:				return GL_FLOAT;
-		case ShaderDataType::Mat4:				return GL_FLOAT;
-		case ShaderDataType::Int:				return GL_INT;
-		case ShaderDataType::Int2:				return GL_INT;
-		case ShaderDataType::Int3:				return GL_INT;
-		case ShaderDataType::Int4:				return GL_INT;
-		case ShaderDataType::Bool:				return GL_BOOL;
-		}
-
-		SP_CORE_ASSERT(false, "Unknown ShaderDataType~");
-		return 0;
-	}
-
 	Application::Application()
 	{
 		SP_CORE_ASSERT(!s_Instance, "Application already exists!");
@@ -46,44 +25,46 @@ namespace StartPoint {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		// Vertex Array
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-		// Index Buffer
+		m_VertexArray.reset(VertexArray::Create());
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
-
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-		// Set action scope
-		// "layout" will be deleted automatically out of action scope
-		{
-			BufferLayout layout = {
-				{ShaderDataType::Float3, "a_Position"},
-				{ShaderDataType::Float4, "a_Color"}
-			};
-
-			m_VertexBuffer->SetLayout(layout);
-		}
-
-		unsigned int index = 0;
-		const auto& layout = m_VertexBuffer->GetLayout();
-		for (const auto& i : layout) {
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, 
-				i.GetElementCount(), 
-				ShaderDataTypeToOpenGLBaseType(i.Type), 
-				i.Normalized ? GL_TRUE : GL_FALSE, 
-				layout.GetStride(),
-				(const void*)i.Offset);
-			index++;
-		}
-
+		BufferLayout layout = {
+			{ShaderDataType::Float3, "a_Position"},
+			{ShaderDataType::Float4, "a_Color"}
+		};
+		m_VertexBuffer->SetLayout(layout);
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 		unsigned int indices[3] = { 0, 1, 2 };
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices)));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
+
+
+		m_SquareVA.reset(VertexArray::Create());
+		float vertices2[3 * 4] = {
+		   -0.5f, -0.5f, 0.0f,   // 右上角
+			0.5f, -0.5f, 0.0f,  // 右下角
+			0.5f,  0.5f, 0.0f, // 左下角
+		   -0.5f,  0.5f, 0.0f   // 左上角
+		};
+
+		std::shared_ptr<VertexBuffer> squareVB;
+		squareVB.reset(VertexBuffer::Create(vertices2, sizeof(vertices2)));
+		BufferLayout squareLayout = {
+			{ShaderDataType::Float3, "a_Position"}
+		};
+		squareVB->SetLayout(squareLayout);
+		m_SquareVA->AddVertexBuffer(squareVB);
+		unsigned int indices2[6] = {
+			0, 1, 2, // 第一个三角形
+			2, 3, 0  // 第二个三角形
+		};
+		std::shared_ptr<IndexBuffer> squareIB;
+		squareIB.reset(IndexBuffer::Create(indices2, sizeof(indices2)));
+		m_SquareVA->SetIndexBuffer(squareIB);
 
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -114,6 +95,28 @@ namespace StartPoint {
 			}
 		)";
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+
+		std::string vertexSrc2 = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			
+			void main(){
+				gl_Position = vec4(a_Position, 1.0);
+
+			}
+		)";
+
+		std::string fragmentSrc2 = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			
+			void main(){
+				color = vec4(0.0, 1.0, 0.0, 1.0);
+			}
+		)";
+		m_Shader2.reset(new Shader(vertexSrc2, fragmentSrc2));
 	}
 
 	Application::~Application() {}
@@ -139,9 +142,13 @@ namespace StartPoint {
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			m_Shader2->Bind();
+			m_SquareVA->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			glViewport(0, 0, m_Window->GetWidth(), m_Window->GetHeight());
 

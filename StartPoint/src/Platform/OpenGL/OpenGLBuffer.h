@@ -31,8 +31,11 @@ namespace StartPoint {
 		virtual void Bind() const override;
 
 		virtual void Unbind() const override;
+
+		virtual unsigned int GetCount() const override;
 	private:
 		unsigned int m_RendererID;
+		unsigned int m_Count;
 	};
 
 }
