@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
 
 namespace StartPoint {
 
@@ -15,6 +16,8 @@ namespace StartPoint {
 		void Bind() const;
 
 		void Unbind() const;
+
+		void UploadUniformMat4(const std::string name, const glm::mat4 matrix);
 	};
 
 }

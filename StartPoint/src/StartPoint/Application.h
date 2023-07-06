@@ -13,6 +13,8 @@
 #include <StartPoint/Renderer/Renderer.h>
 #include "Renderer/RenderCommand.h"
 
+#include <StartPoint/Renderer/OrthegraphicCamera.h>
+
 namespace StartPoint {
 	class SP_API Application
 	{
@@ -49,6 +51,8 @@ namespace StartPoint {
 		std::shared_ptr<VertexArray> m_SquareVA;
 		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+
+		OrthegraphicCamera m_Camera;
 
 		static Application* s_Instance;
 	};
