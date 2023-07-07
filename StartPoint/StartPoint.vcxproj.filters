@@ -108,6 +108,9 @@
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Timestep.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Application.cpp">

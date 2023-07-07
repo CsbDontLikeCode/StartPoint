@@ -106,34 +106,39 @@ public:
 		m_Shader2.reset(new StartPoint::Shader(vertexSrc2, fragmentSrc2));
 	}
 
-	void OnUpdate() override
+	void OnUpdate(StartPoint::Timestep timestep) override
 	{
+		// Explanation: the class "Timestep" has overrided the float conversion.
+		// When assign the instance of class "Timestep" to a float type variable, the 
+		// instance will automatically return the instance's member properties-"m_Time".
+		float deltatime = timestep;
+		SP_INFO("Deltatime:{0}.", deltatime);
 		// Move the camera(left and right)
 		if (StartPoint::Input::IsKeyPressed(SP_KEY_LEFT))
 		{
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * deltatime;
 		}
 		else if (StartPoint::Input::IsKeyPressed(SP_KEY_RIGHT))
 		{
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * deltatime;
 		}
 		// Move the camera(up and down)
 		if (StartPoint::Input::IsKeyPressed(SP_KEY_DOWN))
 		{
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * deltatime;
 		}
 		else if (StartPoint::Input::IsKeyPressed(SP_KEY_UP))
 		{
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * deltatime;
 		}
 		// Rotate the camera
 		if (StartPoint::Input::IsKeyPressed(SP_KEY_A))
 		{
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * deltatime;
 		}
 		else if (StartPoint::Input::IsKeyPressed(SP_KEY_D))
 		{
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * deltatime;
 		}
 
 		StartPoint::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
@@ -170,10 +175,10 @@ private:
 	std::shared_ptr<StartPoint::IndexBuffer> m_IndexBuffer;
 
 	StartPoint::OrthegraphicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 0.02f;
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 1.0f;
+	glm::vec3 m_CameraPosition;					// Camera's current position, it will be set in constructor
+	float m_CameraMoveSpeed = 2.0f;				// Camera's move speed for "¡ü" "¡ý" "¡û" "¡ú"
+	float m_CameraRotation = 0.0f;				// Camera's current rotation
+	float m_CameraRotationSpeed = 15.0f;		// Camera's rotate speed
 };
 
 class Sandbox : public StartPoint::Application {

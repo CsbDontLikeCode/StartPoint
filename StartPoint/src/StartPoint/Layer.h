@@ -1,6 +1,7 @@
 #pragma once
 #include "StartPoint/Core.h"
 #include "StartPoint/Events/Event.h"
+#include <StartPoint/Core/Timestep.h>
 
 namespace StartPoint {
 
@@ -14,7 +15,7 @@ namespace StartPoint {
 
 		virtual void OnDetach(){}
 
-		virtual void OnUpdate(){}
+		virtual void OnUpdate(Timestep timestep){}
 
 		virtual void OnImGuiRender(){}
 

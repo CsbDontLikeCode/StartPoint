@@ -5,47 +5,33 @@
 #include "LayerStack.h"
 #include "Events/ApplicationEvent.h"
 #include "ImGui/ImGuiLayer.h"
-
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-
-#include <StartPoint/Renderer/Renderer.h>
-#include "Renderer/RenderCommand.h"
-
-#include <StartPoint/Renderer/OrthegraphicCamera.h>
+#include "StartPoint/Core/Timestep.h"
 
 namespace StartPoint {
 	class SP_API Application
 	{
+	private:
+		static Application* s_Instance;		// Application instance
+		bool m_Running = true;				// Application running state
+
+		LayerStack m_LayerStack;			// Layer stack
+		std::unique_ptr<Window> m_Window;	// Window object
+		ImGuiLayer* m_ImGuiLayer;			// ImGui object
+		Timestep* m_Timestep;				// Timer object
+		float m_LastFrameTime = 0.0f;				// Record last frame's time to compute the deltatime
 	public:
 		Application();
-
 		virtual ~Application();
 
 		void Run();
-
 		void OnEvent(Event& e);
-
 		void PushLayer(Layer* layer);
-
 		void PushOverlay(Layer* layer);
 
 		inline static Application& Get() { return *s_Instance; }
-
 		inline Window& GetWindow() { return *m_Window; }
-	
 	private:
 		bool OnWindowClosed(WindowCloseEvent& e);
-
-		std::unique_ptr<Window> m_Window;
-		ImGuiLayer* m_ImGuiLayer;
-
-		bool m_Running = true;
-
-		LayerStack m_LayerStack;
-
-		static Application* s_Instance;
 	};
 
 	// Set by user
