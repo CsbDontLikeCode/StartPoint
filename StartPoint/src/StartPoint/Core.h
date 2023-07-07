@@ -1,10 +1,14 @@
 #pragma once
 
 #ifdef SP_PLATFORM_WINDOWS
-	#ifdef SP_BUILD_DLL
-		#define SP_API __declspec(dllexport)
+	#if SP_DYNAMIC_LINK
+		#ifdef SP_BUILD_DLL
+			#define SP_API __declspec(dllexport)
+		#else
+			#define SP_API __declspec(dllimport)
+		#endif
 	#else
-		#define SP_API __declspec(dllimport)
+		#define SP_API
 	#endif
 #else
 	#error StartPoint Only Suppert Windows

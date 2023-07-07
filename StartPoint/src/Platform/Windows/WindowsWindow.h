@@ -1,10 +1,6 @@
 #pragma once
 #include "StartPoint/Window.h"
-#include "StartPoint/Log.h"
-
-#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
-
 #include <StartPoint/Renderer/GraphicsContext.h>
 
 namespace StartPoint {
