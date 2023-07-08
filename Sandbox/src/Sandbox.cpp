@@ -1,6 +1,7 @@
-#include <iostream>
 #include <StartPoint.h>
 #include <imgui.h>
+#include <glm/gtc/matrix_transform.hpp>
+
 
 class ExampleLayer : public StartPoint::Layer 
 {
@@ -56,13 +57,14 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 VP_Matrix;
+			uniform mat4 transform;
 
 			out vec3 position;
 			out vec4 a_color;	
 			
 			void main(){
 				position = a_Position;
-				gl_Position = VP_Matrix * vec4(a_Position, 1.0);
+				gl_Position = VP_Matrix * transform * vec4(a_Position, 1.0);
 				a_color = a_Color;
 			}
 		)";
@@ -87,9 +89,10 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 VP_Matrix;
+			uniform mat4 transform;
 			
 			void main(){
-				gl_Position = VP_Matrix * vec4(a_Position, 1.0);
+				gl_Position = VP_Matrix * transform * vec4(a_Position, 1.0);
 
 			}
 		)";
@@ -112,7 +115,7 @@ public:
 		// When assign the instance of class "Timestep" to a float type variable, the 
 		// instance will automatically return the instance's member properties-"m_Time".
 		float deltatime = timestep;
-		SP_INFO("Deltatime:{0}.", deltatime);
+
 		// Move the camera(left and right)
 		if (StartPoint::Input::IsKeyPressed(SP_KEY_LEFT))
 		{
@@ -140,7 +143,6 @@ public:
 		{
 			m_CameraRotation -= m_CameraRotationSpeed * deltatime;
 		}
-
 		StartPoint::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		StartPoint::RenderCommand::Clear();
 
@@ -149,8 +151,14 @@ public:
 		// Rotate the angle of view
 		m_Camera.SetRotation(m_CameraRotation);
 
+		// Unlike the camera move, transform matrix moves the specific object in the scene.
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
+
 		StartPoint::Renderer::BeginScene(m_Camera);
-		StartPoint::Renderer::Submit(m_SquareVA, m_Shader2);
+		for (int i = 0; i < 10; i++) {
+			glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), glm::vec3((float)i, 0.0f, 0.0f)) * scale;
+			StartPoint::Renderer::Submit(m_SquareVA, m_Shader2, transform2);
+		}
 		StartPoint::Renderer::Submit(m_VertexArray, m_Shader);
 		StartPoint::Renderer::EndScene();
 	}
@@ -179,6 +187,8 @@ private:
 	float m_CameraMoveSpeed = 2.0f;				// Camera's move speed for "¡ü" "¡ý" "¡û" "¡ú"
 	float m_CameraRotation = 0.0f;				// Camera's current rotation
 	float m_CameraRotationSpeed = 15.0f;		// Camera's rotate speed
+	// glm::vec3 m_TransformPosition;				// Scene object transform matrix
+	// float m_SquareMoveSpeed = 5.0f;				// Scene object transform matrix
 };
 
 class Sandbox : public StartPoint::Application {
