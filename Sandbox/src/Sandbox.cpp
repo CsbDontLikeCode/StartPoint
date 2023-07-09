@@ -39,7 +39,7 @@ public:
 		   -0.5f,  0.5f, 0.0f   // left-top corner
 		};
 
-		std::shared_ptr<StartPoint::VertexBuffer> squareVB;
+		StartPoint::Ref<StartPoint::VertexBuffer> squareVB;
 		squareVB.reset(StartPoint::VertexBuffer::Create(vertices2, sizeof(vertices2)));
 		StartPoint::BufferLayout squareLayout = {
 			{StartPoint::ShaderDataType::Float3, "a_Position"}
@@ -50,7 +50,7 @@ public:
 			0, 1, 2, // first triangle
 			2, 3, 0  // second triangle
 		};
-		std::shared_ptr<StartPoint::IndexBuffer> squareIB;
+		StartPoint::Ref<StartPoint::IndexBuffer> squareIB;
 		squareIB.reset(StartPoint::IndexBuffer::Create(indices2, sizeof(indices2)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -191,12 +191,21 @@ public:
 
 	}
 private:
-	std::shared_ptr<StartPoint::Shader> m_Shader;
-	std::shared_ptr<StartPoint::Shader> m_Shader2;
-	std::shared_ptr<StartPoint::VertexArray> m_VertexArray;
-	std::shared_ptr<StartPoint::VertexArray> m_SquareVA;
-	std::shared_ptr<StartPoint::VertexBuffer> m_VertexBuffer;
-	std::shared_ptr<StartPoint::IndexBuffer> m_IndexBuffer;
+	//Ref is a kind of template use based on std::shared_ptr<>.
+	//Besides, there is a template use of std::unique_ptr<> named Scope.
+	//The defination is in "Core.h" file.
+	StartPoint::Ref<StartPoint::Shader> m_Shader;
+	//std::shared_ptr<StartPoint::Shader> m_Shader;
+	StartPoint::Ref<StartPoint::Shader> m_Shader2;
+	//std::shared_ptr<StartPoint::Shader> m_Shader2;
+	StartPoint::Ref<StartPoint::VertexArray> m_VertexArray;
+	//std::shared_ptr<StartPoint::VertexArray> m_VertexArray;
+	StartPoint::Ref<StartPoint::VertexArray> m_SquareVA;
+	//std::shared_ptr<StartPoint::VertexArray> m_SquareVA;
+	StartPoint::Ref<StartPoint::VertexBuffer> m_VertexBuffer;
+	//std::shared_ptr<StartPoint::VertexBuffer> m_VertexBuffer;
+	StartPoint::Ref<StartPoint::IndexBuffer> m_IndexBuffer;
+	//std::shared_ptr<StartPoint::IndexBuffer> m_IndexBuffer;
 
 	StartPoint::OrthegraphicCamera m_Camera;
 	glm::vec3 m_CameraPosition;					// Camera's current position, it will be set in constructor

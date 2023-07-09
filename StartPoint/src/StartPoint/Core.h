@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #ifdef SP_PLATFORM_WINDOWS
 	#if SP_DYNAMIC_LINK
@@ -27,3 +28,14 @@
 #define SP_BIND_ENENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
 #define GLFW_INCLUDE_NONE
+
+namespace StartPoint 
+{
+
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+}
