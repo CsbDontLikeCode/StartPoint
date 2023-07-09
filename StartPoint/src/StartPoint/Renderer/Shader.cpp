@@ -118,7 +118,13 @@ namespace StartPoint {
 		glUseProgram(0);
 	}
 
-	void Shader::UploadUniformMat4(const std::string name, const glm::mat4 matrix)
+	void Shader::UploadUniformFloat4(const std::string& name, const glm::vec4& color)
+	{
+		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+		glUniform4f(location, color.r, color.g, color.b, color.a);
+	}
+
+	void Shader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));

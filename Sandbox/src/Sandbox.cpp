@@ -91,6 +91,7 @@ public:
 			uniform mat4 VP_Matrix;
 			uniform mat4 transform;
 			
+			
 			void main(){
 				gl_Position = VP_Matrix * transform * vec4(a_Position, 1.0);
 
@@ -100,10 +101,12 @@ public:
 		std::string fragmentSrc2 = R"(
 			#version 330 core
 			
+			uniform vec4 u_Color;			
+
 			layout(location = 0) out vec4 color;
-			
+
 			void main(){
-				color = vec4(0.0, 1.0, 0.0, 1.0);
+				color = u_Color;
 			}
 		)";
 		m_Shader2.reset(new StartPoint::Shader(vertexSrc2, fragmentSrc2));
@@ -154,8 +157,19 @@ public:
 		// Unlike the camera move, transform matrix moves the specific object in the scene.
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
 
+		glm::vec4 redColor(1.0f, 0.25f, 0.25f, 1.0f);
+		glm::vec4 blueColor(0.25f, 0.25f, 1.0f, 1.0f);
+
 		StartPoint::Renderer::BeginScene(m_Camera);
 		for (int i = 0; i < 10; i++) {
+			if (i % 2 == 0) 
+			{
+				m_Shader2->UploadUniformFloat4("u_Color", redColor);
+			}
+			else 
+			{
+				m_Shader2->UploadUniformFloat4("u_Color", blueColor);
+			}
 			glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), glm::vec3((float)i, 0.0f, 0.0f)) * scale;
 			StartPoint::Renderer::Submit(m_SquareVA, m_Shader2, transform2);
 		}

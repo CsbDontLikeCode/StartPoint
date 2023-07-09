@@ -17,7 +17,9 @@ namespace StartPoint {
 
 		void Unbind() const;
 
-		void UploadUniformMat4(const std::string name, const glm::mat4 matrix);
+		void UploadUniformFloat4(const std::string& name, const glm::vec4& color);
+
+		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
 	};
 
 }
