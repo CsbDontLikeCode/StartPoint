@@ -1,25 +1,17 @@
 #pragma once
 
 #include <string>
-#include <glm/glm.hpp>
 
 namespace StartPoint {
 
 	class Shader {
-	private:
-		unsigned int m_RendererID;
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		virtual ~Shader() = default;
 
-		~Shader();
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
 
-		void Bind() const;
-
-		void Unbind() const;
-
-		void UploadUniformFloat4(const std::string& name, const glm::vec4& color);
-
-		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
 
 }

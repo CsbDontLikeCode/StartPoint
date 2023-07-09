@@ -1,6 +1,10 @@
 #include <StartPoint.h>
 #include <imgui.h>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+// Temporary
+#include <Platform/OpenGL/OpenGLShader.h>
 
 
 class ExampleLayer : public StartPoint::Layer 
@@ -81,7 +85,7 @@ public:
 				color = a_color;
 			}
 		)";
-		m_Shader.reset(new StartPoint::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(StartPoint::Shader::Create(vertexSrc, fragmentSrc));
 
 		std::string vertexSrc2 = R"(
 			#version 330 core
@@ -109,7 +113,7 @@ public:
 				color = u_Color;
 			}
 		)";
-		m_Shader2.reset(new StartPoint::Shader(vertexSrc2, fragmentSrc2));
+		m_Shader2.reset(StartPoint::Shader::Create(vertexSrc2, fragmentSrc2));
 	}
 
 	void OnUpdate(StartPoint::Timestep timestep) override
@@ -156,19 +160,17 @@ public:
 
 		// Unlike the camera move, transform matrix moves the specific object in the scene.
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
-
-		glm::vec4 redColor(1.0f, 0.25f, 0.25f, 1.0f);
 		glm::vec4 blueColor(0.25f, 0.25f, 1.0f, 1.0f);
 
 		StartPoint::Renderer::BeginScene(m_Camera);
 		for (int i = 0; i < 10; i++) {
 			if (i % 2 == 0) 
 			{
-				m_Shader2->UploadUniformFloat4("u_Color", redColor);
+				std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader2)->UploadUniformFloat4("u_Color", glm::vec4(m_SquareColor, 1.0f));
 			}
 			else 
 			{
-				m_Shader2->UploadUniformFloat4("u_Color", blueColor);
+				std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader2)->UploadUniformFloat4("u_Color", blueColor);
 			}
 			glm::mat4 transform2 = glm::translate(glm::mat4(1.0f), glm::vec3((float)i, 0.0f, 0.0f)) * scale;
 			StartPoint::Renderer::Submit(m_SquareVA, m_Shader2, transform2);
@@ -179,8 +181,8 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello, World!");
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Squares' color except blue ones", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 	}
 
@@ -201,8 +203,7 @@ private:
 	float m_CameraMoveSpeed = 2.0f;				// Camera's move speed for "¡ü" "¡ý" "¡û" "¡ú"
 	float m_CameraRotation = 0.0f;				// Camera's current rotation
 	float m_CameraRotationSpeed = 15.0f;		// Camera's rotate speed
-	// glm::vec3 m_TransformPosition;				// Scene object transform matrix
-	// float m_SquareMoveSpeed = 5.0f;				// Scene object transform matrix
+	glm::vec3 m_SquareColor = glm::vec3(0.3f, 0.6f, 0.9f);
 };
 
 class Sandbox : public StartPoint::Application {

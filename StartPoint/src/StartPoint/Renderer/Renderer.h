@@ -2,6 +2,7 @@
 #include "RendererAPI.h"
 #include "OrthegraphicCamera.h"
 #include "Shader.h"
+#include "RenderCommand.h"
 
 namespace StartPoint {
 
