@@ -8,6 +8,8 @@ namespace StartPoint {
 
 	class Renderer {
 	public:
+		static void Init();
+
 		static void BeginScene(OrthegraphicCamera& camera);
 		static void EndScene();
 		

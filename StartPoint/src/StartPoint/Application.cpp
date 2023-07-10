@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "Input.h"
 #include <GLFW/glfw3.h>
+#include "Renderer/Renderer.h"
 
 namespace StartPoint {
 
@@ -20,6 +21,8 @@ namespace StartPoint {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 		m_Window->SetVSync(false);
+
+		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);

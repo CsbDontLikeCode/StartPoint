@@ -150,7 +150,8 @@ public:
 			}
 		)";
 		m_TextureShader.reset(StartPoint::Shader::Create(vertexSrc3, fragmentSrc3));
-		m_Texture2D= StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
+		m_Texture2D = StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
+		//m_FrameTexture2D = StartPoint::Texture2D::Create("assets/textures/awesomeface.png");	// For texture blend test
 
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -220,6 +221,8 @@ public:
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->UploadUniformFloat4("u_Color", blueColor);
 		m_Texture2D->Bind();
 		StartPoint::Renderer::Submit(m_SquareVA, m_TextureShader, glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));
+		//m_FrameTexture2D->Bind();																						// For texture blend test
+		//StartPoint::Renderer::Submit(m_SquareVA, m_TextureShader, glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));		// For texture blend test
 		
 		StartPoint::Renderer::Submit(m_VertexArray, m_Shader,glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f)) * scale);
 
@@ -249,12 +252,7 @@ private:
 	StartPoint::Ref<StartPoint::VertexBuffer> m_VertexBuffer;
 	StartPoint::Ref<StartPoint::IndexBuffer> m_IndexBuffer;
 	StartPoint::Ref<StartPoint::Texture2D> m_Texture2D;
-	//std::shared_ptr<StartPoint::Shader> m_Shader;
-	//std::shared_ptr<StartPoint::Shader> m_Shader2;
-	//std::shared_ptr<StartPoint::VertexArray> m_VertexArray;
-	//std::shared_ptr<StartPoint::VertexArray> m_SquareVA;
-	//std::shared_ptr<StartPoint::VertexBuffer> m_VertexBuffer;
-	//std::shared_ptr<StartPoint::IndexBuffer> m_IndexBuffer;
+	//StartPoint::Ref<StartPoint::Texture2D> m_FrameTexture2D;	// For texture blend test
 
 	StartPoint::OrthegraphicCamera m_Camera;
 	glm::vec3 m_CameraPosition;					// Camera's current position, it will be set in constructor
