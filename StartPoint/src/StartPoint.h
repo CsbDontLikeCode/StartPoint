@@ -20,6 +20,7 @@
 
 #include "StartPoint/Renderer/Buffer.h"
 #include "StartPoint/Renderer/Shader.h"
+#include "StartPoint/Renderer/Texture.h"
 #include "StartPoint/Renderer/VertexArray.h"
 
 #include "StartPoint/Renderer/OrthegraphicCamera.h"
