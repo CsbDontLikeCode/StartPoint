@@ -1,6 +1,7 @@
 #pragma once
 #include <StartPoint/Renderer/Shader.h>
 #include <glm/glm.hpp>
+#include <glad/glad.h>
 
 namespace StartPoint {
 
@@ -9,6 +10,7 @@ namespace StartPoint {
 	private:
 		unsigned int m_RendererID;
 	public:
+		OpenGLShader(const std::string& filepath);
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 		virtual ~OpenGLShader();
 
@@ -24,6 +26,10 @@ namespace StartPoint {
 
 		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix3);
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix4);
+	private:
+		std::string ReadFile(const std::string& filepath);
+		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+		void Compile(std::unordered_map<GLenum, std::string>& shaderSource);
 	};
 
 }
