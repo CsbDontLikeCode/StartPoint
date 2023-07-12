@@ -123,6 +123,9 @@
     <ClInclude Include="vender\Include\stb_image\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\OrthegraphicCameraController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Application.cpp">
@@ -195,6 +198,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="vender\Include\stb_image\stb_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\OrthegraphicCameraController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

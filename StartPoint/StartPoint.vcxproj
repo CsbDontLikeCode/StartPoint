@@ -182,6 +182,7 @@
     <ClInclude Include="src\StartPoint\Core.h" />
     <ClInclude Include="src\StartPoint\EntryPoint.h" />
     <ClInclude Include="src\StartPoint\MouseButtonCodes.h" />
+    <ClInclude Include="src\StartPoint\OrthegraphicCameraController.h" />
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h" />
@@ -213,6 +214,7 @@
     <ClCompile Include="src\StartPoint\LayerStack.cpp" />
     <ClCompile Include="src\StartPoint\Log.cpp" />
     <ClCompile Include="src\StartPoint\Application.cpp" />
+    <ClCompile Include="src\StartPoint\OrthegraphicCameraController.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp" />

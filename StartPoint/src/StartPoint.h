@@ -24,6 +24,7 @@
 #include "StartPoint/Renderer/VertexArray.h"
 
 #include "StartPoint/Renderer/OrthegraphicCamera.h"
+#include "StartPoint/OrthegraphicCameraController.h"
 // ----------------------------------------------------
 
 // -----³ÌÐòÈë¿Ú------------------

@@ -11,7 +11,7 @@ class ExampleLayer : public StartPoint::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.5f, 0.0f, 0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 		m_VertexArray.reset(StartPoint::VertexArray::Create());
 		float vertices[3 * 7] = {
@@ -132,51 +132,16 @@ public:
 
 	void OnUpdate(StartPoint::Timestep timestep) override
 	{
-		// Explanation: the class "Timestep" has overrided the float conversion.
-		// When assign the instance of class "Timestep" to a float type variable, the 
-		// instance will automatically return the instance's member properties-"m_Time".
-		float deltatime = timestep;
-
-		// Move the camera(left and right)
-		if (StartPoint::Input::IsKeyPressed(SP_KEY_LEFT))
-		{
-			m_CameraPosition.x -= m_CameraMoveSpeed * deltatime;
-		}
-		else if (StartPoint::Input::IsKeyPressed(SP_KEY_RIGHT))
-		{
-			m_CameraPosition.x += m_CameraMoveSpeed * deltatime;
-		}
-		// Move the camera(up and down)
-		if (StartPoint::Input::IsKeyPressed(SP_KEY_DOWN))
-		{
-			m_CameraPosition.y -= m_CameraMoveSpeed * deltatime;
-		}
-		else if (StartPoint::Input::IsKeyPressed(SP_KEY_UP))
-		{
-			m_CameraPosition.y += m_CameraMoveSpeed * deltatime;
-		}
-		// Rotate the camera
-		if (StartPoint::Input::IsKeyPressed(SP_KEY_A))
-		{
-			m_CameraRotation += m_CameraRotationSpeed * deltatime;
-		}
-		else if (StartPoint::Input::IsKeyPressed(SP_KEY_D))
-		{
-			m_CameraRotation -= m_CameraRotationSpeed * deltatime;
-		}
+		m_CameraController.OnUpdate(timestep);
+		
 		StartPoint::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		StartPoint::RenderCommand::Clear();
-
-		// Change the position of the camera
-		m_Camera.SetPosition(m_CameraPosition);
-		// Rotate the angle of view
-		m_Camera.SetRotation(m_CameraRotation);
 
 		// Unlike the camera move, transform matrix moves the specific object in the scene.
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
 		glm::vec4 blueColor(0.25f, 0.25f, 1.0f, 1.0f);
 
-		StartPoint::Renderer::BeginScene(m_Camera);
+		StartPoint::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		for (int i = 0; i < 2; i++) {
 			if (i % 2 == 0) 
@@ -211,7 +176,7 @@ public:
 
 	void OnEvent(StartPoint::Event& event) override
 	{
-
+		m_CameraController.OnEvent(event);
 	}
 private:
 	//Ref is a kind of template use based on std::shared_ptr<>.
@@ -228,11 +193,9 @@ private:
 	StartPoint::Ref<StartPoint::Texture2D> m_Texture2D;
 	//StartPoint::Ref<StartPoint::Texture2D> m_FrameTexture2D;	// For texture blend test
 
-	StartPoint::OrthegraphicCamera m_Camera;
-	glm::vec3 m_CameraPosition;					// Camera's current position, it will be set in constructor
-	float m_CameraMoveSpeed = 2.0f;				// Camera's move speed for "¡ü" "¡ý" "¡û" "¡ú"
-	float m_CameraRotation = 0.0f;				// Camera's current rotation
-	float m_CameraRotationSpeed = 15.0f;		// Camera's rotate speed
+	//StartPoint::OrthegraphicCamera m_Camera;
+	StartPoint::OrthegraphicCameraController m_CameraController;
+	
 	glm::vec3 m_SquareColor = glm::vec3(0.3f, 0.6f, 0.9f);
 };
 

@@ -8,6 +8,8 @@ namespace StartPoint
 	{
 	public:
 		OrthegraphicCamera(float left, float right, float bottom, float top);
+		
+		void SetProjection(float left, float right, float bottom, float top);
 
 		void SetRotation(float rotation) 
 		{ 
@@ -23,6 +25,7 @@ namespace StartPoint
 			// Every time camera attribution changes, recalculate the camera's view Matrix.
 			RecalculateViewMatrix();
 		}
+
 		const glm::vec3& GetPosition() const { return m_Position; }
 
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
