@@ -87,7 +87,9 @@ public:
 				color = a_color;
 			}
 		)";
-		m_Shader.reset(StartPoint::Shader::Create(vertexSrc, fragmentSrc));
+
+		m_Shader = StartPoint::Shader::Create("m_Shader", vertexSrc, fragmentSrc);
+		m_ShaderLibrary.Add("Shader", m_Shader);
 
 		std::string vertexSrc2 = R"(
 			#version 330 core
@@ -115,15 +117,17 @@ public:
 				color = u_Color;
 			}
 		)";
-		m_Shader2.reset(StartPoint::Shader::Create(vertexSrc2, fragmentSrc2));
+		m_Shader2 = StartPoint::Shader::Create("m_Shader2", vertexSrc2, fragmentSrc2);
+		m_ShaderLibrary.Add("Shader2", m_Shader2);
 
 
-		m_TextureShader.reset(StartPoint::Shader::Create("assets/shaders/Texture.glsl"));
+		m_TextureShader = StartPoint::Shader::Create("assets/shaders/Texture.glsl");
 		m_Texture2D = StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
 		//m_FrameTexture2D = StartPoint::Texture2D::Create("assets/textures/awesomeface.png");	// For texture blend test
 
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		m_ShaderLibrary.Add("Texture", m_TextureShader);
 	}
 
 	void OnUpdate(StartPoint::Timestep timestep) override
@@ -189,11 +193,11 @@ public:
 
 		std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_TextureShader)->UploadUniformFloat4("u_Color", blueColor);
 		m_Texture2D->Bind();
-		StartPoint::Renderer::Submit(m_SquareVA, m_TextureShader, glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));
+		StartPoint::Renderer::Submit(m_SquareVA, m_ShaderLibrary.Get("Texture"), glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));
 		//m_FrameTexture2D->Bind();																						// For texture blend test
 		//StartPoint::Renderer::Submit(m_SquareVA, m_TextureShader, glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));		// For texture blend test
 		
-		StartPoint::Renderer::Submit(m_VertexArray, m_Shader,glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f)) * scale);
+		StartPoint::Renderer::Submit(m_VertexArray, m_ShaderLibrary.Get("Shader"),glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f)) * scale);
 
 		StartPoint::Renderer::EndScene();
 	}
@@ -213,6 +217,7 @@ private:
 	//Ref is a kind of template use based on std::shared_ptr<>.
 	//Besides, there is a template use of std::unique_ptr<> named Scope.
 	//The defination is in "Core.h" file.
+	StartPoint::ShaderLibrary m_ShaderLibrary;
 	StartPoint::Ref<StartPoint::Shader> m_Shader;
 	StartPoint::Ref<StartPoint::Shader> m_Shader2;
 	StartPoint::Ref<StartPoint::Shader> m_TextureShader;

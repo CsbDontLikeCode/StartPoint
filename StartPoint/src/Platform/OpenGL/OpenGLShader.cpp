@@ -27,9 +27,17 @@ namespace StartPoint {
 		std::string source = ReadFile(filepath);
 		std::unordered_map<GLenum, std::string> shaderSources = PreProcess(source);
 		Compile(shaderSources);
+
+		// Set shader's name by filename
+		auto lastSlash = filepath.find_last_of("/\\");
+		lastSlash = (lastSlash == std::string::npos ? 0 : lastSlash + 1);
+		auto lastDot = filepath.rfind('.');
+		auto count = (lastDot == std::string::npos ? filepath.size() - lastSlash : lastDot - lastSlash);
+		m_Name = filepath.substr(lastSlash, count);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
+		: m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -147,6 +155,8 @@ namespace StartPoint {
 
 	void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSource)
 	{
+		SP_CORE_ASSERT(shaderSource <= 2, "Only support vertex shader and fragment shader now!");
+
 		std::string vertexSource;
 		std::string fragmentSource;
 		for (auto& kv : shaderSource) 
