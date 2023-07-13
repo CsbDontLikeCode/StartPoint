@@ -2,8 +2,8 @@
 #include "Buffer.h"
 
 #include "Renderer.h"
-#include "../Log.h"
-#include "../../Platform/OpenGL/OpenGLBuffer.h"
+#include <StartPoint/Core/Log.h>
+#include <Platform/OpenGL/OpenGLBuffer.h>
 
 namespace StartPoint {
 

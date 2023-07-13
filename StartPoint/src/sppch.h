@@ -17,4 +17,4 @@
 #include <Windows.h>
 #endif
 
-#include <StartPoint/Core.h>
+#include <StartPoint/Core/Core.h>

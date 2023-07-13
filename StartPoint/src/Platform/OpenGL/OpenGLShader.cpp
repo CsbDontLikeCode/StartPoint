@@ -1,7 +1,7 @@
 #include <sppch.h>
 #include "OpenGLShader.h"
 #include <glad/glad.h>
-#include <StartPoint/Log.h>
+#include <StartPoint/Core/Log.h>
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 

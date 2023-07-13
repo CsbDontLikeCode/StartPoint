@@ -1,5 +1,5 @@
 #pragma once
-#include "../Core.h"
+#include <StartPoint/Core/Core.h>
 
 namespace StartPoint {
 

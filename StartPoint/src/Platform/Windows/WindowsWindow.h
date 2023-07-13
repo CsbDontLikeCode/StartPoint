@@ -1,5 +1,5 @@
 #pragma once
-#include "StartPoint/Window.h"
+#include "StartPoint/Core/Window.h"
 #include <GLFW/glfw3.h>
 #include <StartPoint/Renderer/GraphicsContext.h>
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../Log.h"
+#include <StartPoint/Core/Log.h>
 
 namespace StartPoint{
 

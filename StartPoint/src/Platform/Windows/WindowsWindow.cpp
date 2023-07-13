@@ -6,7 +6,7 @@
 #include "StartPoint/Events/ApplicationEvent.h"
 
 #include <Platform/OpenGL/OpenGLContext.h>
-#include "StartPoint/Log.h"
+#include "StartPoint/Core/Log.h"
 
 #include <glad/glad.h>
 //#define GLFW_INCLUDE_NONE

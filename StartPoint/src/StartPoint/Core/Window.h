@@ -2,7 +2,7 @@
 
 #include "sppch.h"
 #include "Core.h"
-#include "Events/Event.h"
+#include <StartPoint/Events/Event.h>
 
 namespace StartPoint{
 

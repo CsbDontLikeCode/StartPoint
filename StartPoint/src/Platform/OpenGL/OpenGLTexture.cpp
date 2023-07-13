@@ -2,7 +2,7 @@
 #include "OpenGLTexture.h"
 #include <stb_image/stb_image.h>
 #include <glad/glad.h>
-#include <StartPoint/Core.h>
+#include <StartPoint/Core/Core.h>
 
 namespace StartPoint
 {

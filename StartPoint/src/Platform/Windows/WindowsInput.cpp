@@ -1,7 +1,7 @@
 #include "sppch.h"
 #include "WindowsInput.h"
 
-#include <StartPoint/Application.h>
+#include <StartPoint/Core/Application.h>
 #include <GLFW/glfw3.h>
 
 namespace StartPoint {

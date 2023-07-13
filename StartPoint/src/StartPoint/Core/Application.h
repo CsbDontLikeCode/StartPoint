@@ -3,8 +3,8 @@
 #include "Core.h"
 #include "Window.h"
 #include "LayerStack.h"
-#include "Events/ApplicationEvent.h"
-#include "ImGui/ImGuiLayer.h"
+#include <StartPoint/Events/ApplicationEvent.h>
+#include <StartPoint/ImGui/ImGuiLayer.h>
 #include "StartPoint/Core/Timestep.h"
 
 namespace StartPoint {

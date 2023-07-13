@@ -1,5 +1,5 @@
 #pragma once
-#include "StartPoint/Core.h"
+#include "Core.h"
 #include "StartPoint/Events/Event.h"
 #include <StartPoint/Core/Timestep.h>
 

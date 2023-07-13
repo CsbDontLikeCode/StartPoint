@@ -172,17 +172,17 @@
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\StartPoint\Input.h" />
-    <ClInclude Include="src\StartPoint\KeyCodes.h" />
-    <ClInclude Include="src\StartPoint\Layer.h" />
-    <ClInclude Include="src\StartPoint\LayerStack.h" />
-    <ClInclude Include="src\StartPoint\Log.h" />
+    <ClInclude Include="src\StartPoint\Core\Input.h" />
+    <ClInclude Include="src\StartPoint\Core\KeyCodes.h" />
+    <ClInclude Include="src\StartPoint\Core\Layer.h" />
+    <ClInclude Include="src\StartPoint\Core\LayerStack.h" />
+    <ClInclude Include="src\StartPoint\Core\Log.h" />
     <ClInclude Include="src\StartPoint.h" />
-    <ClInclude Include="src\StartPoint\Application.h" />
-    <ClInclude Include="src\StartPoint\Core.h" />
-    <ClInclude Include="src\StartPoint\EntryPoint.h" />
-    <ClInclude Include="src\StartPoint\MouseButtonCodes.h" />
-    <ClInclude Include="src\StartPoint\OrthegraphicCameraController.h" />
+    <ClInclude Include="src\StartPoint\Core\Application.h" />
+    <ClInclude Include="src\StartPoint\Core\Core.h" />
+    <ClInclude Include="src\StartPoint\Core\EntryPoint.h" />
+    <ClInclude Include="src\StartPoint\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h" />
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h" />
@@ -192,7 +192,7 @@
     <ClInclude Include="src\StartPoint\Renderer\Shader.h" />
     <ClInclude Include="src\StartPoint\Renderer\Texture.h" />
     <ClInclude Include="src\StartPoint\Renderer\VertexArray.h" />
-    <ClInclude Include="src\StartPoint\Window.h" />
+    <ClInclude Include="src\StartPoint\Core\Window.h" />
     <ClInclude Include="vender\Include\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -210,11 +210,11 @@
     </ClCompile>
     <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\StartPoint\Layer.cpp" />
-    <ClCompile Include="src\StartPoint\LayerStack.cpp" />
-    <ClCompile Include="src\StartPoint\Log.cpp" />
-    <ClCompile Include="src\StartPoint\Application.cpp" />
-    <ClCompile Include="src\StartPoint\OrthegraphicCameraController.cpp" />
+    <ClCompile Include="src\StartPoint\Core\Layer.cpp" />
+    <ClCompile Include="src\StartPoint\Core\LayerStack.cpp" />
+    <ClCompile Include="src\StartPoint\Core\Log.cpp" />
+    <ClCompile Include="src\StartPoint\Core\Application.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp" />

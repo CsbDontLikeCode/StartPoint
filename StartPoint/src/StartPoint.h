@@ -1,12 +1,12 @@
 #pragma once
 
-#include "StartPoint/Application.h"
-#include "StartPoint/Layer.h"
-#include "StartPoint/Log.h"
+#include "StartPoint/Core/Application.h"
+#include "StartPoint/Core/Layer.h"
+#include "StartPoint/Core/Log.h"
 
-#include "StartPoint/Input.h"
-#include "StartPoint/KeyCodes.h"
-#include "StartPoint/MouseButtonCodes.h"
+#include "StartPoint/Core/Input.h"
+#include "StartPoint/Core/KeyCodes.h"
+#include "StartPoint/Core/MouseButtonCodes.h"
 
 #include "StartPoint/ImGui/ImGuiLayer.h"
 
@@ -24,9 +24,9 @@
 #include "StartPoint/Renderer/VertexArray.h"
 
 #include "StartPoint/Renderer/OrthegraphicCamera.h"
-#include "StartPoint/OrthegraphicCameraController.h"
+#include "StartPoint/Renderer/OrthegraphicCameraController.h"
 // ----------------------------------------------------
 
 // -----³ÌÐòÈë¿Ú------------------
-#include "StartPoint/EntryPoint.h"
+#include "StartPoint/Core/EntryPoint.h"
 // -------------------------------

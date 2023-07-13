@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-#include "../Application.h" 
+#include <StartPoint/Core/Application.h>
 
 namespace StartPoint {
 	ImGuiLayer::ImGuiLayer() 

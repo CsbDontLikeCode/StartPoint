@@ -1,5 +1,5 @@
 #pragma once
-#include "../../StartPoint/Input.h"
+#include <StartPoint/Core/Input.h>
 
 namespace StartPoint {
 

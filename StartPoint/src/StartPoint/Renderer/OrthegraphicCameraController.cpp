@@ -1,7 +1,7 @@
 #include <sppch.h>
 #include "OrthegraphicCameraController.h"
-#include <StartPoint/Input.h>
-#include <StartPoint/KeyCodes.h>
+#include <StartPoint/Core/Input.h>
+#include <StartPoint/Core/KeyCodes.h>
 
 namespace StartPoint
 {

@@ -1,11 +1,11 @@
 #include "sppch.h"
 
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
+#include <StartPoint/Events/ApplicationEvent.h>
 #include "Log.h"
 #include "Input.h"
 #include <GLFW/glfw3.h>
-#include "Renderer/Renderer.h"
+#include <StartPoint/Renderer/Renderer.h>
 
 namespace StartPoint {
 
