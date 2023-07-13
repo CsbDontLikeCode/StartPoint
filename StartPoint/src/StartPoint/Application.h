@@ -13,6 +13,7 @@ namespace StartPoint {
 	private:
 		static Application* s_Instance;		// Application instance
 		bool m_Running = true;				// Application running state
+		bool m_Minimized = false;			// Application minimized state
 
 		LayerStack m_LayerStack;			// Layer stack
 		std::unique_ptr<Window> m_Window;	// Window object
@@ -32,6 +33,7 @@ namespace StartPoint {
 		inline Window& GetWindow() { return *m_Window; }
 	private:
 		bool OnWindowClosed(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 	};
 
 	// Set by user

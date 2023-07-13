@@ -10,6 +10,11 @@ namespace StartPoint {
 			s_RendererAPI->Init();
 		}
 
+		inline static void SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height) 
+		{
+			s_RendererAPI->SetViewport(x, y, width, height);
+		}
+
 		inline static void SetClearColor(const glm::vec4& color) 
 		{
 			s_RendererAPI->SetClearColor(color);

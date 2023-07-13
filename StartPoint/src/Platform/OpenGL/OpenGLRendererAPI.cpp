@@ -11,6 +11,11 @@ namespace StartPoint {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+	void OpenGLRendererAPI::SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
+	{
+		glViewport(x, y, width, height);
+	}
+
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) const
 	{
 		glClearColor(color.r, color.g, color.b, color.a);

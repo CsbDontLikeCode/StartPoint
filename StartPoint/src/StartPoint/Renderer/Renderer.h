@@ -9,6 +9,7 @@ namespace StartPoint {
 	class Renderer {
 	public:
 		static void Init();
+		static void OnWindowResize(unsigned int width, unsigned int height);
 
 		static void BeginScene(OrthegraphicCamera& camera);
 		static void EndScene();
