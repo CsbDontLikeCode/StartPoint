@@ -26,7 +26,3 @@
 #include "StartPoint/Renderer/OrthegraphicCamera.h"
 #include "StartPoint/Renderer/OrthegraphicCameraController.h"
 // ----------------------------------------------------
-
-// -----³ÌÐòÈë¿Ú------------------
-#include "StartPoint/Core/EntryPoint.h"
-// -------------------------------

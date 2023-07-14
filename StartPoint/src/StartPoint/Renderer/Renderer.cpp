@@ -32,8 +32,8 @@ namespace StartPoint {
 		shader->Bind();
 
 		// Temporary method to make sure the program can work
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("VP_Matrix", m_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("transform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ProjectView", m_SceneData->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);

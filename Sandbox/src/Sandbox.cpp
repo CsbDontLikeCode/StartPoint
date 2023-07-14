@@ -6,6 +6,13 @@
 // Temporary
 #include <Platform/OpenGL/OpenGLShader.h>
 
+#include "Sandbox2D.h"
+
+
+// -----³ÌÐòÈë¿Ú------------------
+#include "StartPoint/Core/EntryPoint.h"
+// -------------------------------
+
 
 class ExampleLayer : public StartPoint::Layer 
 {
@@ -13,7 +20,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
-		m_VertexArray.reset(StartPoint::VertexArray::Create());
+		m_VertexArray = StartPoint::VertexArray::Create();
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
@@ -31,7 +38,7 @@ public:
 		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 
-		m_SquareVA.reset(StartPoint::VertexArray::Create());
+		m_SquareVA = StartPoint::VertexArray::Create();
 		float vertices2[5 * 4] = {
 			//Position			//Texture
 		   -0.5f, -0.5f, 0.0f,	0.0f, 0.0f,		//right-top corner
@@ -203,8 +210,8 @@ class Sandbox : public StartPoint::Application {
 
 public:
 	Sandbox() {
-		PushLayer(new ExampleLayer());
-		// PushOverlay(new StartPoint::ImGuiLayer());
+		// PushLayer(new ExampleLayer());
+		PushOverlay(new Sandbox2D());
 	}
 
 	~Sandbox() {
