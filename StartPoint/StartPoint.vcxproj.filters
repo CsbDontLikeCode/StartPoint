@@ -126,6 +126,9 @@
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">
@@ -201,6 +204,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

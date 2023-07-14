@@ -16,6 +16,7 @@
 
 // -----Renderer---------------------------------------
 #include "StartPoint/Renderer/Renderer.h"
+#include "StartPoint/Renderer/Renderer2D.h"
 #include "StartPoint/Renderer/RenderCommand.h"
 
 #include "StartPoint/Renderer/Buffer.h"

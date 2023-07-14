@@ -187,6 +187,7 @@
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h" />
     <ClInclude Include="src\StartPoint\Renderer\Renderer.h" />
+    <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h" />
     <ClInclude Include="src\StartPoint\Renderer\RendererAPI.h" />
     <ClInclude Include="src\StartPoint\Renderer\RenderCommand.h" />
     <ClInclude Include="src\StartPoint\Renderer\Shader.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Shader.cpp" />

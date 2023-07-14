@@ -10,31 +10,6 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
-	m_SquareVA = StartPoint::VertexArray::Create();
-	float vertices[4 * 3] = {
-		//Position			
-	   -0.5f, -0.5f, 0.0f,			//right-top corner
-		0.5f, -0.5f, 0.0f,			//right-botton corner
-		0.5f,  0.5f, 0.0f,			//left-botton corner
-	   -0.5f,  0.5f, 0.0f			//left-top corner
-	};
-	StartPoint::Ref<StartPoint::VertexBuffer> squareVB;
-	squareVB.reset(StartPoint::VertexBuffer::Create(vertices, sizeof(vertices)));
-	StartPoint::BufferLayout squareLayout = {
-		{StartPoint::ShaderDataType::Float3, "a_Position"}
-	};
-	squareVB->SetLayout(squareLayout);
-	m_SquareVA->AddVertexBuffer(squareVB);
-	unsigned int indices[6] = {
-		0, 1, 2, // first triangle
-		2, 3, 0  // second triangle
-	};
-	StartPoint::Ref<StartPoint::IndexBuffer> squareIB;
-	squareIB.reset(StartPoint::IndexBuffer::Create(indices, sizeof(indices)));
-	m_SquareVA->SetIndexBuffer(squareIB);
-
-
-	m_Shader = StartPoint::Shader::Create("assets/shaders/FlatColorShader.glsl");
 }
 
 void Sandbox2D::OnDetach()
@@ -52,13 +27,11 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 	// Unlike the camera move, transform matrix moves the specific object in the scene.
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
 
-	StartPoint::Renderer::BeginScene(m_CameraController.GetCamera());
-
-	std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->Bind();
-	std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color", m_SquareColor);
-	StartPoint::Renderer::Submit(m_SquareVA, m_Shader, glm::scale(glm::mat4(1.0f), glm::vec3(0.75f)));
-
-	StartPoint::Renderer::EndScene();
+	StartPoint::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, {0.8f, 0.2f, 0.15f, 1.0f});
+	StartPoint::Renderer2D::EndScene();
+	//std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->Bind();
+	//std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color", m_SquareColor);
 }
 
 void Sandbox2D::OnImGuiRender()
