@@ -154,6 +154,7 @@
     <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\CommonShader.glsl" />
     <None Include="assets\shaders\FlatColorShader.glsl" />
     <None Include="assets\shaders\Texture.glsl" />
   </ItemGroup>
