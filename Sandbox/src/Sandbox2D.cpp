@@ -2,8 +2,6 @@
 
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
-// Temporary
-#include <Platform/OpenGL/OpenGLShader.h>
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true){}
@@ -29,9 +27,8 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 
 	StartPoint::Renderer2D::BeginScene(m_CameraController.GetCamera());
 	StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, {0.8f, 0.2f, 0.15f, 1.0f});
+	StartPoint::Renderer2D::DrawQuad({ 0.5f, 0.5f }, { 0.5f, 0.5f }, {0.1f, 0.1f, 0.85f, 1.0f});
 	StartPoint::Renderer2D::EndScene();
-	//std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->Bind();
-	//std::dynamic_pointer_cast<StartPoint::OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color", m_SquareColor);
 }
 
 void Sandbox2D::OnImGuiRender()

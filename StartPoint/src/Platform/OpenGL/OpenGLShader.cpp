@@ -63,6 +63,21 @@ namespace StartPoint {
 		glUseProgram(0);
 	}
 
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& vec3)
+	{
+		UploadUniformFloat3(name, vec3);
+	}
+
+	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& vec4)
+	{
+		UploadUniformFloat4(name, vec4);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& mat4)
+	{
+		UploadUniformMat4(name, mat4);
+	}
+
 	void OpenGLShader::UploadUniformInt(const std::string& name, int value)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
