@@ -7,8 +7,13 @@ namespace StartPoint {
 
 	void OpenGLRendererAPI::Init()
 	{
+		// Enable deep testing
+		glEnable(GL_DEPTH_TEST);
+
+		// Enable textre blend
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
 	}
 
 	void OpenGLRendererAPI::SetViewport(unsigned int x, unsigned int y, unsigned int width, unsigned int height)

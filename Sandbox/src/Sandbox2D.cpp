@@ -8,6 +8,7 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	m_Texture = StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
 }
 
 void Sandbox2D::OnDetach()
@@ -26,8 +27,12 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 	glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));
 
 	StartPoint::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	
+	// Position,Size and Color
 	StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, {0.8f, 0.2f, 0.15f, 1.0f});
-	StartPoint::Renderer2D::DrawQuad({ 0.5f, 0.5f }, { 0.5f, 0.5f }, {0.1f, 0.1f, 0.85f, 1.0f});
+	StartPoint::Renderer2D::DrawQuad({ 0.5f, 0.5f}, { 0.5f, 0.5f }, {0.1f, 0.1f, 0.85f, 1.0f});
+	StartPoint::Renderer2D::DrawQuad({ -0.5f, 0.5f, -0.5f}, { 5.0f, 5.0f }, m_Texture);
+	
 	StartPoint::Renderer2D::EndScene();
 }
 
