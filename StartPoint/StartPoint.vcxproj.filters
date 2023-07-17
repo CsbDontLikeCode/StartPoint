@@ -129,6 +129,9 @@
     <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Debug\Instrumentor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">

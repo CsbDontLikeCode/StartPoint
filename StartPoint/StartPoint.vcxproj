@@ -167,6 +167,7 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\sppch.h" />
+    <ClInclude Include="src\StartPoint\Debug\Instrumentor.h" />
     <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h" />
     <ClInclude Include="src\StartPoint\Events\Event.h" />
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />

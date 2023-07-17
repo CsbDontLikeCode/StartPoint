@@ -20,11 +20,4 @@ private:
 	glm::vec4 m_SquareColor = glm::vec4(0.3f, 0.6f, 0.9f, 1.0f);
 	StartPoint::Ref<StartPoint::VertexArray> m_SquareVA;
 	StartPoint::Ref<StartPoint::Texture2D> m_Texture;
-
-	struct ProfileResult 
-	{
-		const char* Name;
-		float Time;
-	};
-	std::vector<ProfileResult> m_ProfileResults;
 };

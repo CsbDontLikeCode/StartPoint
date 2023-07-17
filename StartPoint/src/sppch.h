@@ -18,3 +18,4 @@
 #endif
 
 #include <StartPoint/Core/Core.h>
+#include <StartPoint/Debug/Instrumentor.h>

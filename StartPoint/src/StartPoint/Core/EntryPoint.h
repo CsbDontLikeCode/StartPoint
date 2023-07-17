@@ -4,14 +4,21 @@
 
 extern StartPoint::Application* StartPoint::createApplication();
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) 
+{
 	StartPoint::Log::init();
-	SP_CORE_WARN("CORE WARN!");
-	SP_INFO("CLIENT INFO!");
 
+	SP_PROFILE_BEGIN_SESSION("Startup", "StartPointProfile-Startup.json");
 	auto app = StartPoint::createApplication();
+	SP_PROFILE_END_SESSION();
+	
+	SP_PROFILE_BEGIN_SESSION("Runtime", "StartPointProfile-Runtime.json");
 	app->Run();
+	SP_PROFILE_END_SESSION();
+	
+	SP_PROFILE_BEGIN_SESSION("Shutdown", "StartPointProfile-Shutdown.json");
 	delete app;
+	SP_PROFILE_END_SESSION();
 }
 
 #endif
