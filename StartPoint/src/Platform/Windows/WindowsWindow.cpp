@@ -28,6 +28,8 @@ namespace StartPoint {
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) 
 	{
+		SP_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
@@ -38,6 +40,8 @@ namespace StartPoint {
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		SP_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Height = props.Height;
 		m_Data.Width = props.Width;
@@ -147,17 +151,23 @@ namespace StartPoint {
 
 	void WindowsWindow::Shutdown()
 	{
+		SP_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		SP_PROFILE_FUNCTION();
+
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) 
 	{
+		SP_PROFILE_FUNCTION();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else

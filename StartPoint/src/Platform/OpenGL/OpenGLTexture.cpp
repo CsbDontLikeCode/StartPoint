@@ -9,12 +9,19 @@ namespace StartPoint
 	OpenGLTextur2D::OpenGLTextur2D(const std::string& path)
 		: m_Path(path)
 	{
+		SP_PROFILE_FUNCTION();
+
 		// The style of image reading is different between OpenGL and stb.
 		// Therefore, it is necessary to flip the image vertically.
 		stbi_set_flip_vertically_on_load(1);
 
 		int width, height, channels;
-		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		stbi_uc* data = nullptr;
+		{
+			SP_PROFILE_SCOPE("stbi_load - OpenGLTextur2D::OpenGLTextur2D(const std::string& path)");
+			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		}
+		
 		SP_CORE_ASSERT(data, "Fail to load image!");
 		m_Width = width;
 		m_Height = height;

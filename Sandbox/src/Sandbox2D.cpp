@@ -17,16 +17,8 @@ void Sandbox2D::OnDetach()
 
 void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 {
-	// Performance testing, test this function's time consuming.
-	//Timer timer("Sandbox2D::OnUpdate", [&](ProfileResult profileResult) { m_ProfileResults.push_back(profileResult); });
-	 SP_PROFILE_FUNCTION();
-
 	 // Update
-	 {
-		 SP_PROFILE_SCOPE("OnUpdate");
-		 m_CameraController.OnUpdate(timestep);
-
-	 }
+	 m_CameraController.OnUpdate(timestep);
 
 	// Render preparation.
 	{

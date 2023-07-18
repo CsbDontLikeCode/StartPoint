@@ -123,7 +123,7 @@ namespace StartPoint
 	};
 }
 
-#define SP_PROFILE 1
+#define SP_PROFILE 0
 #if SP_PROFILE
 #define SP_PROFILE_BEGIN_SESSION(name, filepath) ::StartPoint::Instrumentor::Get().BeginSession(name, filepath)
 #define SP_PROFILE_END_SESSION() ::StartPoint::Instrumentor::Get().EndSession()
