@@ -38,7 +38,8 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 		// Position,Size and Color
 		StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.15f, 1.0f });
 		StartPoint::Renderer2D::DrawQuad({ 1.0f, 0.5f }, { 0.5f, 0.5f }, { 0.1f, 0.1f, 0.85f, 1.0f });
-		StartPoint::Renderer2D::DrawQuad({ -0.5f, 0.5f, -0.5f }, { 5.0f, 5.0f }, m_Texture);
+		StartPoint::Renderer2D::DrawRotatedQuad({ 2.0f, 0.0f }, { 1.0f, 1.0f }, glm::radians(45.0f), { 0.1f, 0.1f, 0.85f, 1.0f });
+		StartPoint::Renderer2D::DrawQuad({ -0.5f, 0.5f, -0.5f }, { 5.0f, 5.0f }, m_Texture, 3.0f);
 		StartPoint::Renderer2D::EndScene();
 	}
 }
