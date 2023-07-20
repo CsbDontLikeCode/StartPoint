@@ -18,6 +18,11 @@ namespace StartPoint
 		virtual void SetData(void* data, uint32_t size) override;
 
 		virtual void Bind(unsigned int slot) const override;
+
+		virtual bool operator==(const Texture& other) const override 
+		{ 
+			return m_RendererID == ((OpenGLTextur2D&)other).m_RendererID;
+		};
 	private:
 		std::string m_Path;
 		unsigned int m_Width;

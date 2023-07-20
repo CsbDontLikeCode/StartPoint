@@ -79,7 +79,7 @@ namespace StartPoint
 
 	void OpenGLTextur2D::Bind(unsigned int slot) const
 	{
-		glBindTextureUnit(0, m_RendererID);
+		glBindTextureUnit(slot, m_RendererID);
 	}
 
 }
