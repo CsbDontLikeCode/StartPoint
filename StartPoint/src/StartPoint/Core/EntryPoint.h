@@ -2,14 +2,14 @@
 
 #ifdef SP_PLATFORM_WINDOWS
 
-extern StartPoint::Application* StartPoint::createApplication();
+extern StartPoint::Application* StartPoint::CreateApplication();
 
 int main(int argc, char** argv) 
 {
 	StartPoint::Log::init();
 
 	SP_PROFILE_BEGIN_SESSION("Startup", "StartPointProfile-Startup.json");
-	auto app = StartPoint::createApplication();
+	auto app = StartPoint::CreateApplication();
 	SP_PROFILE_END_SESSION();
 	
 	SP_PROFILE_BEGIN_SESSION("Runtime", "StartPointProfile-Runtime.json");

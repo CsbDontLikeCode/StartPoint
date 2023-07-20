@@ -220,6 +220,6 @@ public:
 
 };
 
-StartPoint::Application* StartPoint::createApplication() {
+StartPoint::Application* StartPoint::CreateApplication() {
 	return new Sandbox();
 }

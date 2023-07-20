@@ -6,6 +6,7 @@ namespace StartPoint {
 	class OpenGLVertexBuffer : public VertexBuffer {
 	public:
 		OpenGLVertexBuffer(float* vertices, unsigned int size);
+		OpenGLVertexBuffer(uint32_t size);
 
 		virtual ~OpenGLVertexBuffer();
 
@@ -13,9 +14,13 @@ namespace StartPoint {
 
 		virtual void Unbind() const override;
 
+		virtual void SetData(const void* data, uint32_t size) override;
+
 		virtual const BufferLayout& GetLayout() const override;
 
 		virtual void SetLayout(const BufferLayout& layout) override;
+
+		
 	private:
 		unsigned int m_RendererID;
 

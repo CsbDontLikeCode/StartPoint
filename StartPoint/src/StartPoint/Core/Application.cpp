@@ -97,6 +97,7 @@ namespace StartPoint {
 		m_Running = false;
 		return true;
 	}
+
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
 		if(e.GetWidth() == 0 || e.GetHeight() == 0)

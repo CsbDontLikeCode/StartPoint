@@ -15,17 +15,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\shaders\Texture.glsl" />
+    <None Include="assets\shaders\FlatColorShader.glsl" />
+    <None Include="assets\shaders\CommonShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\Sandbox.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Sandbox2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\shaders\Texture.glsl" />
-    <None Include="assets\shaders\FlatColorShader.glsl" />
-    <None Include="assets\shaders\CommonShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Sandbox2D.h">

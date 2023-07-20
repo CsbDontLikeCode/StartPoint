@@ -151,13 +151,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Sandbox.cpp" />
-    <ClCompile Include="src\Sandbox2D.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="assets\shaders\CommonShader.glsl" />
     <None Include="assets\shaders\FlatColorShader.glsl" />
     <None Include="assets\shaders\Texture.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\Sandbox2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Sandbox2D.h" />

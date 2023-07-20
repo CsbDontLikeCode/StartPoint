@@ -37,5 +37,5 @@ namespace StartPoint {
 	};
 
 	// Set by user
-	Application* createApplication();
+	Application* CreateApplication();
 }
