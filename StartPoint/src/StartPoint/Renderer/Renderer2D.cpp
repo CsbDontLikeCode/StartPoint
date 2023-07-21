@@ -21,7 +21,7 @@ namespace StartPoint
 
 	struct Renderer2DData 
 	{
-		static const uint32_t MaxQuads = 10000;
+		static const uint32_t MaxQuads = 1000;
 		static const uint32_t MaxVertices = MaxQuads * 4;		// A quad has four vertices(two triangles).
 		static const uint32_t MaxIndices = MaxQuads * 6;		// A quad (two triangles) needs 6 indices.
 		static const uint32_t MaxTextureSlots = 32;
@@ -269,7 +269,7 @@ namespace StartPoint
 		float tilingFactor = 1.0f;
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
+			* glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f))
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPosition[0];
@@ -334,7 +334,7 @@ namespace StartPoint
 		}
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) 
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
+			* glm::rotate(glm::mat4(1.0f), rotation, glm::vec3(0.0f, 0.0f, 1.0f))
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f});
 
 		s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPosition[0];
