@@ -8,7 +8,6 @@ layout(location = 3) in float a_TexIndex;
 layout(location = 4) in float a_TilingFactor;
 
 uniform mat4 u_ViewProjection;
-// uniform mat4 u_Transform;
 
 out vec4 v_Color;
 out vec2 v_TexCoord;
@@ -20,8 +19,7 @@ void main(){
 	v_Color = a_Color; 
 	v_TexIndex = a_TexIndex;
 	v_TilingFactor = a_TilingFactor;
-	// gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-	gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+	gl_Position = u_ViewProjection  * vec4(a_Position, 1.0);
 }
 
 #type FragmentShader
@@ -35,10 +33,7 @@ in float v_TexIndex;
 in float v_TilingFactor;
 
 uniform sampler2D u_Texture[32];
-// uniform vec4 u_Color;
-// uniform float u_TilingFactor;
 
 void main(){
 	color = texture(u_Texture[int(v_TexIndex)], v_TexCoord * v_TilingFactor) * v_Color;
-	// color = v_Color;
 }
