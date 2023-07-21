@@ -27,6 +27,20 @@ namespace StartPoint
 		static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color);
 		static void DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
 		static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+
+		struct Statistics
+		{
+			unsigned int DrawCalls = 0;
+			unsigned int QuadCount = 0;
+
+			// What's the meaning of these two functions?
+			unsigned int GetTotalVertexCount() { return QuadCount * 4; }
+			unsigned int GetTotalIndexCount() { return QuadCount * 6; }
+		};
+		static void ResetStats();
+		static Statistics GetStats();
+	private:
+		static void FlushAndReset();
 	};
 
 }
