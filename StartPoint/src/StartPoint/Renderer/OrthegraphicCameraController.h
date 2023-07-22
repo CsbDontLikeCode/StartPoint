@@ -37,8 +37,12 @@ namespace StartPoint
 		void OnUpdate(Timestep timestep);
 		void OnEvent(Event& e);
 
+		float GetZoomLevel() const { return m_ZoomLevel; }
+		void SetZoomLevel(float level) { m_ZoomLevel = level; CalculateView(); }
+
 		const OrthegraphicCameraBounds& GetBounds() const { return m_CameraBounds;  }
 	private:
+		void CalculateView();
 		bool OnMouseScorlled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);
 	};

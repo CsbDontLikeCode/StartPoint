@@ -3,6 +3,21 @@
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
 
+static const int s_MapWidth = 24;
+static const char* s_MapTiles = 
+"WWWWWWWWWWWWWWWWWWWWWWWW"
+"WWWWWWWWWDDDDWWWWWWWWWWW"
+"WWWWWWWDDDDDDDDWWWWWWWWW"
+"WWWWWWDDDDWWWDDDWWWWWWWW"
+"WWWWWDDDDDWWWWWDDWWWWWWW"
+"WWWWWWDDDDWWWWDDDWWWWWWW"
+"WWWWWWWWDDDWWDDDDWWWWWWW"
+"WWWWWWWWWDDDWDDDWWWWWWWW"
+"WWWWWWWWWWDDWDDWWWEEEWWW"
+"WWWWWWWWWWWDDDWWWWWWWWWW"
+"WWWWWWWWWWWDDDWWWWWWWWWW"
+"WWWWWWWWWWWWDWWWWWWWWWWW";
+
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true){}
 
@@ -13,7 +28,12 @@ void Sandbox2D::OnAttach()
 	m_SpriteSheet = StartPoint::Texture2D::Create("assets/game_test/textures/RPGpack_sheet_2X.png");
 	glm::vec2 coords = { 7.0f, 6.0f };
 	glm::vec2 size = { 128.0f, 128.f };
-	m_SpriteTexture = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8.0f, 2.0f }, { 128.0f, 128.0f }, { 1, 2 });
+	m_SpriteTexture = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 1.0f, 11.0f }, { 128.0f, 128.0f }, { 1, 1 });
+
+	m_MapWidth = s_MapWidth;
+	m_MapHeight = strlen(s_MapTiles) / m_MapWidth;
+	m_SubTextureMap['D'] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6.0f, 11.0f }, { 128.0f, 128.0f });
+	m_SubTextureMap['W'] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11.0f, 11.0f }, { 128.0f, 128.0f });
 
 	// Init here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -23,6 +43,8 @@ void Sandbox2D::OnAttach()
 	m_Particle.Velocity = { 0.0f, 0.0f };
 	m_Particle.VelocityVariation = { 3.0f, 1.0f };
 	m_Particle.Position = { 0.0f, 0.0f };
+
+	m_CameraController.SetZoomLevel(1.0f);
 }
 
 void Sandbox2D::OnDetach()
@@ -91,12 +113,28 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
 	// Game scene generate.
+#if 0
+	m_CameraController.SetZoomLevel(7.0f);
 	StartPoint::Renderer2D::BeginScene(m_CameraController.GetCamera());
-	StartPoint::Renderer2D::DrawQuad({ -1.0f, 1.0f, 1.0f }, { 0.5f, 0.5f }, m_SpriteSheet);
-	StartPoint::Renderer2D::DrawQuad({ 1.0f, 1.0f, 1.0f }, { 1.0f, 2.0f }, m_SpriteTexture);
-	static float rotation2 = 3.0f;
-	StartPoint::Renderer2D::DrawRotatedQuad({ 2.0f, 1.0f, 1.0f }, { 1.0f, 2.0f }, rotation2, m_SpriteTexture);
+	for (int y = 0; y < m_MapHeight; y++) 
+	{
+		for (int x = 0; x < m_MapWidth; x++)
+		{
+			char tileType = s_MapTiles[x + y * m_MapWidth];
+			StartPoint::Ref<StartPoint::SubTexture2D> texture;
+			if (m_SubTextureMap.find(tileType) != m_SubTextureMap.end()) 
+			{
+				texture = m_SubTextureMap[tileType];
+			}
+			else
+			{
+				texture = m_SpriteTexture;
+			}
+			StartPoint::Renderer2D::DrawQuad({ x - m_MapWidth / 2.0f, m_MapHeight - y - m_MapHeight / 2.0f, 0.5f }, { 1.0f, 1.0f }, texture);
+		}
+	}
 	StartPoint::Renderer2D::EndScene();
+#endif
 }
 
 void Sandbox2D::OnImGuiRender()
