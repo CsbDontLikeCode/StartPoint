@@ -10,6 +10,10 @@ void Sandbox2D::OnAttach()
 {
 	m_Texture = StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
 	m_TextureAzi = StartPoint::Texture2D::Create("assets/textures/Azi.png");
+	m_SpriteSheet = StartPoint::Texture2D::Create("assets/game_test/textures/RPGpack_sheet_2X.png");
+	glm::vec2 coords = { 7.0f, 6.0f };
+	glm::vec2 size = { 128.0f, 128.f };
+	m_SpriteTexture = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8.0f, 2.0f }, { 128.0f, 128.0f }, { 1, 2 });
 
 	// Init here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -85,6 +89,14 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 
 	m_ParticleSystem.OnUpdate(timestep);
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+
+	// Game scene generate.
+	StartPoint::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	StartPoint::Renderer2D::DrawQuad({ -1.0f, 1.0f, 1.0f }, { 0.5f, 0.5f }, m_SpriteSheet);
+	StartPoint::Renderer2D::DrawQuad({ 1.0f, 1.0f, 1.0f }, { 1.0f, 2.0f }, m_SpriteTexture);
+	static float rotation2 = 3.0f;
+	StartPoint::Renderer2D::DrawRotatedQuad({ 2.0f, 1.0f, 1.0f }, { 1.0f, 2.0f }, rotation2, m_SpriteTexture);
+	StartPoint::Renderer2D::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()

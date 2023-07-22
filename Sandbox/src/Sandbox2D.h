@@ -24,6 +24,8 @@ private:
 
 	StartPoint::Ref<StartPoint::Texture2D> m_Texture;
 	StartPoint::Ref<StartPoint::Texture2D> m_TextureAzi;
+	StartPoint::Ref<StartPoint::Texture2D> m_SpriteSheet;
+	StartPoint::Ref<StartPoint::SubTexture2D> m_SpriteTexture;
 
 	glm::vec4 m_SquareColor = glm::vec4(0.3f, 0.6f, 0.9f, 1.0f);
 

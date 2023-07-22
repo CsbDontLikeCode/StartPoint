@@ -192,6 +192,7 @@
     <ClInclude Include="src\StartPoint\Renderer\RendererAPI.h" />
     <ClInclude Include="src\StartPoint\Renderer\RenderCommand.h" />
     <ClInclude Include="src\StartPoint\Renderer\Shader.h" />
+    <ClInclude Include="src\StartPoint\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\StartPoint\Renderer\Texture.h" />
     <ClInclude Include="src\StartPoint\Renderer\VertexArray.h" />
     <ClInclude Include="src\StartPoint\Core\Window.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="src\StartPoint\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Shader.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Texture.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp" />
     <ClCompile Include="vender\Include\stb_image\stb_image.cpp" />

@@ -132,6 +132,9 @@
     <ClInclude Include="src\StartPoint\Debug\Instrumentor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\SubTexture2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">
@@ -210,6 +213,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
