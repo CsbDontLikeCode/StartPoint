@@ -14,6 +14,7 @@ namespace StartPoint
 
 		virtual unsigned int GetWidth() override { return m_Width; }
 		virtual unsigned int GetHeight() override { return m_Height; }
+		virtual unsigned int GetRendererID() const override { return m_RendererID; }
 
 		virtual void SetData(void* data, uint32_t size) override;
 
