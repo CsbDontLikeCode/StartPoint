@@ -21,7 +21,7 @@ namespace StartPoint {
 		Timestep* m_Timestep;				// Timer object
 		float m_LastFrameTime = 0.0f;				// Record last frame's time to compute the deltatime
 	public:
-		Application();
+		Application(const std::string& name = "StartPoint Engine");
 		virtual ~Application();
 
 		void Run();

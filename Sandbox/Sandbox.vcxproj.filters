@@ -21,21 +21,21 @@
     <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Sandbox.cpp">
+    <ClCompile Include="Editor\EditorApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sandbox2D.cpp">
+    <ClCompile Include="Editor\EditorLayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\ParticleSystem.cpp">
+    <ClCompile Include="Editor\ParticleSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Sandbox2D.h">
+    <ClInclude Include="Editor\EditorLayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\ParticleSystem.h">
+    <ClInclude Include="Editor\ParticleSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

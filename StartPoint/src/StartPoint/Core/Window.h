@@ -12,7 +12,7 @@ namespace StartPoint{
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProps(const std::string& title = "SP Engine", unsigned int width = 1280, unsigned int height = 720)
+		WindowProps(const std::string& title = "StartPoint Engine", unsigned int width = 1280, unsigned int height = 720)
 			:Title(title), Width(width), Height(height){}
 	};
 
@@ -26,7 +26,6 @@ namespace StartPoint{
 		virtual void OnUpdate() = 0;
 
 		virtual unsigned int GetWidth() const = 0;
-
 		virtual unsigned int GetHeight() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
