@@ -37,5 +37,7 @@ namespace StartPoint
 
 		unsigned int m_MapWidth, m_MapHeight;
 		std::unordered_map<char, Ref<SubTexture2D>> m_SubTextureMap;
+
+		glm::vec2 m_ViewportSize;
 	};
 }
