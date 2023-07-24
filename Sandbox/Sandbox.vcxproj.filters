@@ -18,6 +18,7 @@
     <None Include="assets\shaders\Texture.glsl" />
     <None Include="assets\shaders\FlatColorShader.glsl" />
     <None Include="assets\shaders\CommonShader.glsl" />
+    <None Include="imgui.ini" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Sandbox.cpp">

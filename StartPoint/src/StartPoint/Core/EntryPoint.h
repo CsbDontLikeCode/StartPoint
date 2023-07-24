@@ -5,7 +5,7 @@
 extern StartPoint::Application* StartPoint::CreateApplication();
 
 int main(int argc, char** argv) 
-{
+ {
 	StartPoint::Log::init();
 
 	SP_PROFILE_BEGIN_SESSION("Startup", "StartPointProfile-Startup.json");

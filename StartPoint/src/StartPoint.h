@@ -24,6 +24,7 @@
 #include "StartPoint/Renderer/Texture.h"
 #include "StartPoint/Renderer/SubTexture2D.h"
 #include "StartPoint/Renderer/VertexArray.h"
+#include "StartPoint/Renderer/Framebuffer.h"
 
 #include "StartPoint/Renderer/OrthegraphicCamera.h"
 #include "StartPoint/Renderer/OrthegraphicCameraController.h"

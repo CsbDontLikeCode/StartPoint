@@ -157,6 +157,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\StartPoint\Core\Timestep.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="src\StartPoint\Core\Core.h" />
     <ClInclude Include="src\StartPoint\Core\EntryPoint.h" />
     <ClInclude Include="src\StartPoint\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h" />
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
@@ -201,6 +203,7 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="src\StartPoint\Core\LayerStack.cpp" />
     <ClCompile Include="src\StartPoint\Core\Log.cpp" />
     <ClCompile Include="src\StartPoint\Core\Application.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
