@@ -10,6 +10,8 @@
 
 #include <StartPoint/Core/Application.h>
 
+#include <StartPoint.h>
+
 namespace StartPoint {
 	ImGuiLayer::ImGuiLayer() 
 		: Layer("ImGuiLayer"){}
@@ -50,12 +52,24 @@ namespace StartPoint {
 		ImGui::DestroyContext();
 	}
 
+	void ImGuiLayer::OnEvent(Event& e)
+	{
+		// Useless code.
+		//if (m_BlockEvents)
+		//{
+		//	ImGuiIO& io = ImGui::GetIO();
+		//	e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+		//	e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+		//}
+	}
+
 	void ImGuiLayer::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
+
 	void ImGuiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();

@@ -39,5 +39,6 @@ namespace StartPoint
 		std::unordered_map<char, Ref<SubTexture2D>> m_SubTextureMap;
 
 		glm::vec2 m_ViewportSize;
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
 	};
 }

@@ -60,9 +60,6 @@
     <ClInclude Include="src\StartPoint\Core\Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\StartPoint\Core\KeyCodes.h">
       <Filter>头文件</Filter>
     </ClInclude>

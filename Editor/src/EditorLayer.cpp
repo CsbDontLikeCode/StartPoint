@@ -63,7 +63,8 @@ namespace StartPoint
 	void EditorLayer::OnUpdate(Timestep timestep)
 	{
 		// Update
-		m_CameraController.OnUpdate(timestep);
+		if(m_ViewportFocused)
+			m_CameraController.OnUpdate(timestep);
 
 		// Render preparation.
 		Renderer2D::ResetStats();
@@ -232,7 +233,10 @@ namespace StartPoint
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Rendering Viewport");
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		//SP_INFO("Viewport size:{0} {1}", viewportPanelSize.x, viewportPanelSize.y);
+		m_ViewportFocused = ImGui::IsWindowFocused();
+		m_ViewportHovered = ImGui::IsWindowHovered();
+		// The following function from cherno can not work in my program and I don't know the reason, so I make a new one.
+		//Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered);	
 		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
 		{
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
@@ -252,9 +256,11 @@ namespace StartPoint
 
 	void EditorLayer::OnEvent(Event& event)
 	{
-		m_CameraController.OnEvent(event);
+		if (m_ViewportHovered) 
+		{
+			m_CameraController.OnEvent(event);
+		}
 	}
-
 
 }
 
