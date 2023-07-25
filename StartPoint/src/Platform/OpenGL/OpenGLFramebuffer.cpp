@@ -15,10 +15,19 @@ namespace StartPoint
 	OpenGLFramebuffer::~OpenGLFramebuffer()
 	{
 		glDeleteFramebuffers(1, &m_RendererId);
+		glDeleteTextures(1, &m_ColorAttachment);
+		glDeleteTextures(1, &m_DepthAttachment);
 	}
 
 	void OpenGLFramebuffer::Invalidate()
 	{
+		if (m_RendererId) 
+		{
+			glDeleteFramebuffers(1, &m_RendererId);
+			glDeleteTextures(1, &m_ColorAttachment);
+			glDeleteTextures(1, &m_DepthAttachment);
+		}
+
 		// Create extra framebuffer and bind it for the render output.
 		glGenFramebuffers(1, &m_RendererId);
 		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererId);
@@ -59,6 +68,14 @@ namespace StartPoint
 	void OpenGLFramebuffer::Unbind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	void OpenGLFramebuffer::Resize(unsigned int width, unsigned int height)
+	{
+		m_Specification.Width = width;
+		m_Specification.Height = height;
+
+		Invalidate();
 	}
 
 }

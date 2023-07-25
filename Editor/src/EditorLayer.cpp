@@ -219,7 +219,7 @@ namespace StartPoint
 
 			ImGui::EndMenuBar();
 		}
-		
+
 		ImGui::Begin("Settings");
 		ImGui::Text("Renderer2D Stats");
 		auto stats = Renderer2D::GetStats();
@@ -229,15 +229,23 @@ namespace StartPoint
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 		ImGui::End();
 
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Rendering Viewport");
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		//if(m_viewportPanelSize != &)
-		SP_INFO("Viewport size:{0} {1}", viewportPanelSize.x, viewportPanelSize.y);
-		glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
+		//SP_INFO("Viewport size:{0} {1}", viewportPanelSize.x, viewportPanelSize.y);
+		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
+		{
+			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+			m_Framebuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
+
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+		}
+		//glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
 		// uint32_t texture = m_TextureAzi->GetRendererID();
 		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)texture, ImVec2{ viewportPanelSize.x, viewportPanelSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		ImGui::End();	// Rendering Viewport End.
+		ImGui::PopStyleVar();
 
 		ImGui::End();	// Docking End.
 	}

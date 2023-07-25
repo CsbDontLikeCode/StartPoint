@@ -15,27 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\Texture.glsl" />
-    <None Include="assets\shaders\FlatColorShader.glsl" />
-    <None Include="assets\shaders\CommonShader.glsl" />
-    <None Include="imgui.ini" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sandbox.cpp">
+    <ClCompile Include="src\EditorApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Sandbox2D.cpp">
+    <ClCompile Include="src\EditorLayer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ParticleSystem.h">
+    <ClInclude Include="src\EditorLayer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Sandbox2D.h">
+    <ClInclude Include="src\ParticleSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

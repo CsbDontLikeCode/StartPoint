@@ -15,6 +15,8 @@ namespace StartPoint
 	    virtual void Bind() override;
 		virtual void Unbind() override;
 
+		virtual void Resize(unsigned int width, unsigned int height) override;
+
 		virtual unsigned int GetColorAttachmentRendererID() const override { return m_ColorAttachment; }
 
 		virtual const FramebufferSpecification& GetSpecification() const override { return m_Specification; }

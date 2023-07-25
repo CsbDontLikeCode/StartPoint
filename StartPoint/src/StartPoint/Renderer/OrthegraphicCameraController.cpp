@@ -60,6 +60,13 @@ namespace StartPoint
 		dispatcher.Dispatch<WindowResizeEvent>(SP_BIND_ENENT_FN(OrthegraphicCameraController::OnWindowResized));
 	}
 
+	void OrthegraphicCameraController::OnResize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		CalculateView();
+
+	}
+
 	void OrthegraphicCameraController::CalculateView()
 	{
 		m_CameraBounds = { -m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel };
@@ -83,6 +90,7 @@ namespace StartPoint
 	{
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		CalculateView();
+		OnResize((float)e.GetWidth(), (float)e.GetHeight());
 		return false;
 	}
 
