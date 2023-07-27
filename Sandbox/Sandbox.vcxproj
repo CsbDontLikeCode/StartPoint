@@ -114,7 +114,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLFW_INCLUDE_NONE;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)StartPoint\vender\spdlog\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>

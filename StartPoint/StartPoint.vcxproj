@@ -144,6 +144,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -197,6 +198,9 @@
     <ClInclude Include="src\StartPoint\Renderer\Texture.h" />
     <ClInclude Include="src\StartPoint\Renderer\VertexArray.h" />
     <ClInclude Include="src\StartPoint\Core\Window.h" />
+    <ClInclude Include="src\StartPoint\Scene\Components.h" />
+    <ClInclude Include="src\StartPoint\Scene\Scene.h" />
+    <ClInclude Include="vender\Include\entt\entt.hpp" />
     <ClInclude Include="vender\Include\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +235,7 @@
     <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Texture.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\StartPoint\Scene\Scene.cpp" />
     <ClCompile Include="vender\Include\stb_image\stb_image.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

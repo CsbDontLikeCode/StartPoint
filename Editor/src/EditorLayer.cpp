@@ -53,6 +53,13 @@ namespace StartPoint
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
+
+		m_ActiveScene = CreateRef<Scene>();
+
+		auto square = m_ActiveScene->CreateEntity();
+		m_ActiveScene->Reg().emplace<TransformComponent>(square);
+		m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+		m_SquareEntity = square;
 	}
 
 	void EditorLayer::OnDetach()
@@ -68,11 +75,6 @@ namespace StartPoint
 
 		// Render preparation.
 		Renderer2D::ResetStats();
-
-		unsigned int ID;
-		glCreateFramebuffers(1, &ID);
-		glBindFramebuffer(GL_FRAMEBUFFER, ID);
-
 		{
 			SP_PROFILE_SCOPE("Render Prep");
 			m_Framebuffer->Bind();
@@ -84,52 +86,54 @@ namespace StartPoint
 		// Render
 		{
 			SP_PROFILE_SCOPE("Render");
-
-			static float rotation = 0.0f;
-			rotation += timestep * 3.1415926f * 2;
-
 			Renderer2D::BeginScene(m_CameraController.GetCamera());
-			// Position,Size and Color
-			Renderer2D::DrawQuad({ -0.5f, 0.5f }, { 0.25f, 0.25f }, { 0.8f, 0.2f, 0.15f, 1.0f });
-			Renderer2D::DrawQuad({ -0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.1f, 0.1f, 0.85f, 1.0f });
 
-			for (float y = -1.0f; y < 1.0f; y += 0.1f)
-			{
-				for (float x = -1.0f; x < 1.0f; x += 0.1f)
-				{
-					float r = (x + 1.0f) / 2;
-					float g = (y + 1.0f) / 2;
-					Renderer2D::DrawQuad({ x, y, -0.2 }, { 0.09f, 0.09f }, { r, g, 0.85f, 1.0f });
-				}
-			}
-			Renderer2D::DrawRotatedQuad({ 0.75f, 0.0f, 0.1f }, { 0.5f, 0.5f }, rotation, { 0.1f, 0.95f, 0.85f, 1.0f });
+			//static float rotation = 0.0f;
+			//rotation += timestep * 3.1415926f * 2;
+			//// Position,Size and Color
+			//Renderer2D::DrawQuad({ -0.5f, 0.5f }, { 0.25f, 0.25f }, { 0.8f, 0.2f, 0.15f, 1.0f });
+			//Renderer2D::DrawQuad({ -0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.1f, 0.1f, 0.85f, 1.0f });
+			//for (float y = -1.0f; y < 1.0f; y += 0.1f)
+			//{
+			//	for (float x = -1.0f; x < 1.0f; x += 0.1f)
+			//	{
+			//		float r = (x + 1.0f) / 2;
+			//		float g = (y + 1.0f) / 2;
+			//		Renderer2D::DrawQuad({ x, y, -0.2 }, { 0.09f, 0.09f }, { r, g, 0.85f, 1.0f });
+			//	}
+			//}
+			//Renderer2D::DrawRotatedQuad({ 0.75f, 0.0f, 0.1f }, { 0.5f, 0.5f }, rotation, { 0.1f, 0.95f, 0.85f, 1.0f });
+			//Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.0f }, { 0.5f, 0.5f }, 45.0f, m_TextureAzi, 1.0f);
+			//Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 0.5f, 0.5f }, m_Texture);
 
-			Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.0f }, { 0.5f, 0.5f }, 45.0f, m_TextureAzi, 1.0f);
-			Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 0.5f, 0.5f }, m_Texture);
+			// Render the scene.
+			m_ActiveScene->OnUpdate(timestep);
 
 			Renderer2D::EndScene();
 		}
 
-		if (Input::IsMouseButtonPressed(SP_MOUSE_BUTTON_LEFT))
-		{
-			auto [x, y] = Input::GetMousePosition();
-			auto width = Application::Get().GetWindow().GetWidth();
-			auto height = Application::Get().GetWindow().GetHeight();
-
-			auto bounds = m_CameraController.GetBounds();
-			auto pos = m_CameraController.GetCamera().GetPosition();
-			x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
-			y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
-			m_Particle.Position = { x + pos.x, y + pos.y };
-			for (int i = 0; i < 5; i++)
-				m_ParticleSystem.Emit(m_Particle);
-		}
-
-		m_ParticleSystem.OnUpdate(timestep);
-		m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+		// <Particle Effect>Mouse left button click particle effect.
+		//if (Input::IsMouseButtonPressed(SP_MOUSE_BUTTON_LEFT))
+		//{
+		//	auto [x, y] = Input::GetMousePosition();
+		//	SP_INFO("MousePos{0} {1}", x, y);
+		//	auto width = Application::Get().GetWindow().GetWidth();
+		//	auto height = Application::Get().GetWindow().GetHeight();
+		//	auto bounds = m_CameraController.GetBounds();
+		//	auto pos = m_CameraController.GetCamera().GetPosition();
+		//	x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
+		//	y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
+		//	m_Particle.Position = { x + pos.x, y + pos.y };
+		//	if (m_ViewportHovered) 
+		//	{
+		//		for (int i = 0; i < 5; i++)
+		//			m_ParticleSystem.Emit(m_Particle);
+		//	}
+		//}
+		//m_ParticleSystem.OnUpdate(timestep);
+		//m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
 		m_Framebuffer->Unbind();
-
 
 		// Game scene generate.
 #if 0
@@ -228,11 +232,15 @@ namespace StartPoint
 		ImGui::Text("Quad Count: %d", stats.QuadCount);
 		ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+		auto& squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
+		ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
 		ImGui::End();
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Rendering Viewport");
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		//ImVec2 locationViewport = ImGui::GetWindowPos();
+		//SP_INFO("location:{0} {1}", locationViewport.x, locationViewport.y);
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
 		// The following function from cherno can not work in my program and I don't know the reason, so I make a new one.

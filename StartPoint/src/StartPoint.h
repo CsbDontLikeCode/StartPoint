@@ -9,6 +9,8 @@
 #include "StartPoint/Core/MouseButtonCodes.h"
 
 #include "StartPoint/ImGui/ImGuiLayer.h"
+#include "StartPoint/Scene/Scene.h"
+#include "StartPoint/Scene/Components.h"
 
 // -----Timer------------------------------------------
 #include "StartPoint/Core/Timestep.h"

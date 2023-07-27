@@ -30,6 +30,10 @@ namespace StartPoint
 		Ref<SubTexture2D> m_SpriteTexture;
 		Ref<Framebuffer> m_Framebuffer;
 
+		// Scene
+		Ref<Scene> m_ActiveScene;
+		entt::entity m_SquareEntity;
+
 		glm::vec4 m_SquareColor = glm::vec4(0.3f, 0.6f, 0.9f, 1.0f);
 
 		ParticleSystem m_ParticleSystem;

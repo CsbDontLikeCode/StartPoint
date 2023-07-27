@@ -2,9 +2,11 @@
 #include <glad/glad.h>
 
 #include "OpenGLFramebuffer.h"
+#include <StartPoint.h>
 
 namespace StartPoint 
 {
+	static const unsigned int s_MaxFramebufferSize = 8192;	// *NO USE*
 
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& spec)
 		:m_Specification(spec)
@@ -72,10 +74,18 @@ namespace StartPoint
 
 	void OpenGLFramebuffer::Resize(unsigned int width, unsigned int height)
 	{
-		m_Specification.Width = width;
-		m_Specification.Height = height;
-
-		Invalidate();
+		// If the width or height will be set a illegal value, refuse the resize action.
+		if (width == 0 || height == 0)
+		{
+			SP_WARN("Attemped to resize framebuffer to {0}-{1}", width, height);
+			return;
+		}
+		else 
+		{
+			m_Specification.Width = width;
+			m_Specification.Height = height;
+			Invalidate();
+		}
 	}
 
 }
