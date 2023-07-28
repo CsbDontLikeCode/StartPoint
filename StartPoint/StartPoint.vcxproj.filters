@@ -147,6 +147,9 @@
     <ClInclude Include="vender\Include\entt\entt.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\Entity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">
@@ -237,6 +240,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\Scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Scene\Entity.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
