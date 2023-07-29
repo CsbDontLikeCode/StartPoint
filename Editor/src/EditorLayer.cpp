@@ -6,47 +6,11 @@
 namespace StartPoint 
 {
 
-	static const int s_MapWidth = 24;
-	static const char* s_MapTiles =
-		"WWWWWWWWWWWWWWWWWWWWWWWW"
-		"WWWWWWWWWDDDDWWWWWWWWWWW"
-		"WWWWWWWDDDDDDDDWWWWWWWWW"
-		"WWWWWWDDDDWWWDDDWWWWWWWW"
-		"WWWWWDDDDDWWWWWDDWWWWWWW"
-		"WWWWWWDDDDWWWWDDDWWWWWWW"
-		"WWWWWWWWDDDWWDDDDWWWWWWW"
-		"WWWWWWWWWDDDWDDDWWWWWWWW"
-		"WWWWWWWWWWDDWDDWWWEEEWWW"
-		"WWWWWWWWWWWDDDWWWWWWWWWW"
-		"WWWWWWWWWWWDDDWWWWWWWWWW"
-		"WWWWWWWWWWWWDWWWWWWWWWWW";
-
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f, true) {}
 
 	void EditorLayer::OnAttach()
 	{
-		m_Texture = Texture2D::Create("assets/textures/Yin.jpg");
-		m_TextureAzi = Texture2D::Create("assets/textures/Azi.png");
-		m_SpriteSheet = Texture2D::Create("assets/game_test/textures/RPGpack_sheet_2X.png");
-		glm::vec2 coords = { 7.0f, 6.0f };
-		glm::vec2 size = { 128.0f, 128.f };
-		m_SpriteTexture = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 1.0f, 11.0f }, { 128.0f, 128.0f }, { 1, 1 });
-
-		m_MapWidth = s_MapWidth;
-		m_MapHeight = strlen(s_MapTiles) / m_MapWidth;
-		m_SubTextureMap['D'] = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6.0f, 11.0f }, { 128.0f, 128.0f });
-		m_SubTextureMap['W'] = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11.0f, 11.0f }, { 128.0f, 128.0f });
-
-		// Init here
-		m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
-		m_Particle.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
-		m_Particle.SizeBegin = 0.01f, m_Particle.SizeVariation = 0.05f, m_Particle.SizeEnd = 0.0f;
-		m_Particle.LifeTime = 5.0f;
-		m_Particle.Velocity = { 0.0f, 0.0f };
-		m_Particle.VelocityVariation = { 3.0f, 1.0f };
-		m_Particle.Position = { 0.0f, 0.0f };
-
 		m_CameraController.SetZoomLevel(1.0f);
 
 		FramebufferSpecification fbSpec;
@@ -57,9 +21,15 @@ namespace StartPoint
 		m_ActiveScene = CreateRef<Scene>();
 
 		auto square = m_ActiveScene->CreateEntity("Square");
-		//square.AddComponent<TransformComponent>();
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 		m_SquareEntity = square;
+
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entity");
+		m_CameraEntity.AddComponent<CameraComponent>();
+
+		m_CameraEntity2 = m_ActiveScene->CreateEntity("ClipSpace Entity");
+		auto& cc = m_CameraEntity2.AddComponent<CameraComponent>();
+		cc.Primary = false;
 	}
 
 	void EditorLayer::OnDetach()
@@ -69,95 +39,33 @@ namespace StartPoint
 
 	void EditorLayer::OnUpdate(Timestep timestep)
 	{
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		// Resize
+		if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
+			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
+			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
+		{
+			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+			m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+		}
+
 		// Update
 		if(m_ViewportFocused)
 			m_CameraController.OnUpdate(timestep);
 
 		// Render preparation.
 		Renderer2D::ResetStats();
-		{
-			SP_PROFILE_SCOPE("Render Prep");
-			m_Framebuffer->Bind();
-			// Sky blue color - (0.46f, 0.84f, 0.91f)
-			RenderCommand::SetClearColor({ 0.46f, 0.84f, 0.91f, 1.0f });
-			RenderCommand::Clear();
-		}
+		m_Framebuffer->Bind();
+		RenderCommand::SetClearColor({ 0.46f, 0.84f, 0.91f, 1.0f });
+		RenderCommand::Clear();
+		//Renderer2D::BeginScene(m_CameraController.GetCamera());
+		// Render the scene.
+		m_ActiveScene->OnUpdate(timestep);
 
-		// Render
-		{
-			SP_PROFILE_SCOPE("Render");
-			Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-			//static float rotation = 0.0f;
-			//rotation += timestep * 3.1415926f * 2;
-			//// Position,Size and Color
-			//Renderer2D::DrawQuad({ -0.5f, 0.5f }, { 0.25f, 0.25f }, { 0.8f, 0.2f, 0.15f, 1.0f });
-			//Renderer2D::DrawQuad({ -0.5f, -0.5f }, { 0.5f, 0.5f }, { 0.1f, 0.1f, 0.85f, 1.0f });
-			//for (float y = -1.0f; y < 1.0f; y += 0.1f)
-			//{
-			//	for (float x = -1.0f; x < 1.0f; x += 0.1f)
-			//	{
-			//		float r = (x + 1.0f) / 2;
-			//		float g = (y + 1.0f) / 2;
-			//		Renderer2D::DrawQuad({ x, y, -0.2 }, { 0.09f, 0.09f }, { r, g, 0.85f, 1.0f });
-			//	}
-			//}
-			//Renderer2D::DrawRotatedQuad({ 0.75f, 0.0f, 0.1f }, { 0.5f, 0.5f }, rotation, { 0.1f, 0.95f, 0.85f, 1.0f });
-			//Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.0f }, { 0.5f, 0.5f }, 45.0f, m_TextureAzi, 1.0f);
-			//Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 0.5f, 0.5f }, m_Texture);
-
-			// Render the scene.
-			m_ActiveScene->OnUpdate(timestep);
-
-			Renderer2D::EndScene();
-		}
-
-		// <Particle Effect>Mouse left button click particle effect.
-		//if (Input::IsMouseButtonPressed(SP_MOUSE_BUTTON_LEFT))
-		//{
-		//	auto [x, y] = Input::GetMousePosition();
-		//	SP_INFO("MousePos{0} {1}", x, y);
-		//	auto width = Application::Get().GetWindow().GetWidth();
-		//	auto height = Application::Get().GetWindow().GetHeight();
-		//	auto bounds = m_CameraController.GetBounds();
-		//	auto pos = m_CameraController.GetCamera().GetPosition();
-		//	x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
-		//	y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
-		//	m_Particle.Position = { x + pos.x, y + pos.y };
-		//	if (m_ViewportHovered) 
-		//	{
-		//		for (int i = 0; i < 5; i++)
-		//			m_ParticleSystem.Emit(m_Particle);
-		//	}
-		//}
-		//m_ParticleSystem.OnUpdate(timestep);
-		//m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+		//Renderer2D::EndScene();
 
 		m_Framebuffer->Unbind();
-
-		// Game scene generate.
-#if 0
-		m_CameraController.SetZoomLevel(7.0f);
-		Renderer2D::BeginScene(m_CameraController.GetCamera());
-		for (int y = 0; y < m_MapHeight; y++)
-		{
-			for (int x = 0; x < m_MapWidth; x++)
-			{
-				char tileType = s_MapTiles[x + y * m_MapWidth];
-				Ref<SubTexture2D> texture;
-				if (m_SubTextureMap.find(tileType) != m_SubTextureMap.end())
-				{
-					texture = m_SubTextureMap[tileType];
-				}
-				else
-				{
-					texture = m_SpriteTexture;
-				}
-				Renderer2D::DrawQuad({ x - m_MapWidth / 2.0f, m_MapHeight - y - m_MapHeight / 2.0f, 0.5f }, { 1.0f, 1.0f }, texture);
-			}
-		}
-		Renderer2D::EndScene();
-#endif
 	}
 
 	void EditorLayer::OnImGuiRender()
@@ -167,8 +75,6 @@ namespace StartPoint
 		static bool opt_padding = false;
 		static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
-		// We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-		// because it would be confusing to have two docking targets within each others.
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 		if (opt_fullscreen)
 		{
@@ -186,19 +92,12 @@ namespace StartPoint
 			dockspace_flags &= ~ImGuiDockNodeFlags_PassthruCentralNode;
 		}
 
-
-		// When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background
-		// and handle the pass-thru hole, so we ask Begin() to not render a background.
 		if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
 			window_flags |= ImGuiWindowFlags_NoBackground;
 
-		// Important: note that we proceed even if Begin() returns false (aka window is collapsed).
-		// This is because we want to keep our DockSpace() active. If a DockSpace() is inactive,
-		// all active windows docked into it will lose their parent and become undocked.
-		// We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
-		// any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
 		if (!opt_padding)
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
 		ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
 		if (!opt_padding)
 			ImGui::PopStyleVar();
@@ -221,10 +120,10 @@ namespace StartPoint
 				if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
 				ImGui::EndMenu();
 			}
-
 			ImGui::EndMenuBar();
 		}
 
+		// Usage of ImGui.
 		ImGui::Begin("Settings");
 		ImGui::Text("Renderer2D Stats");
 		auto stats = Renderer2D::GetStats();
@@ -232,35 +131,48 @@ namespace StartPoint
 		ImGui::Text("Quad Count: %d", stats.QuadCount);
 		ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+
 		if (m_SquareEntity)
 		{
 			ImGui::Separator();
 			ImGui::Text("%s", m_SquareEntity.GetComponent<TagComponent>().Tag.c_str());
 			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
 			ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
+			ImGui::Separator();
 		}
+		ImGui::DragFloat3("Camera Transform:", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+		
+		if (ImGui::Checkbox("Shift Camera:", &m_PrimaryCamera))
+		{
+			m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
+			m_CameraEntity2.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
+		}
+
+
+		if(ImGui::DragFloat("Second Camera Ortho Size", &m_Camera2Size))
+		{
+			if (m_Camera2Size <= -1.0f) 
+			{
+				m_CameraEntity2.GetComponent<CameraComponent>().Camera.SetOrthographicSize(m_Camera2Size);
+			}
+			else 
+			{
+				m_Camera2Size = -1.0f;
+			}
+		}
+
 		ImGui::End();
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 		ImGui::Begin("Rendering Viewport");
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		//ImVec2 locationViewport = ImGui::GetWindowPos();
-		//SP_INFO("location:{0} {1}", locationViewport.x, locationViewport.y);
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
-		// The following function from cherno can not work in my program and I don't know the reason, so I make a new one.
-		//Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportHovered);	
-		if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
-		{
-			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-			m_Framebuffer->Resize((unsigned int)m_ViewportSize.x, (unsigned int)m_ViewportSize.y);
-
-			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-		}
-		//glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
-		// uint32_t texture = m_TextureAzi->GetRendererID();
+		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+		glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
 		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID();
-		ImGui::Image((void*)texture, ImVec2{ viewportPanelSize.x, viewportPanelSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+		ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
 		ImGui::End();	// Rendering Viewport End.
 		ImGui::PopStyleVar();
 

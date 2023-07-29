@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
+#include "SceneCamera.h"
 
 namespace StartPoint
 {
@@ -35,6 +36,16 @@ namespace StartPoint
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color)
 			: Color(color) {}
+	};
+
+	struct CameraComponent
+	{
+		SceneCamera Camera;
+		bool Primary = true;
+		bool FixedAspectRatio = false;	// ---------------------------->Whether the camera length width ratio is fixed.
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
 	};
 
 }
