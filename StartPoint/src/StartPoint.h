@@ -13,6 +13,7 @@
 #include "StartPoint/Scene/Scene.h"
 #include "StartPoint/Scene/Components.h"
 #include "StartPoint/Scene/Entity.h"
+#include "StartPoint/Scene/ScriptableEntity.h"
 
 // -----Timer------------------------------------------
 #include "StartPoint/Core/Timestep.h"

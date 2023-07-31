@@ -4,8 +4,6 @@
 #include <StartPoint/Core/Timestep.h>
 #include <StartPoint/Renderer/Renderer2D.h>
 
-#include "Components.h"
-
 namespace StartPoint
 {
 	class Entity;

@@ -30,6 +30,37 @@ namespace StartPoint
 		m_CameraEntity2 = m_ActiveScene->CreateEntity("ClipSpace Entity");
 		auto& cc = m_CameraEntity2.AddComponent<CameraComponent>();
 		cc.Primary = false;
+
+		// Scripts.
+		class CameraController : public ScriptableEntity 
+		{
+		public:
+			void OnCreate() 
+			{
+			}
+			// ====================================================================================================
+			void OnDestroy()
+			{
+			}
+			// ====================================================================================================
+			void OnUpdate(Timestep ts)
+			{
+				//std::cout << ts << std::endl;
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				float cameraSpeed = 5.0f;
+				// ------------------------------------------------------------------------------------------------
+				if (Input::IsKeyPressed(KeyCode::A))
+					transform[3][0] -= cameraSpeed * ts;
+				if (Input::IsKeyPressed(KeyCode::D))
+					transform[3][0] += cameraSpeed * ts;
+				if (Input::IsKeyPressed(KeyCode::W))
+					transform[3][1] += cameraSpeed * ts;
+				if (Input::IsKeyPressed(KeyCode::S))
+					transform[3][1] -= cameraSpeed * ts;
+			}
+		};
+
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	}
 
 	void EditorLayer::OnDetach()
@@ -59,11 +90,9 @@ namespace StartPoint
 		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.46f, 0.84f, 0.91f, 1.0f });
 		RenderCommand::Clear();
-		//Renderer2D::BeginScene(m_CameraController.GetCamera());
+
 		// Render the scene.
 		m_ActiveScene->OnUpdate(timestep);
-
-		//Renderer2D::EndScene();
 
 		m_Framebuffer->Unbind();
 	}

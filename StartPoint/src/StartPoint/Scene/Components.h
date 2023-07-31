@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "SceneCamera.h"
+#include "ScriptableEntity.h"
 
 namespace StartPoint
 {
@@ -46,6 +47,28 @@ namespace StartPoint
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
+	};
+
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+		// -----------------------------------------------------------------------------
+		std::function<void()> InstantiateFunction;
+		std::function<void()> DestroyIstanceFunction;
+		// -----------------------------------------------------------------------------
+		std::function<void(ScriptableEntity* instance)> OnCreateFunction;
+		std::function<void(ScriptableEntity* instance)> OnDestroyFunction;
+		std::function<void(ScriptableEntity* instance, Timestep)> OnUpdateFunction;
+		// =============================================================================
+		template<typename T>
+		void Bind()
+		{
+			InstantiateFunction = [&]() { Instance = new T(); };
+			DestroyIstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
+			OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
+			OnDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnDestroy(); };
+			OnUpdateFunction = [](ScriptableEntity* instance, Timestep ts) { ((T*)instance)->OnUpdate(ts); };
+		}
 	};
 
 }

@@ -3,6 +3,7 @@
 
 #include "Scene.h"
 #include "Entity.h"
+#include "Components.h"
 
 namespace StartPoint 
 {
@@ -37,6 +38,18 @@ namespace StartPoint
 
 	void Scene::OnUpdate(Timestep ts)
 	{
+		// Update scripts.
+		{
+			m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc) {
+				if (!nsc.Instance) {
+					nsc.InstantiateFunction();
+					nsc.Instance->m_Entity = Entity{ entity, this };
+					nsc.OnCreateFunction(nsc.Instance);
+				}
+				nsc.OnUpdateFunction(nsc.Instance, ts);
+			});
+		}
+
 		SceneCamera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
 		{
