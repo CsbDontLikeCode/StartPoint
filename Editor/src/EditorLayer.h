@@ -1,9 +1,9 @@
 #pragma once
 #include <StartPoint.h>
-
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "ParticleSystem.h"
+#include "Panels/SceneHierachyPanel.h"
 
 
 namespace StartPoint 
@@ -47,5 +47,7 @@ namespace StartPoint
 		//ParticleProps m_Particle;
 		//unsigned int m_MapWidth, m_MapHeight;
 		//std::unordered_map<char, Ref<SubTexture2D>> m_SubTextureMap;
+
+		SceneHierachyPanel m_SceneHierachyPanel;
 	};
 }

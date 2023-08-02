@@ -62,6 +62,8 @@ namespace StartPoint
 		};
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+
+		m_SceneHierachyPanel.SetContext(m_ActiveScene);
 	}
 
 	void EditorLayer::OnDetach()
@@ -152,6 +154,8 @@ namespace StartPoint
 			}
 			ImGui::EndMenuBar();
 		}
+
+		m_SceneHierachyPanel.OnImGuiRender();
 
 		// Usage of ImGui.
 		ImGui::Begin("Settings");
