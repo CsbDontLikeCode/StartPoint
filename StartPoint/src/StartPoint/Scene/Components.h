@@ -53,21 +53,21 @@ namespace StartPoint
 	{
 		ScriptableEntity* Instance = nullptr;
 		// -----------------------------------------------------------------------------
-		std::function<void()> InstantiateFunction;
-		std::function<void()> DestroyIstanceFunction;
+		ScriptableEntity* (*InstantiateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
 		// -----------------------------------------------------------------------------
-		std::function<void(ScriptableEntity* instance)> OnCreateFunction;
-		std::function<void(ScriptableEntity* instance)> OnDestroyFunction;
-		std::function<void(ScriptableEntity* instance, Timestep)> OnUpdateFunction;
+		//std::function<void(ScriptableEntity* instance)> OnCreateFunction;
+		//std::function<void(ScriptableEntity* instance)> OnDestroyFunction;
+		//std::function<void(ScriptableEntity* instance, Timestep)> OnUpdateFunction;
 		// =============================================================================
 		template<typename T>
 		void Bind()
 		{
-			InstantiateFunction = [&]() { Instance = new T(); };
-			DestroyIstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
-			OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
-			OnDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnDestroy(); };
-			OnUpdateFunction = [](ScriptableEntity* instance, Timestep ts) { ((T*)instance)->OnUpdate(ts); };
+			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+			//OnCreateFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnCreate(); };
+			//OnDestroyFunction = [](ScriptableEntity* instance) { ((T*)instance)->OnDestroy(); };
+			//OnUpdateFunction = [](ScriptableEntity* instance, Timestep ts) { ((T*)instance)->OnUpdate(ts); };
 		}
 	};
 

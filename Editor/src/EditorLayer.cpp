@@ -37,6 +37,8 @@ namespace StartPoint
 		public:
 			void OnCreate() 
 			{
+				//auto& transform = GetComponent<TransformComponent>().Transform;
+				//transform[3][0] = rand() % 10 - 5.0f;
 			}
 			// ====================================================================================================
 			void OnDestroy()
@@ -45,7 +47,6 @@ namespace StartPoint
 			// ====================================================================================================
 			void OnUpdate(Timestep ts)
 			{
-				//std::cout << ts << std::endl;
 				auto& transform = GetComponent<TransformComponent>().Transform;
 				float cameraSpeed = 5.0f;
 				// ------------------------------------------------------------------------------------------------
@@ -54,9 +55,9 @@ namespace StartPoint
 				if (Input::IsKeyPressed(KeyCode::D))
 					transform[3][0] += cameraSpeed * ts;
 				if (Input::IsKeyPressed(KeyCode::W))
-					transform[3][1] += cameraSpeed * ts;
-				if (Input::IsKeyPressed(KeyCode::S))
 					transform[3][1] -= cameraSpeed * ts;
+				if (Input::IsKeyPressed(KeyCode::S))
+					transform[3][1] += cameraSpeed * ts;
 			}
 		};
 
