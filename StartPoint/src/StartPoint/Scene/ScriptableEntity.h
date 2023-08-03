@@ -23,5 +23,4 @@ namespace StartPoint
 		friend class Scene;
 	};
 
-
 }

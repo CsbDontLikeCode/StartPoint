@@ -55,9 +55,9 @@ namespace StartPoint
 				if (Input::IsKeyPressed(KeyCode::D))
 					transform[3][0] += cameraSpeed * ts;
 				if (Input::IsKeyPressed(KeyCode::W))
-					transform[3][1] -= cameraSpeed * ts;
-				if (Input::IsKeyPressed(KeyCode::S))
 					transform[3][1] += cameraSpeed * ts;
+				if (Input::IsKeyPressed(KeyCode::S))
+					transform[3][1] -= cameraSpeed * ts;
 			}
 		};
 
@@ -81,7 +81,13 @@ namespace StartPoint
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-			m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			if (!m_CameraEntity.GetComponent<CameraComponent>().FixedAspectRatio)
+			{
+				//cameraComponent.Camera.SetViewportSize(width, height);
+				m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			}
+			//m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			
 		}
 
 		// Update
@@ -206,6 +212,7 @@ namespace StartPoint
 		glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
 		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+		//ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y });
 
 		ImGui::End();	// Rendering Viewport End.
 		ImGui::PopStyleVar();
@@ -222,4 +229,3 @@ namespace StartPoint
 	}
 
 }
-
