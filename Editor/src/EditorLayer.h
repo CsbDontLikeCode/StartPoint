@@ -33,6 +33,7 @@ namespace StartPoint
 		// Scene
 		Ref<Scene> m_ActiveScene;
 		Entity m_SquareEntity;
+		Entity m_SquareEntity2;
 		bool m_PrimaryCamera = true;
 		Entity m_CameraEntity;
 		Entity m_CameraEntity2;

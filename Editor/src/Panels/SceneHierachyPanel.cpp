@@ -82,6 +82,16 @@ namespace StartPoint
 			}
 		}
 
+		// SpriteRendererComponent.
+		if (entity.HasComponent<SpriteRendererComponent>())
+		{
+			if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer")) {
+				auto& color = entity.GetComponent<SpriteRendererComponent>().Color;
+				ImGui::ColorEdit4("Color", glm::value_ptr(color));
+				ImGui::TreePop();
+			}
+		}
+
 		// TransformComponent.
 		if (entity.HasComponent<TransformComponent>())
 		{
@@ -123,7 +133,7 @@ namespace StartPoint
 					}
 					ImGui::EndCombo();
 				}
-
+				// ----------------------------------------------------------------------------------------------------
 				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
 				{
 					float perspectiveFOV = glm::degrees(camera.GetPerspectiveVerticalFOV());
@@ -142,7 +152,7 @@ namespace StartPoint
 						camera.SetPerspectiveFarClip(farClip);
 					}
 				}
-
+				// ----------------------------------------------------------------------------------------------------
 				if (camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
 				{
 					float orthoSize = camera.GetOrthographicSize();
