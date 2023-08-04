@@ -41,8 +41,8 @@ namespace StartPoint
 		public:
 			void OnCreate() 
 			{
-				//auto& transform = GetComponent<TransformComponent>().Transform;
-				//transform[3][0] = rand() % 10 - 5.0f;
+				auto& translation = GetComponent<TransformComponent>().Translation;
+				translation.x = rand() % 10 - 5.0f;
 			}
 			// ====================================================================================================
 			void OnDestroy()
@@ -51,21 +51,22 @@ namespace StartPoint
 			// ====================================================================================================
 			void OnUpdate(Timestep ts)
 			{
-				auto& transform = GetComponent<TransformComponent>().Transform;
+				auto& translation = GetComponent<TransformComponent>().Translation;
 				float cameraSpeed = 5.0f;
 				// ------------------------------------------------------------------------------------------------
 				if (Input::IsKeyPressed(KeyCode::A))
-					transform[3][0] -= cameraSpeed * ts;
+					translation.x -= cameraSpeed * ts;
 				if (Input::IsKeyPressed(KeyCode::D))
-					transform[3][0] += cameraSpeed * ts;
+					translation.x += cameraSpeed * ts;
 				if (Input::IsKeyPressed(KeyCode::W))
-					transform[3][1] += cameraSpeed * ts;
+					translation.y += cameraSpeed * ts;
 				if (Input::IsKeyPressed(KeyCode::S))
-					transform[3][1] -= cameraSpeed * ts;
+					translation.y -= cameraSpeed * ts;
 			}
 		};
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_CameraEntity2.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
 	}
@@ -87,10 +88,8 @@ namespace StartPoint
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
 			if (!m_CameraEntity.GetComponent<CameraComponent>().FixedAspectRatio)
 			{
-				//cameraComponent.Camera.SetViewportSize(width, height);
 				m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 			}
-			//m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
 			
 		}
 
@@ -175,33 +174,6 @@ namespace StartPoint
 		ImGui::Text("Quad Count: %d", stats.QuadCount);
 		ImGui::Text("Vertex Count: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
-		/* ::TODELETE */
-		//if (m_SquareEntity)
-		//{
-		//	ImGui::Separator();
-		//	ImGui::Text("%s", m_SquareEntity.GetComponent<TagComponent>().Tag.c_str());
-		//	auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
-		//	ImGui::ColorEdit4("Color", glm::value_ptr(squareColor));
-		//	ImGui::Separator();
-		//}
-		//ImGui::DragFloat3("Camera Transform:", glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
-		//if (ImGui::Checkbox("Shift Camera:", &m_PrimaryCamera))
-		//{
-		//	m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
-		//	m_CameraEntity2.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
-		//}
-		//if(ImGui::DragFloat("Second Camera Ortho Size", &m_Camera2Size))
-		//{
-		//	if (m_Camera2Size <= -1.0f) 
-		//	{
-		//		m_CameraEntity2.GetComponent<CameraComponent>().Camera.SetOrthographicSize(m_Camera2Size);
-		//	}
-		//	else 
-		//	{
-		//		m_Camera2Size = -1.0f;
-		//	}
-		//}
 
 		ImGui::End();
 

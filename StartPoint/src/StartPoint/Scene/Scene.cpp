@@ -18,9 +18,6 @@ namespace StartPoint
 
 	Scene::Scene()
 	{
-		// entt::entity type->uint32_t, because of this, all operations on entities need to go through the registry.
-		entt::entity entity = m_Registry.create();
-		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));
 	}
 
 	Scene::~Scene()
@@ -53,17 +50,17 @@ namespace StartPoint
 		}
 
 		SceneCamera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 cameraTransform;
 		{
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
 			{
-				auto& transform = view.get<TransformComponent>(entity);
-				auto& camera = view.get<CameraComponent>(entity);
+				auto transform = view.get<TransformComponent>(entity);
+				auto camera = view.get<CameraComponent>(entity);
 				if (camera.Primary) 
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
+					cameraTransform = transform.GetTransform();
 					break;
 				}
 			}
@@ -71,12 +68,12 @@ namespace StartPoint
 
 		if (mainCamera)
 		{
-			Renderer2D::BeginScene(*mainCamera, *cameraTransform);
+			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 			auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
 			for (auto entity : view) {
-				auto& transformComponent = view.get<TransformComponent>(entity);
-				auto& spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
-				Renderer2D::DrawQuad(transformComponent.Transform, spriteRendererComponent.Color);
+				auto transformComponent = view.get<TransformComponent>(entity);
+				auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
+				Renderer2D::DrawQuad(transformComponent.GetTransform(), spriteRendererComponent.Color);
 			}
 			Renderer2D::EndScene();
 		}
