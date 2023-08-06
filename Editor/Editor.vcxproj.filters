@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ParticleSystem.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\EditorApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -30,9 +27,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ParticleSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Panels\SceneHierachyPanel.h">

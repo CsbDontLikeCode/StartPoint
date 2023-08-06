@@ -137,14 +137,17 @@ namespace StartPoint
 
 	void Renderer2D::Flush()
 	{
-		// Bind all the textures
-		for (int i = 0; i < s_Data.TextureIndex; i++)
+		if (s_Data.QuadIndexCount) 
 		{
-			s_Data.TextureSlots[i]->Bind(i);
-		}
+			// Bind all the textures
+			for (int i = 0; i < s_Data.TextureIndex; i++)
+			{
+				s_Data.TextureSlots[i]->Bind(i);
+			}
 
-		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
-		s_Data.Stats.DrawCalls++;
+			RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
+			s_Data.Stats.DrawCalls++;
+		}
 	}
 
 	void Renderer2D::FlushAndReset()
@@ -472,7 +475,7 @@ namespace StartPoint
 
 	void Renderer2D::ResetStats()
 	{
-		memset(&s_Data.Stats, 0, sizeof(s_Data.Stats));
+		memset(&s_Data.Stats, 0, sizeof(Statistics));
 	}
 
 	Renderer2D::Statistics Renderer2D::GetStats()

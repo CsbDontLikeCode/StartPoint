@@ -2,7 +2,6 @@
 #include <StartPoint.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "ParticleSystem.h"
 #include "Panels/SceneHierachyPanel.h"
 
 

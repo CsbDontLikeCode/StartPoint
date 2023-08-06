@@ -23,7 +23,6 @@ namespace StartPoint
 		auto square2 = m_ActiveScene->CreateEntity("Square2");
 		square2.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
 		m_SquareEntity2 = square2;
-
 		auto square = m_ActiveScene->CreateEntity("Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 		m_SquareEntity = square;
@@ -99,6 +98,7 @@ namespace StartPoint
 
 		// Render preparation.
 		Renderer2D::ResetStats();
+		// auto stats = Renderer2D::GetStats();
 		m_Framebuffer->Bind();
 		RenderCommand::SetClearColor({ 0.46f, 0.84f, 0.91f, 1.0f });
 		RenderCommand::Clear();

@@ -15,9 +15,14 @@ namespace StartPoint
 		~Scene();
 
 		Entity CreateEntity(const std::string& name = "");
+		// The "entity" is just a unique ID(unsigned int type).
+		void DestroyEntity(Entity entity);
 
 		void OnUpdate(Timestep ts);
 		void OnViewportResize(uint32_t	width, uint32_t height);
+	private:
+		template<typename T>
+		void OnComponentAdded(Entity entity, T& component);
 	private:
 		// The container of entity and component.
 		entt::registry m_Registry;
@@ -29,5 +34,4 @@ namespace StartPoint
 		friend class Entity;
 		friend class SceneHierachyPanel;
 	};
-
 }
