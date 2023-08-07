@@ -49,6 +49,7 @@ project "StartPoint"            -- porject -> Project in solution.
         -- defines -> Preprocessing macro definition.
         defines                
         {
+            "STB_IMAGE_IMPLEMENTATION",
             "SP_PLATFORM_WINDOWS",
             "SP_BUILD_DLL",
             "GLFW_INCLUDE_NONE",
