@@ -15,6 +15,7 @@ namespace StartPoint
 	void SceneHierachyPanel::SetContext(const Ref<Scene>& context)
 	{
 		m_Context = context;
+		m_SelectionContext = {};
 	}
 
 	static inline bool BeginPopupContextWindow(const char* str_id, ImGuiMouseButton mb, bool over_items)
@@ -27,26 +28,29 @@ namespace StartPoint
 	{
 		ImGui::Begin("SceneHierachy");
 
-		auto view = m_Context->m_Registry.view<TagComponent>();
-
-		for (auto entity : view) {
-			Entity ety{ entity, m_Context.get() };
-			DrawEntityNode(ety);
-		}
-
-		if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
-			m_SelectionContext = {};
-
-
-		
-		// Right-Click on blank space.
-		if (BeginPopupContextWindow(0, 1, false))
+		if (m_Context) 
 		{
-			if (ImGui::MenuItem("Create New Entity"))
-			{
-				m_Context->CreateEntity("Entity");
+			auto view = m_Context->m_Registry.view<TagComponent>();
+
+			for (auto entity : view) {
+				Entity ety{ entity, m_Context.get() };
+				DrawEntityNode(ety);
 			}
-			ImGui::EndPopup();
+
+			if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered())
+				m_SelectionContext = {};
+
+
+
+			// Right-Click on blank space.
+			if (BeginPopupContextWindow(0, 1, false))
+			{
+				if (ImGui::MenuItem("Create New Entity"))
+				{
+					m_Context->CreateEntity("Entity");
+				}
+				ImGui::EndPopup();
+			}
 		}
 
 		ImGui::End();

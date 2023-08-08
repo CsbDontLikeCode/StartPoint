@@ -18,6 +18,11 @@ namespace StartPoint
 		virtual void OnImGuiRender() override;
 		void OnEvent(Event& event) override;
 	private:
+		bool OnKeyPressed(KeyPressedEvent& e);
+		void NewScene();
+		void OpenScene();
+		void SaveSceneAs();
+	private:
 		OrthegraphicCameraController m_CameraController;
 
 		//Ref<VertexArray> m_SquareVA;

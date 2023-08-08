@@ -2,6 +2,7 @@
 
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <StartPoint/Utils/PlatformUtils.h>
 
 namespace StartPoint 
 {
@@ -85,10 +86,11 @@ namespace StartPoint
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-			if (!m_CameraEntity.GetComponent<CameraComponent>().FixedAspectRatio)
-			{
-				m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
-			}
+			//if (!m_CameraEntity.GetComponent<CameraComponent>().FixedAspectRatio)
+			//{
+			//	m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			//}
+		
 			
 		}
 
@@ -162,15 +164,17 @@ namespace StartPoint
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Serialize"))
+				if (ImGui::MenuItem("New", "Ctrl+N"))
 				{
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Serialize("assets/scenes/Example.sp");
+					NewScene();
 				}
-				if (ImGui::MenuItem("Deserialize"))
+				if (ImGui::MenuItem("Open Scene", "Ctrl+O"))
 				{
-					SceneSerializer serializer(m_ActiveScene);
-					serializer.Deserialize("assets/scenes/Example.sp");
+					OpenScene();
+				}
+				if (ImGui::MenuItem("Scene Save As", "Ctrl+Shift+S"))
+				{
+					SaveSceneAs();
 				}
 				if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
 				ImGui::EndMenu();
@@ -213,6 +217,76 @@ namespace StartPoint
 		if (m_ViewportHovered) 
 		{
 			m_CameraController.OnEvent(event);
+		}
+
+		EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<KeyPressedEvent>(SP_BIND_ENENT_FN(EditorLayer::OnKeyPressed));
+	}
+
+	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
+	{
+		if (e.GetRepeatCount() > 0)
+			return false;
+
+		bool control = Input::IsKeyPressed(KeyCode::LeftControl) || Input::IsKeyPressed(KeyCode::RightControl);
+		bool shift = Input::IsKeyPressed(KeyCode::LeftShift) || Input::IsKeyPressed(KeyCode::LeftShift);
+
+		switch (e.GetKeyCode())
+		{
+		case KeyCode::N:
+		{
+
+			if (control)
+			{
+				NewScene();
+			}
+		}
+		case KeyCode::O:
+		{
+			if (control && shift)
+			{
+				OpenScene();
+			}
+			break;
+		}
+		case KeyCode::S:
+		{
+			if (control && shift)
+			{
+				SaveSceneAs();
+			}
+			break;
+		}
+		}
+	}
+
+	void EditorLayer::NewScene()
+	{
+		m_ActiveScene = CreateRef<Scene>();
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+	}
+
+	void EditorLayer::OpenScene()
+	{
+		std::string filepath = FileDialogs::OpenFile("StartPoint Scene (*.sp)\0*.sp\0");
+		if (!filepath.empty())
+		{
+			//m_ActiveScene = CreateRef<Scene>();
+			//m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			//m_SceneHierachyPanel.SetContext(m_ActiveScene);
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(filepath);
+		}
+	}
+
+	void EditorLayer::SaveSceneAs()
+	{
+		std::string filepath = FileDialogs::SaveFile("StartPoint Scene (*.sp)\0*.sp\0");
+		if (!filepath.empty())
+		{
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Serialize(filepath);
 		}
 	}
 

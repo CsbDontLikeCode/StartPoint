@@ -86,6 +86,9 @@ namespace StartPoint
 
 	void Scene::OnViewportResize(uint32_t width, uint32_t height)
 	{
+		if (m_ViewportWidth == width && m_ViewportHeight == height)
+			return;
+
 		m_ViewportWidth = width;
 		m_ViewportHeight = height;
 

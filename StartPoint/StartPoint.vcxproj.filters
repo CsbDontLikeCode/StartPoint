@@ -170,6 +170,7 @@
       <Filter>StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\sppch.h" />
+    <ClInclude Include="src\StartPoint\Utils\PlatformUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -269,5 +270,6 @@
       <Filter>StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\sppch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
   </ItemGroup>
 </Project>
