@@ -2,6 +2,8 @@
 #include "OpenGLTexture.h"
 #include <stb_image/stb_image.h>
 #include <StartPoint/Core/Core.h>
+#include <StartPoint/Core/Log.h>
+
 
 namespace StartPoint
 {

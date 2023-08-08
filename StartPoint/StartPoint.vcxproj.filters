@@ -1,270 +1,273 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint">
+      <UniqueIdentifier>{3D955B2E-294D-9D7B-9254-76D77E2B386C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\Core">
+      <UniqueIdentifier>{B587A481-2113-1246-2A24-953A962E6E46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\Debug">
+      <UniqueIdentifier>{73D941B6-5FD2-6008-8804-468D745C4014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\Events">
+      <UniqueIdentifier>{815A0782-ED70-0518-36E8-9039A23DD69F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\ImGui">
+      <UniqueIdentifier>{2744A0B6-133D-BF08-3C6F-A48D28C79E14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\Renderer">
+      <UniqueIdentifier>{830D4318-EF6E-2026-78DC-66D8E43C57E5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StartPoint\Scene">
+      <UniqueIdentifier>{1A3C50B7-0635-6F09-2F67-548E1BBF4E15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\StartPoint\Core\Core.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Application.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\EntryPoint.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Log.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Events\Event.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Events\KeyEvent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Events\MouseEvent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sppch.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Window.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Layer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\LayerStack.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Input.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\KeyCodes.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\MouseButtonCodes.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Buffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Renderer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\VertexArray.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\RendererAPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\RenderCommand.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Core\Timestep.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vender\Include\stb_image\stb_image.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Debug\Instrumentor.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\SubTexture2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h">
-      <Filter>头文件</Filter>
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
-      <Filter>头文件</Filter>
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint\Scene\Scene.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint\Scene\Components.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="vender\Include\entt\entt.hpp">
-      <Filter>头文件</Filter>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint\Scene\Entity.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint.h" />
+    <ClInclude Include="src\StartPoint\Core\Application.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Core.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\EntryPoint.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Input.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\KeyCodes.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Layer.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\LayerStack.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Log.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\MouseButtonCodes.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Timestep.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\Window.h">
+      <Filter>StartPoint\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Debug\Instrumentor.h">
+      <Filter>StartPoint\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h">
+      <Filter>StartPoint\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Events\Event.h">
+      <Filter>StartPoint\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Events\KeyEvent.h">
+      <Filter>StartPoint\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Events\MouseEvent.h">
+      <Filter>StartPoint\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
+      <Filter>StartPoint\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Buffer.h">
+      <Filter>StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Camera.h">
-      <Filter>头文件</Filter>
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\RenderCommand.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Renderer.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\RendererAPI.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Shader.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\SubTexture2D.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\Texture.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\VertexArray.h">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\Components.h">
+      <Filter>StartPoint\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\Entity.h">
+      <Filter>StartPoint\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\Scene.h">
+      <Filter>StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\SceneCamera.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h">
-      <Filter>头文件</Filter>
+      <Filter>StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\SceneSerializer.h">
-      <Filter>头文件</Filter>
+      <Filter>StartPoint\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h">
+      <Filter>StartPoint\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sppch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\StartPoint\Core\Application.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Core\Log.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sppch.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Core\Layer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Core\LayerStack.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Shader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\RendererAPI.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\RenderCommand.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Texture.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="vender\Include\stb_image\stb_image.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
-      <Filter>源文件</Filter>
+      <Filter>Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\StartPoint\Scene\Scene.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Core\Application.cpp">
+      <Filter>StartPoint\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Core\Layer.cpp">
+      <Filter>StartPoint\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Core\LayerStack.cpp">
+      <Filter>StartPoint\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Core\Log.cpp">
+      <Filter>StartPoint\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp">
+      <Filter>StartPoint\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp">
+      <Filter>StartPoint\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\RenderCommand.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\RendererAPI.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Shader.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\Texture.cpp">
+      <Filter>StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp">
+      <Filter>StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\Entity.cpp">
-      <Filter>源文件</Filter>
+      <Filter>StartPoint\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Scene\Scene.cpp">
+      <Filter>StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\SceneCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp">
-      <Filter>源文件</Filter>
+      <Filter>StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\SceneSerializer.cpp">
-      <Filter>源文件</Filter>
+      <Filter>StartPoint\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp">
+      <Filter>StartPoint\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sppch.cpp" />
   </ItemGroup>
 </Project>

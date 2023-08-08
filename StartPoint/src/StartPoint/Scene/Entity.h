@@ -1,5 +1,6 @@
 #pragma once
 #include <entt/entt.hpp>
+#include <StartPoint/Core/Log.h>
 
 #include "Scene.h"
 

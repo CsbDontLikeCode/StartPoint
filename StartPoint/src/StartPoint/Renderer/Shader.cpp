@@ -57,7 +57,7 @@ namespace StartPoint {
 
 	Ref<Shader> ShaderLibrary::Get(const std::string& name)
 	{
-		SP_CORE_ASSERT(Exists(), "Shader doesn't exists!");
+		SP_CORE_ASSERT(Exists(name), "Shader doesn't exists!");
 		return m_Shaders[name];
 	}
 

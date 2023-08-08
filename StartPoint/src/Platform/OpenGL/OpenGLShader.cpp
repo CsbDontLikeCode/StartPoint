@@ -18,7 +18,7 @@ namespace StartPoint {
 			return GL_FRAGMENT_SHADER;
 		}
 
-		SP_CORE_ASSERT(false. "Unknown shader type.");
+		SP_CORE_ASSERT(false, "Unknown shader type.");
 		return 0;
 	}
 
@@ -191,7 +191,7 @@ namespace StartPoint {
 
 	void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSource)
 	{
-		SP_CORE_ASSERT(shaderSource <= 2, "Only support vertex shader and fragment shader now!");
+		//SP_CORE_ASSERT(shaderSource <= 2, "Only support vertex shader and fragment shader now!");
 
 		std::string vertexSource;
 		std::string fragmentSource;
