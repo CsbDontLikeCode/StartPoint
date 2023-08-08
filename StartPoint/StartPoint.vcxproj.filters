@@ -159,6 +159,9 @@
     <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Scene\SceneSerializer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">
@@ -258,6 +261,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Scene\SceneSerializer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

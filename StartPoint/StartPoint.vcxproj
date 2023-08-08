@@ -114,7 +114,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_API=__declspec(dllexport)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SP_PLATFORM_WINDOWS;SP_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_API=__declspec(dllexport);YAML_CPP_STATIC_DEFINE;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -203,6 +203,7 @@
     <ClInclude Include="src\StartPoint\Scene\Components.h" />
     <ClInclude Include="src\StartPoint\Scene\Entity.h" />
     <ClInclude Include="src\StartPoint\Scene\Scene.h" />
+    <ClInclude Include="src\StartPoint\Scene\SceneSerializer.h" />
     <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h" />
     <ClInclude Include="vender\Include\entt\entt.hpp" />
     <ClInclude Include="vender\Include\stb_image\stb_image.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\StartPoint\Scene\Entity.cpp" />
     <ClCompile Include="src\StartPoint\Scene\Scene.cpp" />
+    <ClCompile Include="src\StartPoint\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp" />
     <ClCompile Include="vender\Include\stb_image\stb_image.cpp" />
   </ItemGroup>

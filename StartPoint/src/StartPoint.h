@@ -14,6 +14,7 @@
 #include "StartPoint/Scene/Components.h"
 #include "StartPoint/Scene/Entity.h"
 #include "StartPoint/Scene/ScriptableEntity.h"
+#include "StartPoint/Scene/SceneSerializer.h"
 
 // -----Timer------------------------------------------
 #include "StartPoint/Core/Timestep.h"
