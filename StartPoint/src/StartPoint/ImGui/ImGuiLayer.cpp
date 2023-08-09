@@ -12,6 +12,8 @@
 
 #include <StartPoint.h>
 
+#include <ImGuizmo/ImGuizmo.h>
+
 namespace StartPoint {
 	ImGuiLayer::ImGuiLayer() 
 		: Layer("ImGuiLayer"){}
@@ -73,6 +75,7 @@ namespace StartPoint {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+		ImGuizmo::BeginFrame();
 	}
 
 	void ImGuiLayer::End()

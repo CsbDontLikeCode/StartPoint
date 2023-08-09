@@ -4,6 +4,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <StartPoint/Utils/PlatformUtils.h>
 
+#include <ImGuizmo/ImGuizmo.h>
+
+#include <StartPoint/Math/Math.h>
+
 namespace StartPoint 
 {
 
@@ -20,20 +24,6 @@ namespace StartPoint
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
 		m_ActiveScene = CreateRef<Scene>();
-
-		auto square2 = m_ActiveScene->CreateEntity("Square2");
-		square2.AddComponent<SpriteRendererComponent>(glm::vec4{ 1.0f, 0.0f, 0.0f, 1.0f });
-		m_SquareEntity2 = square2;
-		auto square = m_ActiveScene->CreateEntity("Square");
-		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
-		m_SquareEntity = square;
-
-		m_CameraEntity = m_ActiveScene->CreateEntity("Primary Camera");
-		m_CameraEntity.AddComponent<CameraComponent>();
-
-		m_CameraEntity2 = m_ActiveScene->CreateEntity("Secondary Camera");
-		auto& cc = m_CameraEntity2.AddComponent<CameraComponent>();
-		cc.Primary = false;
 
 		// Scripts.
 		class CameraController : public ScriptableEntity 
@@ -65,9 +55,6 @@ namespace StartPoint
 			}
 		};
 
-		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-		m_CameraEntity2.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
 	}
 
@@ -86,12 +73,6 @@ namespace StartPoint
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-			//if (!m_CameraEntity.GetComponent<CameraComponent>().FixedAspectRatio)
-			//{
-			//	m_CameraEntity.GetComponent<CameraComponent>().Camera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
-			//}
-		
-			
 		}
 
 		// Update
@@ -179,6 +160,22 @@ namespace StartPoint
 				if (ImGui::MenuItem("Exit")) { Application::Get().Close(); }
 				ImGui::EndMenu();
 			}
+			if (ImGui::BeginMenu("Shift"))
+			{
+				if (ImGui::MenuItem("Translation"))
+				{
+					m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+				}
+				if (ImGui::MenuItem("Rotation"))
+				{
+					m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+				}
+				if (ImGui::MenuItem("Scale"))
+				{
+					m_GizmoType = ImGuizmo::OPERATION::SCALE;
+				}
+				ImGui::EndMenu();
+			}
 			ImGui::EndMenuBar();
 		}
 
@@ -200,11 +197,53 @@ namespace StartPoint
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
+		//Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused && !m_ViewportHovered);
 		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 		glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
 		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID();
 		ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		//ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y });
+
+		// Gizmos
+		Entity selectEntity = m_SceneHierachyPanel.GetSelectedEntity();
+		if (selectEntity && m_GizmoType != -1)
+		{
+			ImGuizmo::SetOrthographic(false);
+			ImGuizmo::SetDrawlist();
+			float wWidth = (float)ImGui::GetWindowWidth();
+			float wHeight = (float)ImGui::GetWindowHeight();
+			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, wWidth, wHeight);
+			// Camera
+			auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			const glm::mat4& cameraProjection = camera.GetProjection();
+			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+			// Entity
+			auto& tc = selectEntity.GetComponent<TransformComponent>();
+			glm::mat4 transform = tc.GetTransform();
+			// Snapping
+			bool snap = Input::IsKeyPressed(KeyCode::LeftControl);
+			float snapValue = 0.5f;
+			if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+			{
+				snapValue = 45.0f;
+			}
+			float snapValues[3] = { snapValue, snapValue, snapValue };
+			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+				(ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
+				nullptr, snap ? snapValues : nullptr);
+			// ----------------------------------------------------------------------------------------------------
+			if (ImGuizmo::IsUsing)
+			{
+				glm::vec3 translation, rotation, scale;
+				Math::DecomposeTransform(transform, translation, rotation, scale);
+
+				glm::vec3 deltaRotation = rotation - tc.Rotation;
+				tc.Translation = translation;
+				tc.Rotation += deltaRotation;
+				tc.Scale = scale;
+			}
+		}
 
 		ImGui::End();	// Rendering Viewport End.
 		ImGui::PopStyleVar();
@@ -233,31 +272,48 @@ namespace StartPoint
 
 		switch (e.GetKeyCode())
 		{
-		case KeyCode::N:
-		{
+			case KeyCode::N:
+			{
 
-			if (control)
-			{
-				NewScene();
+				if (control)
+				{
+					NewScene();
+				}
 			}
-		}
-		case KeyCode::O:
-		{
-			if (control && shift)
+			case KeyCode::O:
 			{
-				OpenScene();
+				if (control && shift)
+				{
+					OpenScene();
+				}
+				break;
 			}
-			break;
-		}
-		case KeyCode::S:
-		{
-			if (control && shift)
+			case KeyCode::S:
 			{
-				SaveSceneAs();
+				if (control && shift)
+				{
+					SaveSceneAs();
+				}
+				break;
 			}
-			break;
+			case KeyCode::Q:
+				if(m_ViewportFocused)
+					m_GizmoType = -1;
+				break;
+			case KeyCode::W:
+				if (m_ViewportFocused)
+					m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+				break;
+			case KeyCode::E:
+				if (m_ViewportFocused)
+					m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+				break;
+			case KeyCode::R:
+				if (m_ViewportFocused)
+					m_GizmoType = ImGuizmo::OPERATION::SCALE;
+				break;
 		}
-		}
+		
 	}
 
 	void EditorLayer::NewScene()
@@ -272,9 +328,9 @@ namespace StartPoint
 		std::string filepath = FileDialogs::OpenFile("StartPoint Scene (*.sp)\0*.sp\0");
 		if (!filepath.empty())
 		{
-			//m_ActiveScene = CreateRef<Scene>();
-			//m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-			//m_SceneHierachyPanel.SetContext(m_ActiveScene);
+			m_ActiveScene = CreateRef<Scene>();
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_SceneHierachyPanel.SetContext(m_ActiveScene);
 			SceneSerializer serializer(m_ActiveScene);
 			serializer.Deserialize(filepath);
 		}

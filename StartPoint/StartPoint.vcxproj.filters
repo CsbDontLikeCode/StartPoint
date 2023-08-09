@@ -1,275 +1,308 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    <Filter Include="src\Platform">
+      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\Windows">
-      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint">
-      <UniqueIdentifier>{3D955B2E-294D-9D7B-9254-76D77E2B386C}</UniqueIdentifier>
+    <Filter Include="src\Platform\Windows">
+      <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\Core">
-      <UniqueIdentifier>{B587A481-2113-1246-2A24-953A962E6E46}</UniqueIdentifier>
+    <Filter Include="src\StartPoint">
+      <UniqueIdentifier>{F4316265-E0FF-556B-C993-C691B50032D0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\Debug">
-      <UniqueIdentifier>{73D941B6-5FD2-6008-8804-468D745C4014}</UniqueIdentifier>
+    <Filter Include="src\StartPoint\Core">
+      <UniqueIdentifier>{CCAE0C9C-3810-EAA9-C17D-305C2DDE2069}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\Events">
-      <UniqueIdentifier>{815A0782-ED70-0518-36E8-9039A23DD69F}</UniqueIdentifier>
+    <Filter Include="src\StartPoint\Debug">
+      <UniqueIdentifier>{6AE3AE1D-5672-38E7-FF90-4CE2EBFE488D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\ImGui">
-      <UniqueIdentifier>{2744A0B6-133D-BF08-3C6F-A48D28C79E14}</UniqueIdentifier>
+    <Filter Include="src\StartPoint\Events">
+      <UniqueIdentifier>{58A315D7-C40F-D1D1-8D03-692FF92EF339}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\Renderer">
-      <UniqueIdentifier>{830D4318-EF6E-2026-78DC-66D8E43C57E5}</UniqueIdentifier>
+    <Filter Include="src\StartPoint\ImGui">
+      <UniqueIdentifier>{1E4E0D1E-0ADD-96E7-B3FB-AAE29F69A78D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StartPoint\Scene">
-      <UniqueIdentifier>{1A3C50B7-0635-6F09-2F67-548E1BBF4E15}</UniqueIdentifier>
+    <Filter Include="src\StartPoint\Renderer">
+      <UniqueIdentifier>{1AE806EA-861F-4F81-8F29-B3A4FBDF757A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\StartPoint\Scene">
+      <UniqueIdentifier>{1146BD1E-FDD4-46E8-A6F3-5AE39261578E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\StartPoint\Utils">
+      <UniqueIdentifier>{54DAEA1E-4069-74E8-E987-88E3D5F5848E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender">
+      <UniqueIdentifier>{69728122-5514-ACF8-3ECF-BF4C2A103349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\Include">
+      <UniqueIdentifier>{BC5A23A0-A828-17A6-91BC-87CC7D29F30A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vender\Include\ImGuizmo">
+      <UniqueIdentifier>{9CA0945C-08D8-DCF3-11E2-40177D9803ED}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint.h" />
+    <ClInclude Include="src\StartPoint.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Application.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Core.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\EntryPoint.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Input.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\KeyCodes.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Layer.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\LayerStack.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Log.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\MouseButtonCodes.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Timestep.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Core\Window.h">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Debug\Instrumentor.h">
-      <Filter>StartPoint\Debug</Filter>
+      <Filter>src\StartPoint\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Events\ApplicationEvent.h">
-      <Filter>StartPoint\Events</Filter>
+      <Filter>src\StartPoint\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Events\Event.h">
-      <Filter>StartPoint\Events</Filter>
+      <Filter>src\StartPoint\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h">
-      <Filter>StartPoint\Events</Filter>
+      <Filter>src\StartPoint\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h">
-      <Filter>StartPoint\Events</Filter>
+      <Filter>src\StartPoint\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
-      <Filter>StartPoint\ImGui</Filter>
+      <Filter>src\StartPoint\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Camera.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCameraController.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\RenderCommand.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Renderer.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Renderer2D.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\RendererAPI.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Shader.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\SubTexture2D.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Texture.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\VertexArray.h">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\Components.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\Entity.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\Scene.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\SceneCamera.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\SceneSerializer.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\sppch.h" />
-    <ClInclude Include="src\StartPoint\Utils\PlatformUtils.h" />
+    <ClInclude Include="src\StartPoint\Utils\PlatformUtils.h">
+      <Filter>src\StartPoint\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sppch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vender\Include\ImGuizmo\ImGuizmo.h">
+      <Filter>vender\Include\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Math\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp">
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Core\Application.cpp">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Core\Layer.cpp">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Core\LayerStack.cpp">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Core\Log.cpp">
-      <Filter>StartPoint\Core</Filter>
+      <Filter>src\StartPoint\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp">
-      <Filter>StartPoint\ImGui</Filter>
+      <Filter>src\StartPoint\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp">
-      <Filter>StartPoint\ImGui</Filter>
+      <Filter>src\StartPoint\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\RenderCommand.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Renderer.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Renderer2D.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\RendererAPI.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Shader.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\SubTexture2D.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Texture.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\VertexArray.cpp">
-      <Filter>StartPoint\Renderer</Filter>
+      <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\Entity.cpp">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\Scene.cpp">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\SceneCamera.cpp">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\SceneSerializer.cpp">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp">
-      <Filter>StartPoint\Scene</Filter>
+      <Filter>src\StartPoint\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\sppch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
+    <ClCompile Include="src\sppch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vender\Include\ImGuizmo\ImGuizmo.cpp">
+      <Filter>vender\Include\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Math\Math.cpp" />
   </ItemGroup>
 </Project>

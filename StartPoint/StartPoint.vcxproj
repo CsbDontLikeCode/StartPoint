@@ -35,7 +35,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>sppch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>STB_IMAGE_IMPLEMENTATION;SP_PLATFORM_WINDOWS;SP_BUILD_DLL;GLFW_INCLUDE_NONE;IMGUI_API=__declspec(dllexport);YAML_CPP_STATIC_DEFINE;SP_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vender\Include;vender\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -77,6 +78,7 @@
     <ClInclude Include="src\StartPoint\Events\KeyEvent.h" />
     <ClInclude Include="src\StartPoint\Events\MouseEvent.h" />
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\StartPoint\Math\Math.h" />
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\Camera.h" />
     <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h" />
@@ -97,8 +99,9 @@
     <ClInclude Include="src\StartPoint\Scene\SceneCamera.h" />
     <ClInclude Include="src\StartPoint\Scene\SceneSerializer.h" />
     <ClInclude Include="src\StartPoint\Scene\ScriptableEntity.h" />
-    <ClInclude Include="src\sppch.h" />
     <ClInclude Include="src\StartPoint\Utils\PlatformUtils.h" />
+    <ClInclude Include="src\sppch.h" />
+    <ClInclude Include="vender\Include\ImGuizmo\ImGuizmo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
@@ -117,6 +120,7 @@
     <ClCompile Include="src\StartPoint\Core\Log.cpp" />
     <ClCompile Include="src\StartPoint\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\StartPoint\Math\Math.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
@@ -134,7 +138,10 @@
     <ClCompile Include="src\StartPoint\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\StartPoint\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\StartPoint\Scene\ScriptableEntity.cpp" />
-    <ClCompile Include="src\sppch.cpp" />
+    <ClCompile Include="src\sppch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vender\Include\ImGuizmo\ImGuizmo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
