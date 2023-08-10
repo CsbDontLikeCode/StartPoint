@@ -56,8 +56,8 @@ namespace StartPoint
 	void OrthegraphicCameraController::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<MouseScrolledEvent>(SP_BIND_ENENT_FN(OrthegraphicCameraController::OnMouseScorlled));
-		dispatcher.Dispatch<WindowResizeEvent>(SP_BIND_ENENT_FN(OrthegraphicCameraController::OnWindowResized));
+		dispatcher.Dispatch<MouseScrolledEvent>(SP_BIND_EVENT_FN(OrthegraphicCameraController::OnMouseScorlled));
+		dispatcher.Dispatch<WindowResizeEvent>(SP_BIND_EVENT_FN(OrthegraphicCameraController::OnWindowResized));
 	}
 
 	void OrthegraphicCameraController::OnResize(float width, float height)

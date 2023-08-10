@@ -25,6 +25,8 @@ namespace StartPoint
 
 		m_ActiveScene = CreateRef<Scene>();
 
+		m_EditorCamera = EditorCamera(30.0f, 1.788f, 0.1f, 1000.0f);
+
 		// Scripts.
 		class CameraController : public ScriptableEntity 
 		{
@@ -73,11 +75,16 @@ namespace StartPoint
 		{
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
 		// Update
-		if(m_ViewportFocused)
+		if (m_ViewportFocused || m_ViewportHovered)
+		{
 			m_CameraController.OnUpdate(timestep);
+			m_EditorCamera.OnUpdate(timestep);
+		}
 
 		// Render preparation.
 		Renderer2D::ResetStats();
@@ -87,7 +94,9 @@ namespace StartPoint
 		RenderCommand::Clear();
 
 		// Render the scene.
-		m_ActiveScene->OnUpdate(timestep);
+		//m_ActiveScene->OnUpdateRuntime(timestep);
+		m_ActiveScene->OnUpdateEditor(timestep, m_EditorCamera);
+
 
 		m_Framebuffer->Unbind();
 	}
@@ -213,11 +222,14 @@ namespace StartPoint
 			float wWidth = (float)ImGui::GetWindowWidth();
 			float wHeight = (float)ImGui::GetWindowHeight();
 			ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, wWidth, wHeight);
-			// Camera
-			auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
-			const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
-			const glm::mat4& cameraProjection = camera.GetProjection();
-			glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+			// Runtime Camera
+			//auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+			//const auto& camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+			//const glm::mat4& cameraProjection = camera.GetProjection();
+			//glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+			// Editor Camera
+			const glm::mat4& cameraProjection = m_EditorCamera.GetProjection();
+			glm::mat4 cameraView = m_EditorCamera.GetViewMatrix();
 			// Entity
 			auto& tc = selectEntity.GetComponent<TransformComponent>();
 			glm::mat4 transform = tc.GetTransform();
@@ -258,8 +270,10 @@ namespace StartPoint
 			m_CameraController.OnEvent(event);
 		}
 
+		m_EditorCamera.OnEvent(event);
+
 		EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<KeyPressedEvent>(SP_BIND_ENENT_FN(EditorLayer::OnKeyPressed));
+		dispatcher.Dispatch<KeyPressedEvent>(SP_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 	}
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)

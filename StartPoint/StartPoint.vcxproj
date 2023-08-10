@@ -81,6 +81,7 @@
     <ClInclude Include="src\StartPoint\Math\Math.h" />
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\Camera.h" />
+    <ClInclude Include="src\StartPoint\Renderer\EditorCamera.h" />
     <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h" />
     <ClInclude Include="src\StartPoint\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\StartPoint\Renderer\OrthegraphicCamera.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\StartPoint\Math\Math.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\StartPoint\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCamera.cpp" />
     <ClCompile Include="src\StartPoint\Renderer\OrthegraphicCameraController.cpp" />

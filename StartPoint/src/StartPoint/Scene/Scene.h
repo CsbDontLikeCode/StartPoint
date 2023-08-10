@@ -1,8 +1,8 @@
 #pragma once
-
 #include <entt/entt.hpp>
 #include <StartPoint/Core/Timestep.h>
 #include <StartPoint/Renderer/Renderer2D.h>
+#include <StartPoint/Renderer/EditorCamera.h>
 
 namespace StartPoint
 {
@@ -18,7 +18,8 @@ namespace StartPoint
 		// The "entity" is just a unique ID(unsigned int type).
 		void DestroyEntity(Entity entity);
 
-		void OnUpdate(Timestep ts);
+		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
+		void OnUpdateRuntime(Timestep ts);
 		void OnViewportResize(uint32_t	width, uint32_t height);
 
 		Entity GetPrimaryCameraEntity();

@@ -4,6 +4,7 @@
 #include <StartPoint/Renderer/Texture.h>
 #include <StartPoint/Renderer/SubTexture2D.h>
 #include <StartPoint/Renderer/Camera.h>
+#include <StartPoint/Renderer/EditorCamera.h>
 
 namespace StartPoint 
 {
@@ -16,6 +17,7 @@ namespace StartPoint
 		static void Shutdown();
 
 		static void BeginScene(const Camera& camera, const glm::mat4& transform);
+		static void BeginScene(const EditorCamera& camera);
 		static void BeginScene(const OrthegraphicCamera& camera);
 		static void EndScene();
 		static void Flush();

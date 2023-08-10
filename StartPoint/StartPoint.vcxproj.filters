@@ -28,6 +28,9 @@
     <Filter Include="src\StartPoint\ImGui">
       <UniqueIdentifier>{1E4E0D1E-0ADD-96E7-B3FB-AAE29F69A78D}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\StartPoint\Math">
+      <UniqueIdentifier>{4DEF119C-B950-EFA9-42BE-355CAE1E2669}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\StartPoint\Renderer">
       <UniqueIdentifier>{1AE806EA-861F-4F81-8F29-B3A4FBDF757A}</UniqueIdentifier>
     </Filter>
@@ -126,10 +129,16 @@
     <ClInclude Include="src\StartPoint\ImGui\ImGuiLayer.h">
       <Filter>src\StartPoint\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Math\Math.h">
+      <Filter>src\StartPoint\Math</Filter>
+    </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Buffer.h">
       <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Camera.h">
+      <Filter>src\StartPoint\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StartPoint\Renderer\EditorCamera.h">
       <Filter>src\StartPoint\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\StartPoint\Renderer\Framebuffer.h">
@@ -195,7 +204,6 @@
     <ClInclude Include="vender\Include\ImGuizmo\ImGuizmo.h">
       <Filter>vender\Include\ImGuizmo</Filter>
     </ClInclude>
-    <ClInclude Include="src\StartPoint\Math\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -246,7 +254,13 @@
     <ClCompile Include="src\StartPoint\ImGui\ImGuiLayer.cpp">
       <Filter>src\StartPoint\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\StartPoint\Math\Math.cpp">
+      <Filter>src\StartPoint\Math</Filter>
+    </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Buffer.cpp">
+      <Filter>src\StartPoint\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Renderer\EditorCamera.cpp">
       <Filter>src\StartPoint\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\StartPoint\Renderer\Framebuffer.cpp">
@@ -303,6 +317,5 @@
     <ClCompile Include="vender\Include\ImGuizmo\ImGuizmo.cpp">
       <Filter>vender\Include\ImGuizmo</Filter>
     </ClCompile>
-    <ClCompile Include="src\StartPoint\Math\Math.cpp" />
   </ItemGroup>
 </Project>

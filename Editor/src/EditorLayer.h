@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Panels/SceneHierachyPanel.h"
+#include "StartPoint/Renderer/EditorCamera.h"
 
 
 namespace StartPoint 
@@ -28,6 +29,8 @@ namespace StartPoint
 
 		// Scene
 		Ref<Scene> m_ActiveScene;
+		// EditorCamera
+		EditorCamera m_EditorCamera;
 
 		int m_GizmoType = -1;
 
