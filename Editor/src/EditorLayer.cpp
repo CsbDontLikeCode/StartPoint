@@ -19,6 +19,7 @@ namespace StartPoint
 		m_CameraController.SetZoomLevel(1.0f);
 
 		FramebufferSpecification fbSpec;
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
@@ -209,7 +210,7 @@ namespace StartPoint
 		//Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused && !m_ViewportHovered);
 		m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 		glViewport(0, 0, viewportPanelSize.x, viewportPanelSize.y);
-		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID();
+		uint32_t texture = m_Framebuffer->GetColorAttachmentRendererID(0);
 		ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 		//ImGui::Image((void*)texture, ImVec2{ m_ViewportSize.x, m_ViewportSize.y });
 
