@@ -16,6 +16,7 @@ namespace StartPoint
 		virtual void Unbind() override;
 
 		virtual void Resize(unsigned int width, unsigned int height) override;
+		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) override;
 
 		virtual unsigned int GetColorAttachmentRendererID(uint32_t index = 0) const override { return m_ColorAttachments[index]; }
 

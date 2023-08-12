@@ -10,6 +10,7 @@ namespace StartPoint
 
 		// Color
 		RGBA8,
+		RED_INTEGER,
 
 		// Depth
 		DEPTH8STENCIL8,
@@ -52,6 +53,7 @@ namespace StartPoint
 		virtual void Unbind() = 0;
 
 		virtual void Resize(unsigned int width, unsigned int height) = 0;
+		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) = 0;
 
 		virtual unsigned int GetColorAttachmentRendererID(uint32_t index = 0) const = 0;
 
