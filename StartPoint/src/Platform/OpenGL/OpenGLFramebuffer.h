@@ -18,6 +18,8 @@ namespace StartPoint
 		virtual void Resize(unsigned int width, unsigned int height) override;
 		virtual int ReadPixel(uint32_t attachmentIndex, int x, int y) override;
 
+		virtual void ClearAttachment(uint32_t attachmentIndex, int value) override;
+
 		virtual unsigned int GetColorAttachmentRendererID(uint32_t index = 0) const override { return m_ColorAttachments[index]; }
 
 		virtual const FramebufferSpecification& GetSpecification() const override { return m_Specification; }

@@ -94,6 +94,8 @@ namespace StartPoint
 		RenderCommand::SetClearColor({ 0.46f, 0.84f, 0.91f, 1.0f });
 		RenderCommand::Clear();
 
+		m_Framebuffer->ClearAttachment(1, -1);
+
 		// Render the scene.
 		//m_ActiveScene->OnUpdateRuntime(timestep);
 		m_ActiveScene->OnUpdateEditor(timestep, m_EditorCamera);
