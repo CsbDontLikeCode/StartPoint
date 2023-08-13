@@ -112,7 +112,14 @@ namespace StartPoint
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y) 
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			SP_CORE_WARN("Pixel Data - {0}", pixelData);
+			if (pixelData == -1)
+			{
+				m_HoveredEntity = {};
+			}
+			else
+			{
+				m_HoveredEntity = { entt::entity(pixelData), m_ActiveScene.get()};
+			}
 		}
 		m_Framebuffer->Unbind();
 	}
@@ -199,6 +206,10 @@ namespace StartPoint
 				{
 					m_GizmoType = ImGuizmo::OPERATION::SCALE;
 				}
+				if (ImGui::MenuItem("None"))
+				{
+					m_GizmoType = -1;
+				}
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
@@ -208,6 +219,13 @@ namespace StartPoint
 
 		// Usage of ImGui.
 		ImGui::Begin("Render Status");
+		std::string entityName = "None";
+		if(m_HoveredEntity)
+		{
+			entityName = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+		}
+		ImGui::Text("Entity: %s", entityName.c_str());
+
 		ImGui::Text("Renderer2D Stats");
 		auto stats = Renderer2D::GetStats();
 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
@@ -317,7 +335,7 @@ namespace StartPoint
 			case KeyCode::N:
 			{
 
-				if (control)
+				if (control && shift)
 				{
 					NewScene();
 				}
@@ -339,19 +357,19 @@ namespace StartPoint
 				break;
 			}
 			case KeyCode::Q:
-				if(m_ViewportFocused)
+				if(m_ViewportFocused || m_ViewportHovered)
 					m_GizmoType = -1;
 				break;
 			case KeyCode::W:
-				if (m_ViewportFocused)
+				if (m_ViewportFocused || m_ViewportHovered)
 					m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
 				break;
 			case KeyCode::E:
-				if (m_ViewportFocused)
+				if (m_ViewportFocused || m_ViewportHovered)
 					m_GizmoType = ImGuizmo::OPERATION::ROTATE;
 				break;
 			case KeyCode::R:
-				if (m_ViewportFocused)
+				if (m_ViewportFocused || m_ViewportHovered)
 					m_GizmoType = ImGuizmo::OPERATION::SCALE;
 				break;
 		}

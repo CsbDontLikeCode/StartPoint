@@ -1,7 +1,6 @@
 #pragma once
 #include <entt/entt.hpp>
 #include <StartPoint/Core/Timestep.h>
-#include <StartPoint/Renderer/Renderer2D.h>
 #include <StartPoint/Renderer/EditorCamera.h>
 
 namespace StartPoint

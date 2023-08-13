@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Components.h"
+#include <StartPoint/Renderer/Renderer2D.h>
 
 namespace StartPoint 
 {
@@ -45,7 +46,7 @@ namespace StartPoint
 		for (auto entity : view) {
 			auto transformComponent = view.get<TransformComponent>(entity);
 			auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
-			Renderer2D::DrawQuad(transformComponent.GetTransform(), spriteRendererComponent.Color);
+			Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
 		}
 		Renderer2D::EndScene();
 	}
@@ -90,7 +91,7 @@ namespace StartPoint
 			for (auto entity : view) {
 				auto transformComponent = view.get<TransformComponent>(entity);
 				auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
-				Renderer2D::DrawQuad(transformComponent.GetTransform(), spriteRendererComponent.Color);
+				Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
 			}
 			Renderer2D::EndScene();
 		}

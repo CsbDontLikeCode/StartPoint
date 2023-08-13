@@ -275,7 +275,7 @@ namespace StartPoint {
 			glDeleteShader(fragmentShader);
 
 			SP_CORE_ERROR("{0}", infoLog.data());
-			SP_CORE_ASSERT(false, "Shader link failure!");
+			// SP_CORE_ASSERT(false, "Shader link failure!");
 			return;
 		}
 

@@ -38,6 +38,8 @@ namespace StartPoint
 		glm::vec2 m_ViewportBounds[2];
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
 
+		Entity m_HoveredEntity;
+
 		SceneHierachyPanel m_SceneHierachyPanel;
 	};
 }
