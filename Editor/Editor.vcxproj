@@ -55,11 +55,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\EditorLayer.h" />
+    <ClInclude Include="src\Panels\ContextBrowserPanel.h" />
     <ClInclude Include="src\Panels\SceneHierachyPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EditorApp.cpp" />
     <ClCompile Include="src\EditorLayer.cpp" />
+    <ClCompile Include="src\Panels\ContextBrowserPanel.cpp" />
     <ClCompile Include="src\Panels\SceneHierachyPanel.cpp" />
   </ItemGroup>
   <ItemGroup>

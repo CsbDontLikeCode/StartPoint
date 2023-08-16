@@ -3,6 +3,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Panels/SceneHierachyPanel.h"
+#include "Panels/ContextBrowserPanel.h"
+
 #include "StartPoint/Renderer/EditorCamera.h"
 
 
@@ -42,5 +44,6 @@ namespace StartPoint
 		Entity m_HoveredEntity;
 
 		SceneHierachyPanel m_SceneHierachyPanel;
+		ContextBrowserPanel m_ContextBrowserPanel;
 	};
 }

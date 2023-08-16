@@ -216,6 +216,7 @@ namespace StartPoint
 		}
 
 		m_SceneHierachyPanel.OnImGuiRender();
+		m_ContextBrowserPanel.OnImGuiRender();
 
 		// Usage of ImGui.
 		ImGui::Begin("Render Status");
