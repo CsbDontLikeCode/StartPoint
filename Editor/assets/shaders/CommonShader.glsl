@@ -44,5 +44,4 @@ uniform sampler2D u_Texture[32];
 void main(){
 	color = texture(u_Texture[int(v_TexIndex)], v_TexCoord * v_TilingFactor) * v_Color;
 	color2 = v_EntityID;
-	//color2 = 50;
 }
