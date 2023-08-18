@@ -27,6 +27,11 @@ namespace StartPoint
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
 		void SaveSceneAs();
+
+		// UI Panels
+		void UI_Toolbar();
+		void OnScenePlay();
+		void OnSceneStop();
 	private:
 		OrthegraphicCameraController m_CameraController;
 		Ref<Framebuffer> m_Framebuffer;
@@ -46,5 +51,13 @@ namespace StartPoint
 
 		SceneHierachyPanel m_SceneHierachyPanel;
 		ContextBrowserPanel m_ContextBrowserPanel;
+
+		enum class SceneState
+		{
+			Edit = 0, Play = 1
+		};
+
+		SceneState m_SceneState = SceneState::Edit;
+		Ref<Texture2D> m_IconPlay, m_IconStop;
 	};
 }
