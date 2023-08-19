@@ -3,6 +3,8 @@
 #include <StartPoint/Core/Timestep.h>
 #include <StartPoint/Renderer/EditorCamera.h>
 
+class b2World;
+
 namespace StartPoint
 {
 	class Entity;
@@ -16,6 +18,9 @@ namespace StartPoint
 		Entity CreateEntity(const std::string& name = "");
 		// The "entity" is just a unique ID(unsigned int type).
 		void DestroyEntity(Entity entity);
+
+		void OnRuntimeStart();
+		void OnRuntimeStop();
 
 		void OnUpdateEditor(Timestep ts, EditorCamera& camera);
 		void OnUpdateRuntime(Timestep ts);
@@ -32,6 +37,8 @@ namespace StartPoint
 		// The width and height of viewport.
 		uint32_t m_ViewportWidth = 0;
 		uint32_t m_ViewportHeight = 0;
+
+		b2World* m_PhysicsWorld = nullptr;
 
 		friend class Entity;
 		friend class SceneHierachyPanel;

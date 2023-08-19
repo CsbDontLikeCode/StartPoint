@@ -108,7 +108,8 @@ project "Sandbox"
         "glfw3.lib",
         "spdlogd.lib",
         "GLAD.lib",
-        "ImGui.lib"
+        "ImGui.lib",
+        "box2d.lib"
     }
 
     filter "system:windows"
@@ -162,7 +163,8 @@ project "Editor"
         "ImGui.lib",
         "user32.lib",
         "gdi32.lib",
-        "shell32.lib"
+        "shell32.lib",
+        "box2d.lib"
     }
 
     filter "system:windows"

@@ -12,6 +12,7 @@ namespace StartPoint
 		virtual unsigned int GetWidth() = 0;
 		virtual unsigned int GetHeight() = 0;
 		virtual unsigned int GetRendererID() const = 0;
+		virtual const std::string GetTexturePath() const = 0;
 
 		virtual void SetData(void* data, uint32_t size) = 0;
 

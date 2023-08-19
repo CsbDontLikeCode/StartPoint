@@ -49,7 +49,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>yaml-cpp.lib;opengl32.lib;glfw3.lib;spdlogd.lib;GLAD.lib;ImGui.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>yaml-cpp.lib;opengl32.lib;glfw3.lib;spdlogd.lib;GLAD.lib;ImGui.lib;user32.lib;gdi32.lib;shell32.lib;box2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\StartPoint\vender\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

@@ -64,57 +64,6 @@ namespace StartPoint
 		if (m_SelectionContext)
 		{
 			DrawComponents(m_SelectionContext);
-			// ----------------------------------------------------------------------------------------------------
-			// Add a component in Properties Panel.
-			//if (ImGui::Button("Add Component")) 
-			//	ImGui::OpenPopup("AddComponent");
-			//
-			//if (ImGui::BeginPopup("AddComponent"))
-			//{
-			//	// Add Camera Component.
-			//	if (ImGui::MenuItem("Camera"))
-			//	{
-			//		if (m_SelectionContext.HasComponent<CameraComponent>())
-			//		{
-			//			SP_INFO("Camera exist!");
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//		else 
-			//		{
-			//			m_SelectionContext.AddComponent<CameraComponent>();
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//	}
-			//	// Add Sprite Renderer Component.
-			//	if (ImGui::MenuItem("Sprite Renderer"))
-			//	{
-			//		if (m_SelectionContext.HasComponent<SpriteRendererComponent>())
-			//		{
-			//			SP_INFO("Sprite Renderer exist!");
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//		else 
-			//		{
-			//			m_SelectionContext.AddComponent<SpriteRendererComponent>();
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//	}
-			//	// Add Transform Component.
-			//	if (ImGui::MenuItem("Transform"))
-			//	{
-			//		if (m_SelectionContext.HasComponent<TransformComponent>())
-			//		{
-			//			SP_INFO("Transform exist!");
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//		else
-			//		{
-			//			m_SelectionContext.AddComponent<TransformComponent>();
-			//			ImGui::CloseCurrentPopup();
-			//		}
-			//	}
-			//	ImGui::EndPopup();
-			//}
 		}
 		ImGui::End();
 	}
@@ -310,6 +259,34 @@ namespace StartPoint
 					ImGui::CloseCurrentPopup();
 				}
 			}
+			// Add Rigidbody2D Component.
+			if (ImGui::MenuItem("Rigidbody2D"))
+			{
+				if (m_SelectionContext.HasComponent<Rigidbody2DComponent>())
+				{
+					SP_INFO("Rigidbody2D exist!");
+					ImGui::CloseCurrentPopup();
+				}
+				else
+				{
+					m_SelectionContext.AddComponent<Rigidbody2DComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
+			// Add BoxCollider2D Component.
+			if (ImGui::MenuItem("BoxCollider2D"))
+			{
+				if (m_SelectionContext.HasComponent<BoxCollider2DComponent>())
+				{
+					SP_INFO("BoxCollider2D exist!");
+					ImGui::CloseCurrentPopup();
+				}
+				else
+				{
+					m_SelectionContext.AddComponent<BoxCollider2DComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
 			// Add Transform Component.
 			if (ImGui::MenuItem("Transform"))
 			{
@@ -376,6 +353,40 @@ namespace StartPoint
 		//		entity.RemoveComponent<SpriteRendererComponent>();
 		//	}
 		//}
+		// ----------------------------------------------------------------------------------------------------
+		// Rigidbody2D Component.
+		DrawComponent<Rigidbody2DComponent>("Rigidbody2D", entity, [](auto& component) {
+			const char* bodyTypeStrings[] = { "Static", "Dynamic", "Kinematic"};
+			const char* currentBodyTypeString = bodyTypeStrings[(int)component.Type];
+			if (ImGui::BeginCombo("Body Type", currentBodyTypeString))
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					bool isSelected = (currentBodyTypeString == bodyTypeStrings[i]);
+					if (ImGui::Selectable(bodyTypeStrings[i], isSelected))
+					{
+						currentBodyTypeString = bodyTypeStrings[i];
+						component.Type = (Rigidbody2DComponent::BodyType)i;
+					}
+					if (isSelected)
+					{
+						ImGui::SetItemDefaultFocus();
+					}
+				}
+				ImGui::EndCombo();
+			}
+			ImGui::Checkbox("Fixed Rotation", &component.FixedRotation);
+		});
+		// ----------------------------------------------------------------------------------------------------
+		// Box Collider 2D Component.
+		DrawComponent<BoxCollider2DComponent>("BoxCollider2D", entity, [](auto& component) {
+			ImGui::DragFloat2("Offset", glm::value_ptr(component.Offset));
+			ImGui::DragFloat2("Size", glm::value_ptr(component.Size));
+			ImGui::DragFloat("Density", &component.Density, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Friction", &component.Friction, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Restitution", &component.Restitution, 0.01f, 0.0f, 1.0f);
+			ImGui::DragFloat("Restitution Threshold", &component.RestitutionThreshold, 0.01f, 0.0f);
+		});
 		// ----------------------------------------------------------------------------------------------------
 		// TransformComponent.
 		DrawComponent<TransformComponent>("Transform", entity, [](auto& component) {

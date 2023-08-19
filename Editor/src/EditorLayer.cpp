@@ -382,21 +382,24 @@ namespace StartPoint
 	void EditorLayer::OnScenePlay()
 	{
 		m_SceneState = SceneState::Play;
+		m_ActiveScene->OnRuntimeStart();
 	}
 
 	void EditorLayer::OnSceneStop()
 	{
 		m_SceneState = SceneState::Edit;
+		m_ActiveScene->OnRuntimeStop();
 	}
 
 	void EditorLayer::OnEvent(Event& event)
 	{
 		if (m_ViewportHovered) 
 		{
-			m_CameraController.OnEvent(event);
+			//m_CameraController.OnEvent(event);
+			m_EditorCamera.OnEvent(event);
 		}
 
-		m_EditorCamera.OnEvent(event);
+		
 
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<KeyPressedEvent>(SP_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
