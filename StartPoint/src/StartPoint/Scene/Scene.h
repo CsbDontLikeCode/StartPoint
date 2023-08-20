@@ -2,6 +2,7 @@
 #include <entt/entt.hpp>
 #include <StartPoint/Core/Timestep.h>
 #include <StartPoint/Renderer/EditorCamera.h>
+#include <StartPoint/Core/UUID.h>
 
 class b2World;
 
@@ -15,7 +16,8 @@ namespace StartPoint
 		Scene();
 		~Scene();
 
-		Entity CreateEntity(const std::string& name = "");
+		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
 		// The "entity" is just a unique ID(unsigned int type).
 		void DestroyEntity(Entity entity);
 

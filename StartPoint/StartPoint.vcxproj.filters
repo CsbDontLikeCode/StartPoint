@@ -204,6 +204,9 @@
     <ClInclude Include="vender\Include\ImGuizmo\ImGuizmo.h">
       <Filter>vender\Include\ImGuizmo</Filter>
     </ClInclude>
+    <ClInclude Include="src\StartPoint\Core\UUID.h">
+      <Filter>src\StartPoint\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -316,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="vender\Include\ImGuizmo\ImGuizmo.cpp">
       <Filter>vender\Include\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StartPoint\Core\UUID.cpp">
+      <Filter>src\StartPoint\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

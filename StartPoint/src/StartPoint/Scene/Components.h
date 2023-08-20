@@ -8,9 +8,16 @@
 #include "SceneCamera.h"
 #include "ScriptableEntity.h"
 #include "StartPoint/Renderer/Texture.h"
+#include "StartPoint/Core/UUID.h"
 
 namespace StartPoint
 {
+	struct IDComponent
+	{
+		UUID ID;
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
 	
 	struct TagComponent
 	{

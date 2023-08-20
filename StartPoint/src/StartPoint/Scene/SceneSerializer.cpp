@@ -137,8 +137,10 @@ namespace StartPoint
 
 	static void SerializeEntity(YAML::Emitter& out, Entity entity)
 	{
+		SP_CORE_ASSERT(entity.HasComponent<IDComponent>(), "Has No UUID.");
+
 		out << YAML::BeginMap;
-		out << YAML::Key << "Entity" << YAML::Value << "12837192831273";	//TODO::
+		out << YAML::Key << "Entity" << YAML::Value << entity.GetComponent<IDComponent>().ID;	//TODO::
 
 		if (entity.HasComponent<TagComponent>())
 		{
@@ -283,7 +285,7 @@ namespace StartPoint
 
 				SP_CORE_TRACE("Deserialized entity with ID = {0}, name = {1}", uuid, name);
 
-				Entity deserializedEntity = m_Scene->CreateEntity(name);
+				Entity deserializedEntity = m_Scene->CreateEntityWithUUID(uuid, name);
 
 				auto transformComponent = entity["TransformComponent"];
 				if (transformComponent)
