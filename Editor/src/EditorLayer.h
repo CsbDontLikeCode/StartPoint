@@ -26,18 +26,25 @@ namespace StartPoint
 		void NewScene();
 		void OpenScene();
 		void OpenScene(const std::filesystem::path& path);
+		void SaveScene();
 		void SaveSceneAs();
+
+		void SerializeScene(Ref<Scene> scene, const std::filesystem::path& path);
 
 		// UI Panels
 		void UI_Toolbar();
 		void OnScenePlay();
 		void OnSceneStop();
+
+		void OnDuplicateEntity();
 	private:
 		OrthegraphicCameraController m_CameraController;
 		Ref<Framebuffer> m_Framebuffer;
 
 		// Scene
 		Ref<Scene> m_ActiveScene;
+		Ref<Scene> m_EditorScene, m_RuntimeScene;
+		std::filesystem::path m_EditorScenePath;
 		// EditorCamera
 		EditorCamera m_EditorCamera;
 

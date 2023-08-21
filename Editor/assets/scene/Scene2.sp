@@ -9,4 +9,4 @@ Entities:
       Scale: [1, 1, 1]
     SpriteRendererComponent:
       Color: [1, 1, 1, 1]
-      TexturePath: NoTexture
+      TexturePath: assets\textures\azi.png

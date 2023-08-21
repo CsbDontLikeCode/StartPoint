@@ -228,7 +228,12 @@ namespace StartPoint
 		ImGui::SameLine();
 		ImGui::PushItemWidth(-1);
 		if (ImGui::Button("Add Component"))
-			ImGui::OpenPopup("AddComponent");
+		{
+			if (addComponentState)
+				ImGui::OpenPopup("AddComponent");
+			else 
+				SP_CORE_INFO("You can't add components now.");
+		}
 		if (ImGui::BeginPopup("AddComponent"))
 		{
 			// Add Camera Component.

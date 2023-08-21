@@ -65,6 +65,7 @@ namespace StartPoint
 		};
 
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+
 	}
 
 	void EditorLayer::OnDetach()
@@ -83,7 +84,7 @@ namespace StartPoint
 			m_Framebuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
 			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			//m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
 		// Update
@@ -110,11 +111,13 @@ namespace StartPoint
 				//{
 				//	m_CameraController.OnUpdate(timestep);
 				//}
+				m_SceneHierachyPanel.SetAddComponentState(true);
 				m_ActiveScene->OnUpdateEditor(timestep, m_EditorCamera);
 				break;
 			}
 			case SceneState::Play:
 			{
+				m_SceneHierachyPanel.SetAddComponentState(false);
 				m_ActiveScene->OnUpdateRuntime(timestep);
 				break;
 			}
@@ -382,6 +385,10 @@ namespace StartPoint
 	void EditorLayer::OnScenePlay()
 	{
 		m_SceneState = SceneState::Play;
+
+		m_RuntimeScene = Scene::Copy(m_EditorScene);
+
+		m_ActiveScene = m_RuntimeScene;
 		m_ActiveScene->OnRuntimeStart();
 	}
 
@@ -389,6 +396,21 @@ namespace StartPoint
 	{
 		m_SceneState = SceneState::Edit;
 		m_ActiveScene->OnRuntimeStop();
+		m_RuntimeScene = nullptr;
+
+		m_ActiveScene = m_EditorScene;
+	}
+
+	void EditorLayer::OnDuplicateEntity()
+	{
+		if (m_SceneState != SceneState::Edit)
+			return;
+
+		Entity selectedEntity = m_SceneHierachyPanel.GetSelectedEntity();
+		if (selectedEntity)
+		{
+			m_EditorScene->DuplicateEntity(selectedEntity);
+		}
 	}
 
 	void EditorLayer::OnEvent(Event& event)
@@ -434,12 +456,26 @@ namespace StartPoint
 			}
 			case KeyCode::S:
 			{
-				if (control && shift)
+				if (control)
 				{
-					SaveSceneAs();
+					if(shift)
+						SaveSceneAs();
+					else
+						SaveScene();
 				}
 				break;
 			}
+
+			case KeyCode::D:
+			{
+				if (control)
+				{
+					OnDuplicateEntity();
+				}
+				break;
+			}
+
+
 			case KeyCode::Q:
 				if(m_ViewportFocused || m_ViewportHovered)
 					m_GizmoType = -1;
@@ -474,6 +510,7 @@ namespace StartPoint
 		m_ActiveScene = CreateRef<Scene>();
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		m_EditorScenePath = std::filesystem::path();
 	}
 
 	void EditorLayer::OpenScene()
@@ -492,12 +529,34 @@ namespace StartPoint
 
 	void EditorLayer::OpenScene(const std::filesystem::path& path)
 	{
-		m_ActiveScene = CreateRef<Scene>();
-		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-		m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		if (m_SceneState != SceneState::Edit)
+			OnSceneStop();
 
-		SceneSerializer serializer(m_ActiveScene);
+		Ref<Scene> newScene = CreateRef<Scene>();
+		newScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		SceneSerializer serializer(newScene);
 		serializer.Deserialize(path.string());
+		m_SceneHierachyPanel.SetContext(newScene);
+		
+		m_EditorScene = newScene;
+		m_EditorScenePath = path;
+		m_ActiveScene = m_EditorScene;
+
+		//m_ActiveScene = CreateRef<Scene>();
+		//m_EditorScene = m_ActiveScene;
+		//m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		//m_SceneHierachyPanel.SetContext(m_ActiveScene);
+		//SceneSerializer serializer(m_ActiveScene);
+		//serializer.Deserialize(path.string());
+	}
+
+	void EditorLayer::SaveScene()
+	{
+		if (!m_EditorScenePath.empty())
+		{
+			SceneSerializer serializer(m_EditorScene);
+			serializer.Serialize(m_EditorScenePath.string());
+		}
 	}
 
 	void EditorLayer::SaveSceneAs()
@@ -507,7 +566,15 @@ namespace StartPoint
 		{
 			SceneSerializer serializer(m_ActiveScene);
 			serializer.Serialize(filepath);
+
+			m_EditorScenePath = filepath;
 		}
+	}
+
+	void EditorLayer::SerializeScene(Ref<Scene> scene, const std::filesystem::path& path)
+	{
+		SceneSerializer serializer(scene);
+		serializer.Serialize(path.string());
 	}
 
 }
