@@ -89,6 +89,7 @@ namespace StartPoint
 
 		CopyComponent<TransformComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<SpriteRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+		CopyComponent<CircleRendererComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<CameraComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
@@ -168,12 +169,26 @@ namespace StartPoint
 	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
 	{
 		Renderer2D::BeginScene(camera);
-		auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
-		for (auto entity : view) {
-			auto transformComponent = view.get<TransformComponent>(entity);
-			auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
-			Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
+
+		{
+			auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
+			for (auto entity : view) {
+				auto transformComponent = view.get<TransformComponent>(entity);
+				auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
+				Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
+			}
 		}
+		
+		{
+			auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+			for (auto entity : view)
+			{
+				auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+
+				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
+			}
+		}
+
 		Renderer2D::EndScene();
 	}
 
@@ -235,12 +250,26 @@ namespace StartPoint
 		if (mainCamera)
 		{
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
-			auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
-			for (auto entity : view) {
-				auto transformComponent = view.get<TransformComponent>(entity);
-				auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
-				Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
+
+			{
+				auto view = m_Registry.view<TransformComponent, SpriteRendererComponent>();
+				for (auto entity : view) {
+					auto transformComponent = view.get<TransformComponent>(entity);
+					auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
+					Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
+				}
 			}
+
+			{
+				auto view = m_Registry.view<TransformComponent, CircleRendererComponent>();
+				for (auto entity : view)
+				{
+					auto [transform, circle] = view.get<TransformComponent, CircleRendererComponent>(entity);
+
+					Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
+				}
+			}
+
 			Renderer2D::EndScene();
 		}
 	}
@@ -271,6 +300,7 @@ namespace StartPoint
 
 		CopyComponentIfExists<TransformComponent>(newEntity, entity);
 		CopyComponentIfExists<SpriteRendererComponent>(newEntity, entity);
+		CopyComponentIfExists<CircleRendererComponent>(newEntity, entity);
 		CopyComponentIfExists<CameraComponent>(newEntity, entity);
 		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
 		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
@@ -308,6 +338,11 @@ namespace StartPoint
 
 	template<>
 	void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent& component)
+	{
+	}
+
+	template<>
+	void Scene::OnComponentAdded<CircleRendererComponent>(Entity entity, CircleRendererComponent& component)
 	{
 	}
 

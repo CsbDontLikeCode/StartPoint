@@ -98,3 +98,14 @@ Entities:
       Friction: 0.5
       Restitution: 0
       RestitutionThreshold: 0.5
+  - Entity: 2286648256635826907
+    TagComponent:
+      Tag: Circle
+    TransformComponent:
+      Translation: [4.66469383, 2.22705531, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleRendererComponent:
+      Color: [0.743620038, 0.939501762, 0.601816058, 1]
+      Thickness: 1
+      Fade: 0.00499999989

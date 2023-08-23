@@ -264,6 +264,20 @@ namespace StartPoint
 					ImGui::CloseCurrentPopup();
 				}
 			}
+			// Add Circle Renderer Component.
+			if (ImGui::MenuItem("Circle Renderer"))
+			{
+				if (m_SelectionContext.HasComponent<CircleRendererComponent>())
+				{
+					SP_INFO("Circle Renderer exist!");
+					ImGui::CloseCurrentPopup();
+				}
+				else
+				{
+					m_SelectionContext.AddComponent<CircleRendererComponent>();
+					ImGui::CloseCurrentPopup();
+				}
+			}
 			// Add Rigidbody2D Component.
 			if (ImGui::MenuItem("Rigidbody2D"))
 			{
@@ -327,6 +341,13 @@ namespace StartPoint
 			}
 
 			ImGui::DragFloat("Tiling Factor", &component.TilingFactor, 0.1f, 0.0f, 100.0f);
+		});
+		// ----------------------------------------------------------------------------------------------------
+		// CircleRendererComponent.
+		DrawComponent<CircleRendererComponent>("Circle Renderer", entity, [](auto& component){
+			ImGui::ColorEdit4("Color", glm::value_ptr(component.Color));
+			ImGui::DragFloat("Thickness", &component.Thickness, 0.025f, 0.0f, 1.0f);
+			ImGui::DragFloat("Fade", &component.Fade, 0.00025f, 0.0f, 1.0f);
 		});
 		// ----------------------------------------------------------------------------------------------------
 		// Rigidbody2D Component.

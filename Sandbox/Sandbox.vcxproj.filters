@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shaders\Texture.glsl" />
-    <None Include="assets\shaders\FlatColorShader.glsl" />
-    <None Include="assets\shaders\CommonShader.glsl" />
-    <None Include="imgui.ini" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\ParticleSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -38,5 +32,8 @@
     <ClInclude Include="src\Sandbox2D.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\test.glsl" />
   </ItemGroup>
 </Project>

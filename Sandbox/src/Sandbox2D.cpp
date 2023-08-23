@@ -97,6 +97,8 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 
 		StartPoint::Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.0f }, { 0.5f, 0.5f }, 45.0f, m_TextureAzi, 1.0f);
 		StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 0.5f, 0.5f }, m_Texture);
+
+		StartPoint::Renderer2D::DrawCircle({ 0.0f, 0.0f, 0.6f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f });
 		
 		StartPoint::Renderer2D::EndScene();
 	}

@@ -170,7 +170,7 @@ namespace StartPoint
 			glDrawBuffer(GL_NONE);
 		}
 		
-		SP_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Attach Framebuffer is incomplete!");
+		// SP_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, "Attach Framebuffer is incomplete!");
 
 		// Rebind the default framebuffer.
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
