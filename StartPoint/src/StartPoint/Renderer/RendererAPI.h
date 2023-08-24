@@ -22,6 +22,8 @@ namespace StartPoint {
 
 		//virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) = 0;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
+		virtual void DrawLines(const std::shared_ptr<VertexArray>& vertexArray, uint32_t vertexCount) = 0;
+		virtual void SetLineWidth(float width) = 0;
 
 		inline static API GetAPI() { return s_API; }
 	};

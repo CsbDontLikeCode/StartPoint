@@ -176,6 +176,7 @@ namespace StartPoint
 				auto transformComponent = view.get<TransformComponent>(entity);
 				auto spriteRendererComponent = view.get<SpriteRendererComponent>(entity);
 				Renderer2D::DrawSprite(transformComponent.GetTransform(), spriteRendererComponent, (int)entity);
+				// Renderer2D::DrawRect(transformComponent.GetTransform(), glm::vec4(1.0f), (int)entity);
 			}
 		}
 		
@@ -188,6 +189,9 @@ namespace StartPoint
 				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
 			}
 		}
+
+		//Renderer2D::DrawLine(glm::vec3(0.0f), glm::vec3(1.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
+		//Renderer2D::DrawRect(glm::vec3(0.0f), glm::vec2(2.0f, 2.0f), glm::vec4(1.0f, 0.0f, 1.0f, 1.0f));
 
 		Renderer2D::EndScene();
 	}
