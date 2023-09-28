@@ -27,12 +27,13 @@ private:
 	StartPoint::Ref<StartPoint::Texture2D> m_SpriteSheet;
 	StartPoint::Ref<StartPoint::SubTexture2D> m_SpriteTexture;
 	StartPoint::Ref<StartPoint::Framebuffer> m_Framebuffer;
-
 	glm::vec4 m_SquareColor = glm::vec4(0.3f, 0.6f, 0.9f, 1.0f);
 
 	ParticleSystem m_ParticleSystem;
 	ParticleProps m_Particle;
 
 	unsigned int m_MapWidth, m_MapHeight;
-	std::unordered_map<char, StartPoint::Ref<StartPoint::SubTexture2D>> m_SubTextureMap;
+	std::unordered_map<int, StartPoint::Ref<StartPoint::SubTexture2D>> m_SubTextureMap;
+	int m_SubTextureMapIndex = 0;
+	float m_InternalTime = 0.0f;
 };

@@ -169,6 +169,7 @@ namespace StartPoint
 		ImGui::Columns(1);
 		ImGui::PopID();
 	}
+
 	// ====================================================================================================
 	template<typename T, typename UIFunction>
 	static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction)

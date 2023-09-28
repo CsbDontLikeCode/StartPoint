@@ -25,15 +25,22 @@ void Sandbox2D::OnAttach()
 {
 	m_Texture = StartPoint::Texture2D::Create("assets/textures/Yin.jpg");
 	m_TextureAzi = StartPoint::Texture2D::Create("assets/textures/Azi.png");
-	m_SpriteSheet = StartPoint::Texture2D::Create("assets/game_test/textures/RPGpack_sheet_2X.png");
+	//m_SpriteSheet = StartPoint::Texture2D::Create("assets/game_test/textures/RPGpack_sheet_2X.png");
+	m_SpriteSheet = StartPoint::Texture2D::Create("assets/game_test/textures/player_tilesheet.png");
 	glm::vec2 coords = { 7.0f, 6.0f };
 	glm::vec2 size = { 128.0f, 128.f };
 	m_SpriteTexture = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 1.0f, 11.0f }, { 128.0f, 128.0f }, { 1, 1 });
 
 	m_MapWidth = s_MapWidth;
 	m_MapHeight = strlen(s_MapTiles) / m_MapWidth;
-	m_SubTextureMap['D'] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6.0f, 11.0f }, { 128.0f, 128.0f });
-	m_SubTextureMap['W'] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11.0f, 11.0f }, { 128.0f, 128.0f });
+	//m_SubTextureMap[0] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6.0f, 11.0f }, { 128.0f, 128.0f });
+	//m_SubTextureMap[1] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11.0f, 11.0f }, { 128.0f, 128.0f });
+	//m_SubTextureMap[2] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 5.0f, 5.0f }, { 128.0f, 128.0f });
+	m_SubTextureMap[0] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0.0f, 2.0f }, { 80.0f, 110.0f });
+	m_SubTextureMap[1] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 1.0f, 2.0f }, { 80.0f, 110.0f });
+	m_SubTextureMap[2] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2.0f, 2.0f }, { 80.0f, 110.0f });
+	m_SubTextureMap[3] = StartPoint::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 3.0f, 2.0f }, { 80.0f, 110.0f });
+
 
 	// Init here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -97,8 +104,18 @@ void Sandbox2D::OnUpdate(StartPoint::Timestep timestep)
 
 		StartPoint::Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.0f }, { 0.5f, 0.5f }, 45.0f, m_TextureAzi, 1.0f);
 		StartPoint::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 0.5f, 0.5f }, m_Texture);
+		
+		m_InternalTime += timestep;
+		if (m_InternalTime > 0.33)
+		{
+			m_InternalTime = 0.0f;
+			m_SubTextureMapIndex++;
+			if (m_SubTextureMapIndex == 4)
+				m_SubTextureMapIndex = 0;
+		}
+		StartPoint::Renderer2D::DrawQuad({ 1.0f, 0.75f }, { 0.4f, 0.55f }, m_SubTextureMap[m_SubTextureMapIndex]);
 
-		StartPoint::Renderer2D::DrawCircle({ 0.0f, 0.0f, 0.6f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f });
+		// StartPoint::Renderer2D::DrawCircle({ 0.0f, 0.0f, 0.6f }, { 1.0f, 1.0f }, { 1.0f, 1.0f, 0.0f, 1.0f });
 		
 		StartPoint::Renderer2D::EndScene();
 	}
